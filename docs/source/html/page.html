@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width" />
-<title>{% block title %}{% endblock %}{% if not index %} | Moar thumbnails{% endif%}</title>
-<link href="/{{ THEME_PREFIX }}/styles/main.css" rel="stylesheet" />
+<title>{% block title %}{% endblock %}{% if not index %} — Moar thumbnails{% endif%}</title>
+<link href="/{{ theme_prefix }}/styles/main.css" rel="stylesheet" />
 </head>
 <body>
-{% include THEME_PREFIX + 'header.html' %}
+{% include theme_prefix + 'header.html' %}
 
 <div id="content" class="wrap">
   <section class="main">
@@ -37,7 +37,7 @@
 </div>
 <!-- #content -->
 
-<script src="/{{ THEME_PREFIX }}/scripts/main.js"></script>
-<script>var _gaq = _gaq || []; _gaq.push(['_setAccount', '{{ GOOGLE_ANALYTICS_CODE }}']); _gaq.push(['_trackPageview']);</script><script src="http://www.google-analytics.com/ga.js" async></script>
+<script src="/{{ theme_prefix }}/scripts/main.js"></script>
+<script>var _gaq = _gaq || []; _gaq.push(['_setAccount', '{{ google_analytics_code }}']); _gaq.push(['_trackPageview']);</script><script src="http://www.google-analytics.com/ga.js" async></script>
 </body>
 </html>

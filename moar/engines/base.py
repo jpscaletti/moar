@@ -18,6 +18,8 @@ class BaseEngine(object):
         options = thumb.options
         path = self.get_source_path(thumb.source)
         im = self.load_image(path)
+        if im is None:
+            return ''
         im = self.set_orientation(im, options)
         im = self.set_geometry(im, thumb.geometry, options)
         im = self.apply_filters(im, thumb.filters, custom_filters, options)

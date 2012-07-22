@@ -22,7 +22,10 @@ class Engine(BaseEngine):
     name = 'pil'
     
     def load_image(self, path):
-        im = Image.open(path)
+        try:
+            im = Image.open(path)
+        except IOError:
+            return None
         return im
     
     def get_data(self, im, options):
