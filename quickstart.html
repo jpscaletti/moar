@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width" />
-<title>Quick start | Moar thumbnails</title>
-<link href="styles/main.css"" rel="stylesheet" />
+<title>Quick start — Moar thumbnails</title>
+<link href="styles/main.css" rel="stylesheet" />
 </head>
 <body>
 <header>
   <div class="wrap">
     <ul id="ghbuttons" class="button-list">
-      <li><a href="https://github.com/lucuma/moar/zipball/master">Download <strong><span class="caps">ZIP</span>&nbsp;File</strong></a></li>
-      <li><a href="https://github.com/lucuma/moar/tarball/master">Download <strong><span class="caps">TAR</span>&nbsp;Ball</strong></a></li>
+      <li><a href="https://github.com/lucuma/moar/zipball/master">Download <strong>ZIP File</strong></a></li>
+      <li><a href="https://github.com/lucuma/moar/tarball/master">Download <strong>TAR Ball</strong></a></li>
       <li><a href="https://github.com/lucuma/moar">Fork On <strong>GitHub</strong></a></li>
     </ul>
 
@@ -23,54 +23,49 @@
 
 <div id="content" class="wrap">
   <section class="main">
-    <h1 id="quick-start"><a class="toclink" href="#quick-start">Quick&nbsp;start</a></h1>
-<p>First, define a thumbnailer to&nbsp;use:</p>
+    <h1 id="quick-start"><a class="toclink" href="#quick-start">Quick start</a></h1>
+<p>First, define a thumbnailer to use:</p>
 <p><div class="highlight python"><pre><span class="kn">from</span> <span class="nn">moar</span> <span class="kn">import</span> <span class="n">Thumbnailer</span>
 
 <span class="n">thumbnail</span> <span class="o">=</span> <span class="n">Thumbnailer</span><span class="p">()</span>
 </pre></div>
 </p>
-<p>Then, make it accesible in your templates. For instance, as a jinja2&nbsp;global:</p>
+<p>Then, make it accesible in your templates. For instance, as a jinja2 global:</p>
 <p><div class="highlight python"><pre><span class="n">render</span><span class="o">.</span><span class="n">set_global</span><span class="p">(</span><span class="s">&#39;thumbnail&#39;</span><span class="p">,</span> <span class="n">thumbnail</span><span class="p">)</span>
 </pre></div>
 </p>
-<p>Finally, you call it from your&nbsp;templates:</p>
-<p><div class="highlight jinja"><pre><span class="x">&lt;img src=&#8221;</span><span class="cp">{{</span> <span class="nv">thumbnail</span><span class="o">(</span><span class="nv">item.image</span><span class="o">,</span> <span class="s1">&#39;100x100&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="x">&#8221; /&gt;</span>
+<p>Finally, you call it from your templates:</p>
+<p><div class="highlight jinja"><pre><span class="x">&lt;img src=&quot;</span><span class="cp">{{</span> <span class="nv">thumbnail</span><span class="o">(</span><span class="nv">item.image</span><span class="o">,</span> <span class="s1">&#39;100x100&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="x">&quot; /&gt;</span>
 </pre></div>
 </p>
-<p>The thumbnailer function expects at least two&nbsp;parameters:</p>
+<p>The thumbnailer function expects at least two parameters:</p>
 <ul>
-<li>A <code>source</code> object or dictionary with, at least, a &#8220;<code>path</code>&#8221; and &#8220;<code>url</code>&#8220;&nbsp;attributes/keys.</li>
-<li>A <code>geometry</code> parameter with the desired width and/or height of the image&nbsp;thumbnail.</li>
+<li>A <code>source</code> object or dictionary with, at least, a "<code>path</code>" and "<code>url</code>" attributes/keys.</li>
+<li>A <code>geometry</code> parameter with the desired width and/or height of the image thumbnail.</li>
 </ul>
-<p>You can also invoke it directly from your code, when you want generate the thumbnail right&nbsp;away.</p>
+<p>You can also invoke it directly from your code, when you want generate the thumbnail right away.</p>
 <p><div class="highlight python"><pre><span class="n">thumbnail</span><span class="p">(</span><span class="n">my_file</span><span class="p">,</span> <span class="s">&#39;100x100&#39;</span><span class="p">)</span>
 </pre></div>
 </p>
-<p>See the <a href="thumbnail.html">thumbnail</a> section for the available&nbsp;options.</p>
+<p>See the <a href="thumbnail.html">thumbnail</a> section for the available options.</p>
   </section>
 
   <nav id="sidebar">
     <div class="main-toc">
-    <h1 class="toc-title">Table of&nbsp;contents</h1>
+    <h1 class="toc-title">Table of contents</h1>
     <ul>
-<li><a href="index.html"">About</a></li>
-<li><a href="installation.html"">Installation</a></li>
-<li><a href="quickstart.html"">Quickstart</a></li>
-<li><a href="thumbnail.html"">The &#8220;thumbnail&#8221;&nbsp;function</a></li>
-<li><a href="thumbnailer.html"">Thumbnailer&nbsp;options</a></li>
-<li><a href="extending.html"">Extending the&nbsp;library</a></li>
+<li><a href="index.html">About</a></li>
+<li><a href="installation.html">Installation</a></li>
+<li><a href="quickstart.html">Quickstart</a></li>
+<li><a href="thumbnail.html">The "thumbnail" function</a></li>
+<li><a href="thumbnailer.html">Thumbnailer options</a></li>
+<li><a href="extending.html">Extending the library</a></li>
 </ul>
     </div>
 
     <div class="page-toc">
-    <ul class="toc"><li><a href="#quick-start">Quick&nbsp;start</a></li></ul>
+    <ul class="toc"><li><a href="#quick-start">Quick start</a></li></ul>
     </div>
-
-    <p id="ghwatch">
-    <iframe src="http://markdotto.github.com/github-buttons/github-btn.html?user=lucuma&amp;repo=moar&amp;type=watch&amp;count=true&amp;size=large"
-      allowtransparency="true" frameborder="0" scrolling="0" width="150px" height="35px"></iframe>
-    </p>
   </nav>
 
   <footer>
@@ -80,7 +75,7 @@
 </div>
 <!-- #content -->
 
-<script src="scripts/main.js""></script>
+<script src="scripts/main.js"></script>
 <script>var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-1495972-14']); _gaq.push(['_trackPageview']);</script><script src="http://www.google-analytics.com/ga.js" async></script>
 </body>
 </html>
