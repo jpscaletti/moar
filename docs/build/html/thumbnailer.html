@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width" />
-<title>Thumbnailer class | Moar thumbnails</title>
-<link href="styles/main.css"" rel="stylesheet" />
+<title>Thumbnailer class — Moar thumbnails</title>
+<link href="styles/main.css" rel="stylesheet" />
 </head>
 <body>
 <header>
   <div class="wrap">
     <ul id="ghbuttons" class="button-list">
-      <li><a href="https://github.com/lucuma/moar/zipball/master">Download <strong><span class="caps">ZIP</span>&nbsp;File</strong></a></li>
-      <li><a href="https://github.com/lucuma/moar/tarball/master">Download <strong><span class="caps">TAR</span>&nbsp;Ball</strong></a></li>
+      <li><a href="https://github.com/lucuma/moar/zipball/master">Download <strong>ZIP File</strong></a></li>
+      <li><a href="https://github.com/lucuma/moar/tarball/master">Download <strong>TAR Ball</strong></a></li>
       <li><a href="https://github.com/lucuma/moar">Fork On <strong>GitHub</strong></a></li>
     </ul>
 
@@ -23,7 +23,7 @@
 
 <div id="content" class="wrap">
   <section class="main">
-    <h1 id="thumbnailer-class"><a class="toclink" href="#thumbnailer-class">Thumbnailer&nbsp;class</a></h1>
+    <h1 id="thumbnailer-class"><a class="toclink" href="#thumbnailer-class">Thumbnailer class</a></h1>
 <p>Syntax:</p>
 <p><div class="highlight python"><pre><span class="kn">from</span> <span class="nn">moar</span> <span class="kn">import</span> <span class="n">Thumbnailer</span>
 
@@ -32,10 +32,10 @@
 </pre></div>
 </p>
 <p>Moar come with support for pluggable engines and storages. By default it use <code>moar.engines.pil.Engine</code> and <code>moar.storages.filesystem.Storage</code>.</p>
-<p>When you call the thumbnail instance, the current storage class will generates a key that represent a thumbnail made from that image with that specific filters and options. If a thumbnail with that key hasn&#8217;t been generated before, it&#8217;ll make a new one, store it using the key as an id, and returns&nbsp;it.</p>
-<p>The default storage class (<code>moar.storages.filesystem.Storage</code>) store the generated thumbnails inside a <code>"t"</code> folder in the same path as the source image (this can be changed). Other storages will operate different, for example, storing the key in a local database and uploading the thumbnail to a remote&nbsp;server.</p>
+<p>When you call the thumbnail instance, the current storage class will generates a key that represent a thumbnail made from that image with that specific filters and options. If a thumbnail with that key hasn't been generated before, it'll make a new one, store it using the key as an id, and returns it.</p>
+<p>The default storage class (<code>moar.storages.filesystem.Storage</code>) store the generated thumbnails inside a <code>"t"</code> folder in the same path as the source image (this can be changed). Other storages will operate different, for example, storing the key in a local database and uploading the thumbnail to a remote server.</p>
 <h2 id="filters"><a class="toclink" href="#filters">Filters</a></h2>
-<p>You can use the <code>filters</code> parameter to define a list of custom filters, adding them to those included by default.&nbsp;E.g.:</p>
+<p>You can use the <code>filters</code> parameter to define a list of custom filters, adding them to those included by default. E.g.:</p>
 <p><div class="highlight python"><pre><span class="kn">from</span> <span class="nn">image_filters</span> <span class="kn">import</span> <span class="n">watermak</span><span class="p">,</span> <span class="n">enhace</span>
 
 <span class="n">thumbnail</span> <span class="o">=</span> <span class="n">Thumbnailer</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="p">[</span><span class="n">watermak</span><span class="p">,</span> <span class="n">enhace</span><span class="p">])</span>
@@ -43,10 +43,10 @@
 </p>
 <div class=note>
 
-<p>The filters has to have a method named after the current engine (eg: <code>"wand"</code> or <code>"pil"</code>) or the&#8217;ll be unusable. See the &#8220;<a href="extending.html#filters">extending the library</a>&#8221; section for more&nbsp;details.</p>
+<p>The filters has to have a method named after the current engine (eg: <code>"wand"</code> or <code>"pil"</code>) or the'll be unusable. See the "<a href="extending.html#filters">extending the library</a>" section for more details.</p>
 </div>
 
-<h2 id="default-options"><a class="toclink" href="#default-options">Default&nbsp;Options</a></h2>
+<h2 id="default-options"><a class="toclink" href="#default-options">Default Options</a></h2>
 <p>These options are the default for all thumbnails. However, they can be overwritten in individual <code>thumbnail</code> calls.</p>
 <p><dl>
 <dt>upscale</dt>
@@ -56,7 +56,7 @@
 <dt>progressive</dt>
 <dd>This controls whether to save jpeg thumbnails as progressive jpegs. Default value is <code>True</code>.</dd>
 <dt>orientation</dt>
-<dd>This controls whether to orientate the resulting thumbnail with respect to the source <span class="caps">EXIF</span> tags for orientation. Default value is <code>True</code>.</dd>
+<dd>This controls whether to orientate the resulting thumbnail with respect to the source EXIF tags for orientation. Default value is <code>True</code>.</dd>
 <dt>format</dt>
 <dd>This controls the write format and thumbnail extension. Formats supported by the shipped engines are <code>"JPEG"</code> and <code>"PNG"</code>. Default value is <code>"JPEG"</code>.</dd>
 <dt>resize</dt>
@@ -66,25 +66,20 @@
 
   <nav id="sidebar">
     <div class="main-toc">
-    <h1 class="toc-title">Table of&nbsp;contents</h1>
+    <h1 class="toc-title">Table of contents</h1>
     <ul>
-<li><a href="index.html"">About</a></li>
-<li><a href="installation.html"">Installation</a></li>
-<li><a href="quickstart.html"">Quickstart</a></li>
-<li><a href="thumbnail.html"">The &#8220;thumbnail&#8221;&nbsp;function</a></li>
-<li><a href="thumbnailer.html"">Thumbnailer&nbsp;options</a></li>
-<li><a href="extending.html"">Extending the&nbsp;library</a></li>
+<li><a href="index.html">About</a></li>
+<li><a href="installation.html">Installation</a></li>
+<li><a href="quickstart.html">Quickstart</a></li>
+<li><a href="thumbnail.html">The "thumbnail" function</a></li>
+<li><a href="thumbnailer.html">Thumbnailer options</a></li>
+<li><a href="extending.html">Extending the library</a></li>
 </ul>
     </div>
 
     <div class="page-toc">
-    <ul class="toc"><li><a href="#thumbnailer-class">Thumbnailer class</a><ul><li><a href="#filters">Filters</a></li><li><a href="#default-options">Default&nbsp;Options</a></li></ul></li></ul>
+    <ul class="toc"><li><a href="#thumbnailer-class">Thumbnailer class</a><ul><li><a href="#filters">Filters</a></li><li><a href="#default-options">Default Options</a></li></ul></li></ul>
     </div>
-
-    <p id="ghwatch">
-    <iframe src="http://markdotto.github.com/github-buttons/github-btn.html?user=lucuma&amp;repo=moar&amp;type=watch&amp;count=true&amp;size=large"
-      allowtransparency="true" frameborder="0" scrolling="0" width="150px" height="35px"></iframe>
-    </p>
   </nav>
 
   <footer>
@@ -94,7 +89,7 @@
 </div>
 <!-- #content -->
 
-<script src="scripts/main.js""></script>
+<script src="scripts/main.js"></script>
 <script>var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-1495972-14']); _gaq.push(['_trackPageview']);</script><script src="http://www.google-analytics.com/ga.js" async></script>
 </body>
 </html>

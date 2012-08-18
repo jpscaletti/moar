@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width" />
-<title>Thumbnail generation | Moar thumbnails</title>
-<link href="styles/main.css"" rel="stylesheet" />
+<title>Thumbnail generation — Moar thumbnails</title>
+<link href="styles/main.css" rel="stylesheet" />
 </head>
 <body>
 <header>
   <div class="wrap">
     <ul id="ghbuttons" class="button-list">
-      <li><a href="https://github.com/lucuma/moar/zipball/master">Download <strong><span class="caps">ZIP</span>&nbsp;File</strong></a></li>
-      <li><a href="https://github.com/lucuma/moar/tarball/master">Download <strong><span class="caps">TAR</span>&nbsp;Ball</strong></a></li>
+      <li><a href="https://github.com/lucuma/moar/zipball/master">Download <strong>ZIP File</strong></a></li>
+      <li><a href="https://github.com/lucuma/moar/tarball/master">Download <strong>TAR Ball</strong></a></li>
       <li><a href="https://github.com/lucuma/moar">Fork On <strong>GitHub</strong></a></li>
     </ul>
 
@@ -23,52 +23,52 @@
 
 <div id="content" class="wrap">
   <section class="main">
-    <h1 id="the-thumbnail-function"><a class="toclink" href="#the-thumbnail-function">The &#8220;thumbnail&#8221;&nbsp;function</a></h1>
+    <h1 id="the-thumbnail-function"><a class="toclink" href="#the-thumbnail-function">The "thumbnail" function</a></h1>
 <p>Syntax:</p>
-<p><div class="highlight python"><pre><span class="n">thumbnail</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">geometry</span><span class="p">,</span> <span class="p">(</span><span class="n">key1</span><span class="p">,</span> <span class="n">value1</span><span class="p">),</span> <span class="p">(</span><span class="n">key2</span><span class="p">,</span> <span class="n">value2</span><span class="p">),</span> <span class="o">&#8230;</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span>
+<p><div class="highlight python"><pre><span class="n">thumbnail</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">geometry</span><span class="p">,</span> <span class="p">(</span><span class="n">key1</span><span class="p">,</span> <span class="n">value1</span><span class="p">),</span> <span class="p">(</span><span class="n">key2</span><span class="p">,</span> <span class="n">value2</span><span class="p">),</span> <span class="o">...</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span>
 </pre></div>
 </p>
-<p>The <code>thumbnail</code> function takes a source image, a geometry parameter, a number of optionals filters as tuples and/or a number of custom options (the same ones of the <a href="thumbnailer.html">Thumbnailer</a> class), and returns the <span class="caps">URL</span> of the generated&nbsp;thumbnail.</p>
-<p><div class="highlight jinja"><pre><span class="x">&lt;img src=&#8221;</span><span class="cp">{{</span> <span class="nv">thumbnail</span><span class="o">(</span> <span class="err">&#8230;</span> <span class="o">)</span> <span class="cp">}}</span><span class="x">&#8221; /&gt;</span>
+<p>The <code>thumbnail</code> function takes a source image, a geometry parameter, a number of optionals filters as tuples and/or a number of custom options (the same ones of the <a href="thumbnailer.html">Thumbnailer</a> class), and returns the URL of the generated thumbnail.</p>
+<p><div class="highlight jinja"><pre><span class="x">&lt;img src=&quot;</span><span class="cp">{{</span> <span class="nv">thumbnail</span><span class="o">(</span> <span class="err">...</span> <span class="o">)</span> <span class="cp">}}</span><span class="x">&quot; /&gt;</span>
 </pre></div>
 </p>
 <h2 id="source"><a class="toclink" href="#source">Source</a></h2>
-<p>Source must be a local image represented as an object or a dictionary with the following attributes or&nbsp;keys:</p>
+<p>Source must be a local image represented as an object or a dictionary with the following attributes or keys:</p>
 <dl>
 <dt>path</dt>
-<dd>absolute path to the image, including it&#8217;s name.<br>
+<dd>absolute path to the image, including it's name.<br>
 Eg: <code>/var/example.com/media/2012/05/05/lena.jpg</code>.</dd>
 <dt>url</dt>
-<dd><span class="caps">URL</span> to the container of the images, either absolute or relative to the domain.<br>
+<dd>URL to the container of the images, either absolute or relative to the domain.<br>
 Eg: <code>http://lucumalabs.com/media/2012/05/05/lena.jpg</code>, <code>/media/2012/05/05/lena.jpg</code>.</dd>
 </dl>
 <div class=note>
 
-<p>Some python web frameworks (like Django) use image objects with both of these&nbsp;attributes.</p>
+<p>Some python web frameworks (like Django) use image objects with both of these attributes.</p>
 </div>
 
 <h2 id="geometry"><a class="toclink" href="#geometry">Geometry</a></h2>
 <p>Geometry is specified as <code>width</code>x<code>height</code>, <code>width</code> or x<code>height</code>.<br>
-Width and height are in&nbsp;pixels. </p>
-<p>This value can either be a string or a callable that return a valid geometry string.&nbsp;Examples:</p>
+Width and height are in pixels. </p>
+<p>This value can either be a string or a callable that return a valid geometry string. Examples:</p>
 <p><div class="highlight python"><pre><span class="n">thumbnail</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="s">&#39;200x100&#39;</span><span class="p">)</span>
 <span class="n">thumbnail</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="s">&#39;200&#39;</span><span class="p">)</span>
 <span class="n">thumbnail</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="s">&#39;x100&#39;</span><span class="p">)</span>
 <span class="n">thumbnail</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">get_geometry</span><span class="p">)</span>
 </pre></div>
 </p>
-<p>If both width and height are given, the image is rescaled to the maximum size that fits in a width x height box, preserving the aspect&nbsp;ratio. </p>
-<p>If the <code>resize</code> option is <code>True</code>, however, the image is deformed to match exactly the given&nbsp;dimensions,</p>
-<p>If the geometry is <code>None</code> or an empty string, no rescaling will be&nbsp;applied.</p>
+<p>If both width and height are given, the image is rescaled to the maximum size that fits in a width x height box, preserving the aspect ratio. </p>
+<p>If the <code>resize</code> option is <code>True</code>, however, the image is deformed to match exactly the given dimensions,</p>
+<p>If the geometry is <code>None</code> or an empty string, no rescaling will be applied.</p>
 <h2 id="filters"><a class="toclink" href="#filters">Filters</a></h2>
-<p>The filters are defined as a sequence of list or&nbsp;tuples.</p>
+<p>The filters are defined as a sequence of list or tuples.</p>
 <pre><code>['filter1', value], ['filter2', value1, value2], ['filter3'] ...
 </code></pre>
-<p>They are defined this way instead of using keyword arguments because the order in which are applied could&nbsp;matter.</p>
-<p>The filters described below are those available in the shipped engines, but you can easily add more (see the section &#8220;<a href="extending.html#filters">extending the library</a>&#8221; for more info about&nbsp;that).</p>
-<h3 id="crop-width-height-x0-y0"><a class="toclink" href="#crop-width-height-x0-y0">crop (width, height, x=0,&nbsp;y=0)</a></h3>
-<p>Crop accepts a width, height and one or two optional values as the coordinates of the new top-left corner (<code>(0, 0)</code> by default). These last values can be integers (pixels), percentages or&nbsp;&#8216;center&#8217;.</p>
-<p>For example, some valid values&nbsp;are:</p>
+<p>They are defined this way instead of using keyword arguments because the order in which are applied could matter.</p>
+<p>The filters described below are those available in the shipped engines, but you can easily add more (see the section "<a href="extending.html#filters">extending the library</a>" for more info about that).</p>
+<h3 id="crop-width-height-x0-y0"><a class="toclink" href="#crop-width-height-x0-y0">crop (width, height, x=0, y=0)</a></h3>
+<p>Crop accepts a width, height and one or two optional values as the coordinates of the new top-left corner (<code>(0, 0)</code> by default). These last values can be integers (pixels), percentages or 'center'.</p>
+<p>For example, some valid values are:</p>
 <p><div class="highlight python"><pre><span class="n">thumbnail</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="s">&#39;200x100&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s">&#39;crop&#39;</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">])</span>
 <span class="n">thumbnail</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="s">&#39;200x100&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s">&#39;crop&#39;</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="s">&#39;15%&#39;</span><span class="p">,</span> <span class="s">&#39;10%&#39;</span><span class="p">])</span>
 <span class="n">thumbnail</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="s">&#39;200x100&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s">&#39;crop&#39;</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">50</span><span class="p">])</span>
@@ -77,36 +77,36 @@ Width and height are in&nbsp;pixels. </p>
 </pre></div>
 </p>
 <h3 id="grayscale"><a class="toclink" href="#grayscale">grayscale</a></h3>
-<p>If you include this filter it will turn the image into&nbsp;gray-scale.</p>
+<p>If you include this filter it will turn the image into gray-scale.</p>
 <p>Example:</p>
 <p><div class="highlight python"><pre><span class="n">thumbnail</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="s">&#39;200x100&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s">&#39;grayscale&#39;</span><span class="p">])</span>
 </pre></div>
 </p>
-<h3 id="sepia-tonefff0c0"><a class="toclink" href="#sepia-tonefff0c0">sepia&nbsp;(tone=&#8217;#fff0c0&#8217;)</a></h3>
-<p>This filter will turn your image into sepia tones, making it looks like an old&nbsp;photo.</p>
-<p>The interesting trick about sepia images is that they are just gray-scale pictures with a different color palette. In this case the default sepia tone is&nbsp;#fff0c0.</p>
-<p>If you would want to change it, the tone can be expressed as a <span class="caps">RGB</span> list of values or like an hex&nbsp;string.</p>
+<h3 id="sepia-tonefff0c0"><a class="toclink" href="#sepia-tonefff0c0">sepia (tone='#fff0c0')</a></h3>
+<p>This filter will turn your image into sepia tones, making it looks like an old photo.</p>
+<p>The interesting trick about sepia images is that they are just gray-scale pictures with a different color palette. In this case the default sepia tone is #fff0c0.</p>
+<p>If you would want to change it, the tone can be expressed as a RGB list of values or like an hex string.</p>
 <p>Examples:</p>
 <p><div class="highlight python"><pre><span class="n">thumbnail</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="s">&#39;200x100&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s">&#39;sepia&#39;</span><span class="p">])</span>
 <span class="n">thumbnail</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="s">&#39;200x100&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s">&#39;sepia&#39;</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">192</span><span class="p">])</span>
 <span class="n">thumbnail</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="s">&#39;200x100&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s">&#39;sepia&#39;</span><span class="p">,</span> <span class="s">&#39;#fff0c0&#39;</span><span class="p">])</span>
 </pre></div>
 </p>
-<h3 id="rotate-degrees"><a class="toclink" href="#rotate-degrees">rotate&nbsp;(degrees)</a></h3>
-<p>Rotates the image counter-clockwise by a specified number of degrees. If degrees is negative, the rotation it&#8217;s clockwise&nbsp;instead.</p>
+<h3 id="rotate-degrees"><a class="toclink" href="#rotate-degrees">rotate (degrees)</a></h3>
+<p>Rotates the image counter-clockwise by a specified number of degrees. If degrees is negative, the rotation it's clockwise instead.</p>
 <p>Example:</p>
 <p><div class="highlight python"><pre><span class="n">thumbnail</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="s">&#39;200x100&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s">&#39;rotate&#39;</span><span class="p">,</span> <span class="mi">45</span><span class="p">])</span>
 <span class="n">thumbnail</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="s">&#39;200x100&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s">&#39;rotate&#39;</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span><span class="p">])</span>
 </pre></div>
 </p>
-<h3 id="blur-radius2"><a class="toclink" href="#blur-radius2">blur&nbsp;(radius=2)</a></h3>
-<p>Apply a gaussian blur (smoothing) to the image. The <code>radius</code> argument determines the scale of fine detail that will be removed. Low values remove only very fine detail while high values remove larger levels of&nbsp;detail.</p>
+<h3 id="blur-radius2"><a class="toclink" href="#blur-radius2">blur (radius=2)</a></h3>
+<p>Apply a gaussian blur (smoothing) to the image. The <code>radius</code> argument determines the scale of fine detail that will be removed. Low values remove only very fine detail while high values remove larger levels of detail.</p>
 <p>Example:</p>
 <p><div class="highlight python"><pre><span class="n">thumbnail</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="s">&#39;200x100&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s">&#39;blur&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
 </pre></div>
 </p>
 <h2 id="options"><a class="toclink" href="#options">Options</a></h2>
-<p>The options overwrite the default ones defined in the <a href="thumbnailer.html">Thumbnailer</a>&nbsp;class.</p>
+<p>The options overwrite the default ones defined in the <a href="thumbnailer.html">Thumbnailer</a> class.</p>
 <p><dl>
 <dt>upscale</dt>
 <dd>Upscale is a boolean that controls if the image can be upscaled or not. For example if your source is <code>"100x100"</code> and you request a thumbnail of size <code>"200x200"</code> and upscale is <code>False</code> this will return a thumbnail of size 100x100. If upscale were <code>True</code> this would result in a thumbnail size <code>"200x200"</code> (upscaled). The default value is <code>True</code>.</dd>
@@ -115,7 +115,7 @@ Width and height are in&nbsp;pixels. </p>
 <dt>progressive</dt>
 <dd>This controls whether to save jpeg thumbnails as progressive jpegs. Default value is <code>True</code>.</dd>
 <dt>orientation</dt>
-<dd>This controls whether to orientate the resulting thumbnail with respect to the source <span class="caps">EXIF</span> tags for orientation. Default value is <code>True</code>.</dd>
+<dd>This controls whether to orientate the resulting thumbnail with respect to the source EXIF tags for orientation. Default value is <code>True</code>.</dd>
 <dt>format</dt>
 <dd>This controls the write format and thumbnail extension. Formats supported by the shipped engines are <code>"JPEG"</code> and <code>"PNG"</code>. Default value is <code>"JPEG"</code>.</dd>
 <dt>resize</dt>
@@ -125,25 +125,20 @@ Width and height are in&nbsp;pixels. </p>
 
   <nav id="sidebar">
     <div class="main-toc">
-    <h1 class="toc-title">Table of&nbsp;contents</h1>
+    <h1 class="toc-title">Table of contents</h1>
     <ul>
-<li><a href="index.html"">About</a></li>
-<li><a href="installation.html"">Installation</a></li>
-<li><a href="quickstart.html"">Quickstart</a></li>
-<li><a href="thumbnail.html"">The &#8220;thumbnail&#8221;&nbsp;function</a></li>
-<li><a href="thumbnailer.html"">Thumbnailer&nbsp;options</a></li>
-<li><a href="extending.html"">Extending the&nbsp;library</a></li>
+<li><a href="index.html">About</a></li>
+<li><a href="installation.html">Installation</a></li>
+<li><a href="quickstart.html">Quickstart</a></li>
+<li><a href="thumbnail.html">The "thumbnail" function</a></li>
+<li><a href="thumbnailer.html">Thumbnailer options</a></li>
+<li><a href="extending.html">Extending the library</a></li>
 </ul>
     </div>
 
     <div class="page-toc">
-    <ul class="toc"><li><a href="#the-thumbnail-function">The &#8220;thumbnail&#8221; function</a><ul><li><a href="#source">Source</a></li><li><a href="#geometry">Geometry</a></li><li><a href="#filters">Filters</a><ul><li><a href="#crop-width-height-x0-y0">crop (width, height, x=0,&nbsp;y=0)</a></li><li><a href="#grayscale">grayscale</a></li><li><a href="#sepia-tonefff0c0">sepia&nbsp;(tone=&#8217;#fff0c0&#8217;)</a></li><li><a href="#rotate-degrees">rotate&nbsp;(degrees)</a></li><li><a href="#blur-radius2">blur&nbsp;(radius=2)</a></li></ul></li><li><a href="#options">Options</a></li></ul></li></ul>
+    <ul class="toc"><li><a href="#the-thumbnail-function">The "thumbnail" function</a><ul><li><a href="#source">Source</a></li><li><a href="#geometry">Geometry</a></li><li><a href="#filters">Filters</a><ul><li><a href="#crop-width-height-x0-y0">crop (width, height, x=0, y=0)</a></li><li><a href="#grayscale">grayscale</a></li><li><a href="#sepia-tonefff0c0">sepia (tone='#fff0c0')</a></li><li><a href="#rotate-degrees">rotate (degrees)</a></li><li><a href="#blur-radius2">blur (radius=2)</a></li></ul></li><li><a href="#options">Options</a></li></ul></li></ul>
     </div>
-
-    <p id="ghwatch">
-    <iframe src="http://markdotto.github.com/github-buttons/github-btn.html?user=lucuma&amp;repo=moar&amp;type=watch&amp;count=true&amp;size=large"
-      allowtransparency="true" frameborder="0" scrolling="0" width="150px" height="35px"></iframe>
-    </p>
   </nav>
 
   <footer>
@@ -153,7 +148,7 @@ Width and height are in&nbsp;pixels. </p>
 </div>
 <!-- #content -->
 
-<script src="scripts/main.js""></script>
+<script src="scripts/main.js"></script>
 <script>var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-1495972-14']); _gaq.push(['_trackPageview']);</script><script src="http://www.google-analytics.com/ga.js" async></script>
 </body>
 </html>

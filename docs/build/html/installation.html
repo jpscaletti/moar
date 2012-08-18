@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width" />
-<title>Installation | Moar thumbnails</title>
-<link href="styles/main.css"" rel="stylesheet" />
+<title>Installation — Moar thumbnails</title>
+<link href="styles/main.css" rel="stylesheet" />
 </head>
 <body>
 <header>
   <div class="wrap">
     <ul id="ghbuttons" class="button-list">
-      <li><a href="https://github.com/lucuma/moar/zipball/master">Download <strong><span class="caps">ZIP</span>&nbsp;File</strong></a></li>
-      <li><a href="https://github.com/lucuma/moar/tarball/master">Download <strong><span class="caps">TAR</span>&nbsp;Ball</strong></a></li>
+      <li><a href="https://github.com/lucuma/moar/zipball/master">Download <strong>ZIP File</strong></a></li>
+      <li><a href="https://github.com/lucuma/moar/tarball/master">Download <strong>TAR Ball</strong></a></li>
       <li><a href="https://github.com/lucuma/moar">Fork On <strong>GitHub</strong></a></li>
     </ul>
 
@@ -24,78 +24,73 @@
 <div id="content" class="wrap">
   <section class="main">
     <h1 id="installation"><a class="toclink" href="#installation">Installation</a></h1>
-<p>To install with <code>pip</code>, just&nbsp;do</p>
+<p>To install with <code>pip</code>, just do</p>
 <pre><code>pip install moar
 </code></pre>
 <h2 id="requirements"><a class="toclink" href="#requirements">Requirements</a></h2>
 <p>You need to have an image library installed. Moar ships with support for the <a href="http://www.pythonware.com/products/pil/" target="_blank">Python Imaging Library</a> and <a href="http://www.imagemagick.org/script/index.php" target="_blank">ImageMagick</a> via <a href="http://styleshare.github.com/wand/" target="_blank">wand</a>. </p>
-<h3 id="python-imaging-library-pil-installation"><a class="toclink" href="#python-imaging-library-pil-installation">Python Imaging Library (<span class="caps">PIL</span>)&nbsp;installation</a></h3>
+<h3 id="python-imaging-library-pil-installation"><a class="toclink" href="#python-imaging-library-pil-installation">Python Imaging Library (PIL) installation</a></h3>
 <p>Prerequisites:</p>
 <ul>
 <li>libjpeg</li>
 <li>zlib</li>
 </ul>
-<p>Ubuntu 10.04 package&nbsp;installation:</p>
+<p>Ubuntu 10.04 package installation:</p>
 <pre><code>sudo apt-get install libjpeg8 libjpeg62-dev libfreetype6 libfreetype6-dev
 </code></pre>
-<p>Then, install the <a href="http://www.pythonware.com/products/pil/" target="_blank">Python Imaging Library</a> using&nbsp;pip:</p>
+<p>Then, install the <a href="http://www.pythonware.com/products/pil/" target="_blank">Python Imaging Library</a> using pip:</p>
 <pre><code>pip install pil
 </code></pre>
-<p>Watch the output for messages on what support got compiled in, you at least want to see the&nbsp;following:</p>
+<p>Watch the output for messages on what support got compiled in, you at least want to see the following:</p>
 <pre><code>--- JPEG support available
 --- ZLIB (PNG/ZIP) support available
 </code></pre>
-<h3 id="wand-installation"><a class="toclink" href="#wand-installation">Wand&nbsp;installation</a></h3>
+<h3 id="wand-installation"><a class="toclink" href="#wand-installation">Wand installation</a></h3>
 <p>Prerequisites:</p>
 <ul>
 <li>ImageMagick</li>
 </ul>
-<h4 id="in-ubuntu-124"><a class="toclink" href="#in-ubuntu-124">In Ubuntu&nbsp;12.4:</a></h4>
+<h4 id="in-ubuntu-124"><a class="toclink" href="#in-ubuntu-124">In Ubuntu 12.4:</a></h4>
 <pre><code>sudo apt-get install libmagickwand-dev
 pip install Wand==0.2
 </code></pre>
-<h4 id="in-mac-osx"><a class="toclink" href="#in-mac-osx">In Mac&nbsp;<span class="caps">OSX</span>:</a></h4>
+<h4 id="in-mac-osx"><a class="toclink" href="#in-mac-osx">In Mac OSX:</a></h4>
 <pre><code>brew install imagemagick
 pip install Wand==0.2
 </code></pre>
-<h2 id="getting-the-source-code"><a class="toclink" href="#getting-the-source-code">Getting the source&nbsp;code</a></h2>
-<p>Moar is actively developed on GitHub, where the code is <a href="https://github.com/lucuma/moar">always available</a>.</p>
-<p>You can either clone the public&nbsp;repository</p>
+<h2 id="getting-the-source-code"><a class="toclink" href="#getting-the-source-code">Getting the source code</a></h2>
+<p>Moar is actively developed on GitHub, where the code is <a href="">always available</a>.</p>
+<p>You can either clone the public repository</p>
 <pre><code>git clone git://github.com/lucuma/moar.git
 </code></pre>
-<p>download the&nbsp;tarball</p>
+<p>download the tarball</p>
 <pre><code>wget https://github.com/lucuma/moar/tarball/master
 </code></pre>
-<p>or, download the&nbsp;zipball:</p>
+<p>or, download the zipball:</p>
 <pre><code>wget https://github.com/lucuma/moar/zipball/master
 </code></pre>
 <p>Once you have a copy of the source, you can embed it in your Python package,<br>
-or install it into your site-packages&nbsp;easily:</p>
+or install it into your site-packages easily:</p>
 <pre><code>python setup.py install
 </code></pre>
   </section>
 
   <nav id="sidebar">
     <div class="main-toc">
-    <h1 class="toc-title">Table of&nbsp;contents</h1>
+    <h1 class="toc-title">Table of contents</h1>
     <ul>
-<li><a href="index.html"">About</a></li>
-<li><a href="installation.html"">Installation</a></li>
-<li><a href="quickstart.html"">Quickstart</a></li>
-<li><a href="thumbnail.html"">The &#8220;thumbnail&#8221;&nbsp;function</a></li>
-<li><a href="thumbnailer.html"">Thumbnailer&nbsp;options</a></li>
-<li><a href="extending.html"">Extending the&nbsp;library</a></li>
+<li><a href="index.html">About</a></li>
+<li><a href="installation.html">Installation</a></li>
+<li><a href="quickstart.html">Quickstart</a></li>
+<li><a href="thumbnail.html">The "thumbnail" function</a></li>
+<li><a href="thumbnailer.html">Thumbnailer options</a></li>
+<li><a href="extending.html">Extending the library</a></li>
 </ul>
     </div>
 
     <div class="page-toc">
-    <ul class="toc"><li><a href="#installation">Installation</a><ul><li><a href="#requirements">Requirements</a><ul><li><a href="#python-imaging-library-pil-installation">Python Imaging Library (<span class="caps">PIL</span>)&nbsp;installation</a></li><li><a href="#wand-installation">Wand installation</a><ul><li><a href="#in-ubuntu-124">In Ubuntu&nbsp;12.4:</a></li><li><a href="#in-mac-osx">In Mac&nbsp;<span class="caps">OSX</span>:</a></li></ul></li></ul></li><li><a href="#getting-the-source-code">Getting the source&nbsp;code</a></li></ul></li></ul>
+    <ul class="toc"><li><a href="#installation">Installation</a><ul><li><a href="#requirements">Requirements</a><ul><li><a href="#python-imaging-library-pil-installation">Python Imaging Library (PIL) installation</a></li><li><a href="#wand-installation">Wand installation</a><ul><li><a href="#in-ubuntu-124">In Ubuntu 12.4:</a></li><li><a href="#in-mac-osx">In Mac OSX:</a></li></ul></li></ul></li><li><a href="#getting-the-source-code">Getting the source code</a></li></ul></li></ul>
     </div>
-
-    <p id="ghwatch">
-    <iframe src="http://markdotto.github.com/github-buttons/github-btn.html?user=lucuma&amp;repo=moar&amp;type=watch&amp;count=true&amp;size=large"
-      allowtransparency="true" frameborder="0" scrolling="0" width="150px" height="35px"></iframe>
-    </p>
   </nav>
 
   <footer>
@@ -105,7 +100,7 @@ or install it into your site-packages&nbsp;easily:</p>
 </div>
 <!-- #content -->
 
-<script src="scripts/main.js""></script>
+<script src="scripts/main.js"></script>
 <script>var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-1495972-14']); _gaq.push(['_trackPageview']);</script><script src="http://www.google-analytics.com/ga.js" async></script>
 </body>
 </html>
