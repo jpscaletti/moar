@@ -1,82 +1,55 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width" />
-<title>Moar thumbnails documentation — Moar thumbnails</title>
-<link href="styles/main.css" rel="stylesheet" />
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="clay.lucumalabs.com">
+  <meta name="description" content="">
+  <link href="../styles/styles.css" media="screen" rel="stylesheet">
+  <link href="../styles/pygments/friendly.css" rel="stylesheet">
 </head>
 <body>
-<header>
-  <div class="wrap">
-    <ul id="ghbuttons" class="button-list">
-      <li><a href="https://github.com/lucuma/moar/zipball/master">Download <strong>ZIP File</strong></a></li>
-      <li><a href="https://github.com/lucuma/moar/tarball/master">Download <strong>TAR Ball</strong></a></li>
-      <li><a href="https://github.com/lucuma/moar">Fork On <strong>GitHub</strong></a></li>
+  <script>var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-1495972-14']); _gaq.push(['_trackPageview']);</script><script src="http://www.google-analytics.com/ga.js" async></script>
+  <header id="sidebar">
+    <aside id="logo" class="clearfix">
+      <div class="clearfix">
+        <a href="index.html">Moar</a>
+      </div>
+    </aside>
+    <ul id="user_meta">
+      <li class="project_name">
+        <h1 id="project_name">
+          <a href="index.html">Moar thumbnails</a>
+        </h1>
+      </li>
+      <!--li class="project_owner">
+        <h2 id="project_owner">
+          <a href="http://lucumalabs.com">By Lúcuma</a>
+        </h2>
+      </li-->
+      <li class="tagline">
+        <h2 id="tagline">On-the-fly thumbnailer for everyone.</h2>
+      </li>
+      
+      <li class="link github">
+        <a href="https://github.com/lucuma/moar">github</a>
+      </li>
+      <li class="link email">
+        <a href="mailto:juanpablo@lucumalabs.com?subject=hi">say hello</a>
+      </li>
     </ul>
+  </header>
 
-    <h1><a href="index.html">Moar thumbnails <small>v. 0.4</small></a></h1>
+  <section id="river">
+  
+  <article class="post">
+    
+  </article>
 
-    <br class="clearfix">
-  </div>
-</header>
-
-<div id="content" class="wrap">
-  <section class="main">
-    <h1 id="moar-thumbnails"><a class="toclink" href="#moar-thumbnails">Moar thumbnails</a></h1>
-<p><strong>Welcome to Moar!</strong></p>
-<p>Moar is an MIT Licensed library, written in Python, that allows you to make custom thumbnails whenever you need them in your application.</p>
-<p><div class="highlight jinja"><pre><span class="x">&lt;img src=&quot;</span><span class="cp">{{</span> <span class="nv">thumbnail</span><span class="o">(</span><span class="nv">source</span><span class="o">,</span> <span class="s1">&#39;200x100&#39;</span><span class="o">,</span> <span class="o">[</span><span class="s1">&#39;crop&#39;</span><span class="o">,</span> <span class="m">50</span><span class="o">,</span> <span class="m">50</span><span class="o">])</span> <span class="cp">}}</span><span class="x">&quot; /&gt;</span>
-</pre></div>
-</p>
-<h2 id="features-at-a-glance"><a class="toclink" href="#features-at-a-glance">Features at a glance</a></h2>
-<ul>
-<li>Pluggable engine support (<a href="http://www.pythonware.com/products/pil/" target="_blank">PIL</a> and <a href="http://styleshare.github.com/wand/" target="_blank">Wand</a> (a wrapper for <a href="http://www.imagemagick.org/script/index.php" target="_blank">ImageMagick</a>) included<sup>*</sup>).</li>
-<li>Automatic cache: a thumbnail is generated only once.</li>
-<li>Pluggable storage support (FileSystem included).</li>
-<li>Flexible, simple syntax, generates no HTML.</li>
-<li>Auto-rotates the image according to its EXIF information. <sup>*</sup></li>
-<li>Several filters available by default:<ul>
-<li>Cropping</li>
-<li>Rotation</li>
-<li>Blur</li>
-<li>Grayscale/Sepia <sup>*</sup></li>
-</ul>
-</li>
-<li>Easily extendable.</li>
-</ul>
-<div class="warning">
-
-<p><sup>*</sup> The Wand engine doesn't have <strong>yet</strong> support for the EXIF-based auto-rotation or<br>
-grayscale/sepia filters.</p>
-</div>
   </section>
 
-  <nav id="sidebar">
-    <div class="main-toc">
-    <h1 class="toc-title">Table of contents</h1>
-    <ul>
-<li><a href="index.html">About</a></li>
-<li><a href="installation.html">Installation</a></li>
-<li><a href="quickstart.html">Quickstart</a></li>
-<li><a href="thumbnail.html">The "thumbnail" function</a></li>
-<li><a href="thumbnailer.html">Thumbnailer options</a></li>
-<li><a href="extending.html">Extending the library</a></li>
-</ul>
-    </div>
-
-    <div class="page-toc">
-    <ul class="toc"><li><a href="#moar-thumbnails">Moar thumbnails</a><ul><li><a href="#features-at-a-glance">Features at a glance</a></li></ul></li></ul>
-    </div>
-  </nav>
-
-  <footer>
-  <p class="copy">© 2012 by <a href="http://lucumalabs.com"target="_blank">Lúcuma</a>. Published with <a href="http://lucuma.github.com/Clay/" target="_blank">Clay</a>.</p>
-  </footer>
-</div>
-<!-- #content -->
-
-<script src="scripts/main.js"></script>
-<script>var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-1495972-14']); _gaq.push(['_trackPageview']);</script><script src="http://www.google-analytics.com/ga.js" async></script>
+  <script data-cfasync="false" src="../scripts/jquery-1.8.0.min.js"></script>
+  <script src="../scripts/scripts.js"></script>
 </body>
 </html>

@@ -1,40 +1,61 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width" />
-<title>Installation — Moar thumbnails</title>
-<link href="styles/main.css" rel="stylesheet" />
+  <meta charset="utf-8">
+  <title>Installation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="clay.lucumalabs.com">
+  <meta name="description" content="">
+  <link href="styles/styles.css" media="screen" rel="stylesheet">
+  <link href="styles/pygments/friendly.css" rel="stylesheet">
 </head>
 <body>
-<header>
-  <div class="wrap">
-    <ul id="ghbuttons" class="button-list">
-      <li><a href="https://github.com/lucuma/moar/zipball/master">Download <strong>ZIP File</strong></a></li>
-      <li><a href="https://github.com/lucuma/moar/tarball/master">Download <strong>TAR Ball</strong></a></li>
-      <li><a href="https://github.com/lucuma/moar">Fork On <strong>GitHub</strong></a></li>
+  <script>var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-1495972-14']); _gaq.push(['_trackPageview']);</script><script src="http://www.google-analytics.com/ga.js" async></script>
+  <header id="sidebar">
+    <aside id="logo" class="clearfix">
+      <div class="clearfix">
+        <a href="index.html">Moar</a>
+      </div>
+    </aside>
+    <ul id="user_meta">
+      <li class="project_name">
+        <h1 id="project_name">
+          <a href="index.html">Moar thumbnails</a>
+        </h1>
+      </li>
+      <!--li class="project_owner">
+        <h2 id="project_owner">
+          <a href="http://lucumalabs.com">By Lúcuma</a>
+        </h2>
+      </li-->
+      <li class="tagline">
+        <h2 id="tagline">On-the-fly thumbnailer for everyone.</h2>
+      </li>
+      
+  <li class="link toc">
+    <a href="index.html#table-of-contents">table of contents</a>
+  </li>
+
+      <li class="link github">
+        <a href="https://github.com/lucuma/moar">github</a>
+      </li>
+      <li class="link email">
+        <a href="mailto:juanpablo@lucumalabs.com?subject=hi">say hello</a>
+      </li>
     </ul>
+  </header>
 
-    <h1><a href="index.html">Moar thumbnails <small>v. 0.4</small></a></h1>
-
-    <br class="clearfix">
-  </div>
-</header>
-
-<div id="content" class="wrap">
-  <section class="main">
+  <section id="river">
+  
+  <article class="post">
     <h1 id="installation"><a class="toclink" href="#installation">Installation</a></h1>
 <p>To install with <code>pip</code>, just do</p>
 <pre><code>pip install moar
 </code></pre>
 <h2 id="requirements"><a class="toclink" href="#requirements">Requirements</a></h2>
-<p>You need to have an image library installed. Moar ships with support for the <a href="http://www.pythonware.com/products/pil/" target="_blank">Python Imaging Library</a> and <a href="http://www.imagemagick.org/script/index.php" target="_blank">ImageMagick</a> via <a href="http://styleshare.github.com/wand/" target="_blank">wand</a>. </p>
+<p>You need to have an image library installed. Moar ships with support for the <a href="http://www.pythonware.com/products/pil/" target="_blank">Python Imaging Library</a> and <a href="http://www.imagemagick.org/script/index.php" target="_blank">ImageMagick</a> via the <a href="http://styleshare.github.com/wand/" target="_blank">wand</a> library. </p>
 <h3 id="python-imaging-library-pil-installation"><a class="toclink" href="#python-imaging-library-pil-installation">Python Imaging Library (PIL) installation</a></h3>
-<p>Prerequisites:</p>
-<ul>
-<li>libjpeg</li>
-<li>zlib</li>
-</ul>
+<p>Prerequisites: <code>libjpeg</code> and <code>zlib</code>.</p>
 <p>Ubuntu 10.04 package installation:</p>
 <pre><code>sudo apt-get install libjpeg8 libjpeg62-dev libfreetype6 libfreetype6-dev
 </code></pre>
@@ -59,7 +80,7 @@ pip install Wand==0.2
 pip install Wand==0.2
 </code></pre>
 <h2 id="getting-the-source-code"><a class="toclink" href="#getting-the-source-code">Getting the source code</a></h2>
-<p>Moar is actively developed on GitHub, where the code is <a href="">always available</a>.</p>
+<p>Moar is actively developed on GitHub, where the code is <a href="https://github.com/lucuma/moar">always available</a>.</p>
 <p>You can either clone the public repository</p>
 <pre><code>git clone git://github.com/lucuma/moar.git
 </code></pre>
@@ -73,33 +94,16 @@ pip install Wand==0.2
 or install it into your site-packages easily:</p>
 <pre><code>python setup.py install
 </code></pre>
-  </section>
-
-  <nav id="sidebar">
-    <div class="main-toc">
-    <h1 class="toc-title">Table of contents</h1>
-    <ul>
-<li><a href="index.html">About</a></li>
-<li><a href="installation.html">Installation</a></li>
-<li><a href="quickstart.html">Quickstart</a></li>
-<li><a href="thumbnail.html">The "thumbnail" function</a></li>
-<li><a href="thumbnailer.html">Thumbnailer options</a></li>
-<li><a href="extending.html">Extending the library</a></li>
-</ul>
-    </div>
-
-    <div class="page-toc">
-    <ul class="toc"><li><a href="#installation">Installation</a><ul><li><a href="#requirements">Requirements</a><ul><li><a href="#python-imaging-library-pil-installation">Python Imaging Library (PIL) installation</a></li><li><a href="#wand-installation">Wand installation</a><ul><li><a href="#in-ubuntu-124">In Ubuntu 12.4:</a></li><li><a href="#in-mac-osx">In Mac OSX:</a></li></ul></li></ul></li><li><a href="#getting-the-source-code">Getting the source code</a></li></ul></li></ul>
-    </div>
+  </article>
+  <nav class="pagination">
+    <span class="prev">
+      <a href="index.html" class="back_to_index">←&nbsp;home</a>
+    </span>
   </nav>
 
-  <footer>
-  <p class="copy">© 2012 by <a href="http://lucumalabs.com"target="_blank">Lúcuma</a>. Published with <a href="http://lucuma.github.com/Clay/" target="_blank">Clay</a>.</p>
-  </footer>
-</div>
-<!-- #content -->
+  </section>
 
-<script src="scripts/main.js"></script>
-<script>var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-1495972-14']); _gaq.push(['_trackPageview']);</script><script src="http://www.google-analytics.com/ga.js" async></script>
+  <script data-cfasync="false" src="scripts/jquery-1.8.0.min.js"></script>
+  <script src="scripts/scripts.js"></script>
 </body>
 </html>
