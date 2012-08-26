@@ -8,7 +8,7 @@ Moar is an MIT Licensed library, written in Python, that allows you to make cust
 ```
 
 See the documentation online at http://lucuma.github.com/moar/
-or in [docs/source](https://github.com/lucuma/moar/tree/master/docs/source).
+or in [doc/source](https://github.com/lucuma/moar/tree/master/doc/source).
 
 
 ## Features at a glance
