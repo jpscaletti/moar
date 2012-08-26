@@ -11,15 +11,12 @@ To install with `pip`, just do
 
 ## Requirements
 
-You need to have an image library installed. Moar ships with support for the [Python Imaging Library][pil]{:target=_blank} and [ImageMagick][imagemagick]{:target=_blank} via [wand][wand]{:target=_blank}. 
+You need to have an image library installed. Moar ships with support for the [Python Imaging Library][pil]{:target=_blank} and [ImageMagick][imagemagick]{:target=_blank} via the [wand][wand]{:target=_blank} library. 
 
 
 ### Python Imaging Library (PIL) installation
 
-Prerequisites:
-
-* libjpeg
-* zlib
+Prerequisites: `libjpeg` and `zlib`.
 
 Ubuntu 10.04 package installation:
 
@@ -54,7 +51,7 @@ Prerequisites:
 
 ## Getting the source code
 
-Moar is actively developed on GitHub, where the code is [always available]({{ GITHUB_URL }}).
+Moar is actively developed on GitHub, where the code is [always available]({{ github_url }}).
 
 You can either clone the public repository
 
