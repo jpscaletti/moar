@@ -8,15 +8,15 @@ port: 8080
 
 ## Ignore the views listed here when generating the static files
 views_ignore:
-  - theme/header.html
-  - theme/post.html
-  - main_toc.md
+  - html/base.html
+  - html/index.html
+  - html/post.html
 
 ## Ignore the views listed here in the _index
 views_list_ignore:
-  - theme/header.html
-  - theme/post.html
-  - main_toc.md
+  - html/base.html
+  - html/index.html
+  - html/post.html
 
 ## Enabled pre-processors
 pre_processors: 
@@ -30,5 +30,4 @@ theme_prefix: html
 
 ## Constants
 github_url: https://github.com/lucuma/moar
-version: 0.4
 google_analytics_code: UA-1495972-14

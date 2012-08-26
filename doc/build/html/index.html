@@ -2,12 +2,12 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title></title>
+  <title>Moar thumbnails</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="generator" content="clay.lucumalabs.com">
   <meta name="description" content="">
-  <link href="../styles/styles.css" media="screen" rel="stylesheet">
-  <link href="../styles/pygments/friendly.css" rel="stylesheet">
+  <link href="styles/styles.css" media="screen" rel="stylesheet">
+  <link href="styles/pygments/friendly.css" rel="stylesheet">
 </head>
 <body>
   <script>var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-1495972-14']); _gaq.push(['_trackPageview']);</script><script src="http://www.google-analytics.com/ga.js" async></script>
@@ -44,12 +44,46 @@
   <section id="river">
   
   <article class="post">
-    
+    <p>Moar is a MIT Licensed library, written in Python, that allows you to make custom thumbnails only changing the template code. The result is cached and can be deleted an regenerated transparently, so your uploaded images can keep-up with your changing design without a glitch.</p>
+<p><pre><code class="highlight jinja"><span class="x">&lt;img src=&quot;</span><span class="cp">{{</span> <span class="nv">thumbnail</span><span class="o">(</span><span class="nv">source</span><span class="o">,</span> <span class="s1">&#39;200x100&#39;</span><span class="o">,</span> <span class="o">[</span><span class="s1">&#39;crop&#39;</span><span class="o">,</span> <span class="m">50</span><span class="o">,</span> <span class="m">50</span><span class="o">])</span> <span class="cp">}}</span><span class="x">&quot; /&gt;</span>
+</code></pre></p>
+<div class="maintoc">
+
+<h1 id="table-of-contents"><a class="toclink" href="#table-of-contents">Table of contents</a></h1>
+<ul>
+<li><a href="installation.html">Installation</a></li>
+<li><a href="quickstart.html">Quickstart</a></li>
+<li><a href="thumbnail.html">The "thumbnail" function</a></li>
+<li><a href="thumbnailer.html">Thumbnailer options</a><br>
+<!-- * <a href="extending.html">Extending the library</a> --></li>
+</ul>
+</div>
+
+<h1 id="features-at-a-glance"><a class="toclink" href="#features-at-a-glance">Features at a glance</a></h1>
+<ul>
+<li>Pluggable engine support (<a href="http://www.pythonware.com/products/pil/" target="_blank">PIL</a> and <a href="http://styleshare.github.com/wand/" target="_blank">Wand</a> (a wrapper for <a href="http://www.imagemagick.org/script/index.php" target="_blank">ImageMagick</a>) included<sup>*</sup>).</li>
+<li>Automatic cache: a thumbnail is generated only once.</li>
+<li>Pluggable storage support (FileSystem included).</li>
+<li>Flexible, simple syntax, generates no HTML.</li>
+<li>Auto-rotates the image according to its EXIF information. <sup>*</sup></li>
+<li>Several filters available by default:<ul>
+<li>Cropping</li>
+<li>Rotation</li>
+<li>Blur</li>
+<li>Grayscale/Sepia <sup>*</sup></li>
+</ul>
+</li>
+<li>Easily extendable.</li>
+</ul>
+<div class="warning">
+
+<p><sup>*</sup> The Wand engine doesn't have <strong>yet</strong> support for the EXIF-based auto-rotation or grayscale/sepia filters.</p>
+</div>
   </article>
 
   </section>
 
-  <script data-cfasync="false" src="../scripts/jquery-1.8.0.min.js"></script>
-  <script src="../scripts/scripts.js"></script>
+  <script data-cfasync="false" src="scripts/jquery-1.8.0.min.js"></script>
+  <script src="scripts/scripts.js"></script>
 </body>
 </html>

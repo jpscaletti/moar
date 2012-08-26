@@ -16,7 +16,7 @@ Moar is a MIT Licensed library, written in Python, that allows you to make custo
 * [Quickstart](/quickstart.md)
 * [The "thumbnail" function](/thumbnail.md)
 * [Thumbnailer options](/thumbnailer.md)
-* [Extending the library](/extending.md)
+<!-- * [Extending the library](/extending.md) -->
 </div>
 
 
