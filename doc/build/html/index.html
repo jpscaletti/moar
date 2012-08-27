@@ -20,16 +20,16 @@
     <ul id="user_meta">
       <li class="project_name">
         <h1 id="project_name">
-          <a href="index.html">Moar thumbnails</a>
+          <a href="index.html">Moar</a>
         </h1>
       </li>
       <!--li class="project_owner">
         <h2 id="project_owner">
-          <a href="http://lucumalabs.com">By Lúcuma</a>
+          <a href="http://lucumalabs.com"></a>
         </h2>
       </li-->
       <li class="tagline">
-        <h2 id="tagline">On-the-fly thumbnailer for everyone.</h2>
+        <h2 id="tagline">Make custom thumbnails only changing the template code.</h2>
       </li>
       
       <li class="link github">
@@ -44,17 +44,20 @@
   <section id="river">
   
   <article class="post">
-    <p>Moar is a MIT Licensed library, written in Python, that allows you to make custom thumbnails only changing the template code. The result is cached and can be deleted an regenerated transparently, so your uploaded images can keep-up with your changing design without a glitch.</p>
+    <p>Hi, this is Moar, a on-the-fly thubnailer library written in Python and MIT licensed.</p>
+<p>Your site design changes a lot, but that means manually generate new thumbnails for all the uploaded images.</p>
+<p>Not anymore. With <strong>Moar</strong> you can upload once and generate thumbnails on the fly, just changing a line in your templates.</p>
 <p><pre><code class="highlight jinja"><span class="x">&lt;img src=&quot;</span><span class="cp">{{</span> <span class="nv">thumbnail</span><span class="o">(</span><span class="nv">source</span><span class="o">,</span> <span class="s1">&#39;200x100&#39;</span><span class="o">,</span> <span class="o">[</span><span class="s1">&#39;crop&#39;</span><span class="o">,</span> <span class="m">50</span><span class="o">,</span> <span class="m">50</span><span class="o">])</span> <span class="cp">}}</span><span class="x">&quot; /&gt;</span>
 </code></pre></p>
+<p>The thumbnails are cached and can be deleted or regenerated transparently. And the library can be extended to store them in custom backends.</p>
 <div class="maintoc">
 
 <h1 id="table-of-contents"><a class="toclink" href="#table-of-contents">Table of contents</a></h1>
 <ul>
 <li><a href="installation.html">Installation</a></li>
 <li><a href="quickstart.html">Quickstart</a></li>
-<li><a href="thumbnail.html">The "thumbnail" function</a></li>
-<li><a href="thumbnailer.html">Thumbnailer options</a><br>
+<li><a href="thumbnail.html">Thumbnail generation</a></li>
+<li><a href="thumbnailer.html">Thumbnailer class</a><br>
 <!-- * <a href="extending.html">Extending the library</a> --></li>
 </ul>
 </div>

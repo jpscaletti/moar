@@ -633,7 +633,6 @@ header#sidebar h2#tagline {
   font-weight: 300;
   font-size: 16px;
   line-height: 23px;
-  color: #585c60;
   -webkit-font-smoothing: antialiased;
   max-width: none;
   margin: 0;
@@ -957,9 +956,9 @@ margin-bottom: 10px;
     padding-left: 0;
   }
   article dl {
-    margin-left: 30px;
+    margin-left: 20px;
     padding-left: 0;
-    padding-right: 15px;
+    padding-right: 20px;
   }
   article ul p,
   article ol p,
@@ -1096,7 +1095,8 @@ margin-bottom: 10px;
   article blockquote ol,
   article blockquote dl { margin-left: 50px }
   section#river article h2 { margin-top: 0 }
-  section#river article code {
+
+  section#river article pre code {
     width: auto;
     margin: 0;
     padding-left: 20px;

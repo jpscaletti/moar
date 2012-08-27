@@ -2,11 +2,17 @@ title: Moar thumbnails
 template: index.html
 
 
-Moar is a MIT Licensed library, written in Python, that allows you to make custom thumbnails only changing the template code. The result is cached and can be deleted an regenerated transparently, so your uploaded images can keep-up with your changing design without a glitch.
+Hi, this is Moar, a on-the-fly thubnailer library written in Python and MIT licensed.
+
+Your site design changes a lot, but that means manually generate new thumbnails for all the uploaded images.
+
+Not anymore. With **Moar** you can upload once and generate thumbnails on the fly, just changing a line in your templates.
 
 ```jinja
 <img src="{{ thumbnail(source, '200x100', ['crop', 50, 50]) }}" />
 ```
+
+The thumbnails are cached and can be deleted or regenerated transparently. And the library can be extended to store them in custom backends.
 
 
 <div class="maintoc" markdown="1">
@@ -14,8 +20,8 @@ Moar is a MIT Licensed library, written in Python, that allows you to make custo
 
 * [Installation](/installation.md)
 * [Quickstart](/quickstart.md)
-* [The "thumbnail" function](/thumbnail.md)
-* [Thumbnailer options](/thumbnailer.md)
+* [Thumbnail generation](/thumbnail.md)
+* [Thumbnailer class](/thumbnailer.md)
 <!-- * [Extending the library](/extending.md) -->
 </div>
 
