@@ -1,11 +1,17 @@
 
 # Welcome to Moar
 
-Moar is an MIT Licensed library, written in Python, that allows you to make custom thumbnails wherever you need them.
+Hi, this is Moar, a on-the-fly thubnailer library written in Python and MIT licensed.
+
+Your site design changes a lot, but that means manually generate new thumbnails for all the uploaded images.
+
+Not anymore. With **Moar** you can upload once and generate thumbnails on the fly, just changing a line in your templates.
 
 ```jinja
-<img src="{{ thumbnail(source, '200x100', ('crop', 50, 50)) }}" />
+<img src="{{ thumbnail(source, '200x100', ['crop', 50, 50]) }}" />
 ```
+
+The thumbnails are cached and can be deleted or regenerated transparently. And the library can be extended to store them in custom backends.
 
 See the documentation online at http://lucuma.github.com/moar/
 or in [doc/source](https://github.com/lucuma/moar/tree/master/doc/source).
