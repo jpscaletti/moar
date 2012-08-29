@@ -814,9 +814,9 @@ nav.pagination {
   padding: 40px;
   border-top: 1px solid #e2e2e2;
   padding-bottom: 100px;
+  text-align: center
 }
-nav.pagination span.next a,
-nav.pagination span.prev a {
+nav.pagination a {
   padding: 10px;
   padding-left: 20px;
   padding-right: 20px;
@@ -827,15 +827,13 @@ nav.pagination span.prev a {
   text-transform: uppercase;
   border: 3px solid;
 }
-nav.pagination span { display: none }
+nav.pagination a:hover {
+  color: #000;
+  border-color: #000;
+}
 nav.pagination span.next {
   display: block;
   float: right;
-}
-nav.pagination span.next a:hover,
-nav.pagination span.prev a:hover {
-  color: #000;
-  border-color: #000;
 }
 nav.pagination span.prev {
   display: block;
@@ -900,15 +898,12 @@ aside#logo a {
 }
 section.preview header#begin h2,
 ul#user_meta a:hover,
-nav.pagination span.next a,
-nav.pagination span.prev a {
+nav.pagination a {
   color: #3A74D0;
-  /*color: #007020;*/
 }
 ul#user_meta a:hover,
-nav.pagination span.next a, nav.pagination span.prev a {
+nav.pagination a {
   border-color: #3A74D0;
-  /*border-color: #007020;*/
 }
 
 article.post .maintoc li {
