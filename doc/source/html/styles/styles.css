@@ -267,6 +267,7 @@ td { vertical-align: top }
   img { page-break-inside: avoid }
   img { max-width: 100%!important }
 }
+
 body {
   background-color: #fff;
   font-family: 'proxima-nova',sans-serif;
@@ -283,16 +284,16 @@ h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
     font-weight: inherit
 }
 h1 {
-  font-size: 23px;
+  font-size: 26px;
   font-weight: bold;
 }
 h2 {
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 600;
   margin-top: 20px;
 }
 h3 {
-  font-size: 19px;
+  font-size: 18px;
   font-weight: 600;
 }
 h4 {
@@ -375,7 +376,7 @@ hr {
 }
 a,
 a:visited {
-  color: #333;
+  color: #3A74D0;
   text-decoration: none;
   outline: 0;
 }
@@ -543,8 +544,8 @@ article blockquote code ol { margin-left: 28px }
 article blockquote pre code { margin-left: 0 }
 header#sidebar {
   width: 27%;
-  padding-left: 1.5%;
-  position: fixed;
+  padding-left: 30px;
+  position: absolute;
   z-index: 1;
   min-height: 100%;
   min-width: 240px;
@@ -566,24 +567,14 @@ aside#logo {
   position: relative;
   background-color: #000;
   display: block;
-  width: 110px;
-  height: 110px;
-  margin-left: 20px;
+  width: 190px;
+  height: 135px;
   margin-top: 30px;
+  margin-bottom: 30px;
 }
-aside#logo div {
-  background-color: #fff;
-  width: 92px;
-  height: 80px;
-  text-indent: -9999px;
-  margin: 0 auto;
-  margin-top: 10px;
-  clear: both;
-}
-aside#logo div a {
+aside#logo a {
   display: block;
   clear: both;
-  margin: 0 auto;
   background-color: #000;
   background-size: 100% 100%;
 }
@@ -602,6 +593,10 @@ header#sidebar h1#project_name a {
   display: block;
   color: #000;
   margin-left: 0;
+}
+header#sidebar h1#project_name a i {
+  color: #999;
+  font-style: normal;
 }
 header#sidebar li.project_owner {
   margin: 0;
@@ -622,7 +617,7 @@ header#sidebar h2#project_owner a {
   font-size: 13px;
   line-height: 16px;
   border: none;
-  padding: 0;
+  padding: 0 25px;
   display: block;
   color: #585858;
   margin-left: 0;
@@ -642,7 +637,6 @@ ul#user_meta {
   clear: both;
   margin: 0;
   padding: 0;
-  margin-left: 25px;
   width: 75%;
 }
 ul#user_meta li {
@@ -663,11 +657,8 @@ ul#user_meta a {
   -webkit-border-radius: 20px;
   border-radius: 20px;
   z-index: 999;
-  padding: 7px;
-  padding-left: 15px;
-  padding-right: 15px;
+  padding: 7px 15px;
   color: #999;
-  margin-left: -15px;
   font-weight: 600;
   position: relative;
 }
@@ -734,6 +725,18 @@ article.post p {
 }
 article h2 { margin-top: 30px }
 article h2 { margin-top: 24px }
+
+article h1 a:link,
+article h1 a:hover,
+article h1 a:visited,
+article h1 a:active {
+  color: black;
+  text-decoration: none;
+  border-bottom: 1px solid #CCC;
+  font-family: futura_std_bookbold,sans-serif;
+  font-weight: 700;
+  -webkit-font-smoothing: antialiased;
+}
 article h2 a:link,
 article h2 a:hover,
 article h2 a:visited,
@@ -742,19 +745,26 @@ article h2 a:active {
   text-decoration: none;
   border-bottom: 1px solid #CCC;
   font-family: futura_std_bookbold,sans-serif;
-  font-size: 20px;
-  line-height: 28px;
   font-weight: 700;
   -webkit-font-smoothing: antialiased;
 }
-article h2 a.no-link {
-  border: none;
-  font-size: 28px;
+article h3 a:link,
+article h3 a:hover,
+article h3 a:visited,
+article h3 a:active {
+  color: black;
+  text-decoration: none;
+  border-bottom: 1px solid #CCC;
+  font-family: futura_std_bookbold,sans-serif;
+  font-weight: 700;
+  -webkit-font-smoothing: antialiased;
 }
+
 article h2 a.anchor {
   border-bottom: 0;
   margin-left: 10px;
 }
+
 article h2 img.scalable {
   width: 16px;
   height: 15px;
@@ -774,7 +784,7 @@ article a:active {
   text-decoration: none;
   border-bottom: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
-  color: #000;
+  color: #3A74D0;
 }
 
 .bleed,
@@ -845,6 +855,7 @@ td {
 * maintoc
 ******************************************************************************/
 .maintoc {
+  width: 75%;
   margin: 30px 0 40px -50px;
   padding: 20px 0 50px 50px;
   border-bottom: 1px solid #ccc;
@@ -852,7 +863,7 @@ td {
 }
 
 article.post .maintoc li a {
-  font-size: 17px;
+  font-size: 16px;
 }
 
 
@@ -871,15 +882,10 @@ ul#user_meta a:hover span.link_logo {
 }
 aside#logo {
   background-color: transparent;
-}
-aside#logo div {
-  margin: 0;
-  width: 116px;
-  height: 110px;
-  background-color: transparent;
+  overflow: hidden;
 }
 
-aside#logo div a {
+aside#logo a {
   display: block;
   margin: 0;
   padding: 0;
@@ -889,6 +895,8 @@ aside#logo div a {
   background-position: 0 0;
   width: 100%;
   height: 100%;
+  text-indent: -999px;
+  overflow: hidden;
 }
 section.preview header#begin h2,
 ul#user_meta a:hover,
@@ -976,7 +984,7 @@ margin-bottom: 10px;
     left: auto;
     right: auto;
     margin-top: 20px;
-    margin-bottom: 0;
+    margin-bottom: 20px;
   }
   ul#user_meta {
     width: auto;
@@ -1168,7 +1176,7 @@ margin-bottom: 10px;
 @media all and (min-width:1300px),all and (device-width:768px) and (device-height:1024px) and (orientation:landscape) { 
   header#sidebar {
     margin-left: 0;
-    padding-left: 2%;
+    padding-left: 40px;
   }
   header#sidebar h2#tagline {
     font-size: 18px;
@@ -1183,14 +1191,8 @@ margin-bottom: 10px;
     line-height: 30px;
   }
   aside#logo {
-    width: 228px;
-    height: 220px;
-  }
-  aside#logo div {
-    width: 228px;
-    height: 217px;
-    margin-top: 0;
-    padding: 10px;
+    width: 190px;
+    height: 153px;
   }
 }
 
