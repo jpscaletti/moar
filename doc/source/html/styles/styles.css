@@ -47,7 +47,7 @@ textarea {
 }
 body {
   margin: 0;
-  font-size: 1em;
+  font-size: 16px;
   line-height: 1.4;
 }
 a { color: #00e }
@@ -81,7 +81,7 @@ mark {
 }
 pre, code, kbd, samp {
   font-family: Monaco, Inconsolata, Consolas, 'DejaVu Sans Mono',monospace;
-  font-size: 1em;
+  font-size: 16px;
 }
 pre {
   white-space: pre;
@@ -311,8 +311,6 @@ h6 {
   color: #555;
 }
 p {
-  font-size: 15px;
-  line-height: 23px;
   margin-top: 20px;
   margin-bottom: 20px;
   color: #4d4d4d;
@@ -330,12 +328,12 @@ a:link,
 a:visited,
 a:hover,
 a:active { text-decoration: none }
+
 blockquote {
   display: inline-block;
   padding-left: 18px;
   padding-bottom: 0;
   font-size: 15px;
-  line-height: 25px;
   margin-left: 0;
   margin-top: 0;
   margin-bottom: 0;
@@ -416,7 +414,6 @@ article.post ul {
 article.post ul li,
 article.post ol li {
   font-size: 15px;
-  line-height: 25px;
   margin: 0;
   color: #4d4d4d;
   display: list-item;
@@ -468,7 +465,7 @@ code {
   padding-right: 5px;
   display: inline;
   padding-right: 5px;
-  font-size: 13px;
+  font-size: 14px;
 }
 p code,
 li code {
@@ -502,7 +499,7 @@ pre code {
   background-color: #f8f8f8;
   padding-top: 10px;
   padding-bottom: 10px;
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.1;
   margin-left: -50px;
   margin-right: 0;
@@ -538,7 +535,6 @@ article pre code ul li,
 article pre code ol li {
   font-family: monospace;
   font-size: 15px;
-  line-height: 16px;
 }
 article blockquote code ol { margin-left: 28px }
 article blockquote pre code { margin-left: 0 }
@@ -587,7 +583,7 @@ header#sidebar h1#project_name a {
   font-family: futura_std_bookbold,sans-serif;
   font-weight: 900;
   font-size: 30px;
-  line-height: 30px;
+  line-height: 1;
   border: none;
   padding: 0;
   display: block;
@@ -614,8 +610,8 @@ header#sidebar h2#project_owner a {
   font-family: futura_std_bookbold,sans-serif;
   font-weight: 900;
   letter-spacing: 1px;
-  font-size: 13px;
-  line-height: 16px;
+  font-size: 14px;
+  line-height: 1.2;
   border: none;
   padding: 0 25px;
   display: block;
@@ -627,7 +623,6 @@ header#sidebar h2#project_owner a {
 header#sidebar h2#tagline {
   font-weight: 300;
   font-size: 16px;
-  line-height: 23px;
   -webkit-font-smoothing: antialiased;
   max-width: none;
   margin: 0;
@@ -650,8 +645,7 @@ ul#user_meta li.project_name { margin-bottom: 0 }
 ul#user_meta li.tagline { margin-top: 0 }
 ul#user_meta a {
   display: inline-block;
-  font-size: 15px;
-  line-height: 14px;
+  font-size: 16px;
   border: 4px solid #f8f8f8;
   -moz-border-radius: 20px;
   -webkit-border-radius: 20px;
@@ -666,11 +660,7 @@ ul#user_meta a:hover {
   color: #000;
   border-color: #000;
 }
-h1.notification {
-  padding-left: 50px;
-  font-size: 40px;
-  line-height: 50px;
-}
+
 header#begin {
   padding-left: 40px;
   padding-top: 40px;
