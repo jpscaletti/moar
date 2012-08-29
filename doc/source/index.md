@@ -2,11 +2,9 @@ title: Moar thumbnails
 template: index.html
 
 
-Hi, this is the documentation for **Moar**, a on-the-fly thubnailer library written in Python and MIT licensed.
+Welcome to **Moar**, an on-the-fly image thumbnailer library written in Python and MIT licensed.
 
-Your site design changes a lot, but that means manually generate new thumbnails for all the uploaded images.
-
-Not anymore. With Moar you can upload once and generate thumbnails on the fly, just changing a line in your templates.
+Your site design changes a lot, but that can mean manually generate new thumbnails for all the uploaded images. Not anymore. With Moar you can upload once and generate thumbnails dynamically, just changing a line in your templates.
 
 ```jinja
 <img src="{{ thumbnail(source, '200x100', ['crop', 50, 50]) }}" />
