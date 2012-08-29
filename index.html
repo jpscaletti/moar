@@ -42,9 +42,9 @@
   <section id="river">
   
   <article class="post">
-    <p>Hi, this is Moar, a on-the-fly thubnailer library written in Python and MIT licensed.</p>
+    <p>Hi, this is the documentation for <strong>Moar</strong>, a on-the-fly thubnailer library written in Python and MIT licensed.</p>
 <p>Your site design changes a lot, but that means manually generate new thumbnails for all the uploaded images.</p>
-<p>Not anymore. With <strong>Moar</strong> you can upload once and generate thumbnails on the fly, just changing a line in your templates.</p>
+<p>Not anymore. With Moar you can upload once and generate thumbnails on the fly, just changing a line in your templates.</p>
 <p><pre><code class="highlight jinja"><span class="x">&lt;img src=&quot;</span><span class="cp">{{</span> <span class="nv">thumbnail</span><span class="o">(</span><span class="nv">source</span><span class="o">,</span> <span class="s1">&#39;200x100&#39;</span><span class="o">,</span> <span class="o">[</span><span class="s1">&#39;crop&#39;</span><span class="o">,</span> <span class="m">50</span><span class="o">,</span> <span class="m">50</span><span class="o">])</span> <span class="cp">}}</span><span class="x">&quot; /&gt;</span>
 </code></pre></p>
 <p>The thumbnails are cached and can be deleted or regenerated transparently. And the library can be extended to store them in custom backends.</p>
