@@ -826,7 +826,7 @@ nav.pagination span.next {
 nav.pagination span.next a:after {
   content: " →";
   font-size: 20px;
-  vertical-align: baseline;
+  vertical-align: middle;
 }
 nav.pagination span.prev {
   display: block;
@@ -835,7 +835,7 @@ nav.pagination span.prev {
 nav.pagination span.prev a:before{
   content: "← ";
   font-size: 20px;
-  vertical-align: baseline;
+  vertical-align: middle;
 }
 nav.pagination span.back_to_index a:before{
   content: "⌾ ";
