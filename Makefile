@@ -26,6 +26,6 @@ doc:
 	cd doc; rm -rf build; clay build
 	git add .; git commit -m "Update doc"; git push origin master
 	cp -r doc/build/html ../_html;
-	git checkout gh-pages; rm *.html; rm -rf images scripts styles; cp ../_html/* .; git add .; git commit -m "Update doc"; git push origin gh-pages; git checkout master
+	git checkout gh-pages; rm *.html; rm -rf images scripts styles; cp -r ../_html/* .; git add .; git commit -m "Update doc"; git push origin gh-pages; git checkout master
 	rm -rf ../_html
 	
