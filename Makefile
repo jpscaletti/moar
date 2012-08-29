@@ -30,5 +30,4 @@ doc:
 	rm -rf _pages/styles
 	cp -r doc/build/html/* _pages
 	cd _pages; git add .; git commit -m "Update doc"; git push origin gh-pages
-	git submodule update
 	git add doc _pages; git commit -m "Update doc"; git push origin master

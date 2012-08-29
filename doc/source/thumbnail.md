@@ -1,5 +1,7 @@
 title: Thumbnail generation
 template: page.html
+next: [Thumbnailer class](/thumbnailer.md)
+prev: [Quickstart](/quickstart.md)
 
 
 # Thumbnail generation
