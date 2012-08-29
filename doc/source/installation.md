@@ -1,6 +1,7 @@
 title: Installation
 template: page.html
 description: Instructions to install Moar
+next: [Quickstart](/quickstart.md)
 
 
 # Installation

@@ -24,10 +24,5 @@ upload: clean
 
 doc:
 	cd doc; rm -rf build; clay build
-	rm _pages/*.html
-	rm -rf _pages/images
-	rm -rf _pages/scripts
-	rm -rf _pages/styles
-	cp -r doc/build/html/* _pages
-	cd _pages; git add .; git commit -m "Update doc"; git push origin gh-pages
+	cd _pages; git checkout gh-pages; cp -r ../doc/build/html/* .;  git add .; git commit -m "Update doc"; git push origin gh-pages
 	git add doc _pages; git commit -m "Update doc"; git push origin master

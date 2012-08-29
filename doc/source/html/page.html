@@ -11,10 +11,10 @@
     {% block content %}{% endblock %}
   </article>
   <nav class="pagination">
-    {% if self.prev %}<span class="prev">{{ self.prev }}</span>{% endif %}
-    <span>
-      <a href="index.html" class="back_to_index">home</a>
+    {% if self.prev %}<span class="prev">{% block prev %}{% endblock %}</span>{% endif %}
+    <span class="back_to_index">
+      <a href="index.html">Home</a>
     </span>
-    {% if self.next %}<span class="next">{{ self.next }}</span>{% endif %}
+    {% if self.next %}<span class="next">{% block next %}{% endblock %}</span>{% endif %}
   </nav>
 {% endblock %}

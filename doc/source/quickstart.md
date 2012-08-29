@@ -1,5 +1,7 @@
 title: Quick start
 template: page.html
+prev: [Installation](/installation.md)
+next: [Thumbnail generation](/thumbnail.md)
 
 
 # Quick start

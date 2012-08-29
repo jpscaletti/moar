@@ -826,6 +826,7 @@ nav.pagination a {
   font-weight: 700;
   text-transform: uppercase;
   border: 3px solid;
+  font-size: 12px;
 }
 nav.pagination a:hover {
   color: #000;
@@ -835,9 +836,24 @@ nav.pagination span.next {
   display: block;
   float: right;
 }
+nav.pagination span.next a:after {
+  content: " →";
+  font-size: 20px;
+  vertical-align: baseline;
+}
 nav.pagination span.prev {
   display: block;
   float: left;
+}
+nav.pagination span.prev a:before{
+  content: "← ";
+  font-size: 20px;
+  vertical-align: baseline;
+}
+nav.pagination span.back_to_index a:before{
+  content: "⌾ ";
+  font-size: 20px;
+  vertical-align: baseline;
 }
 table {
   width: auto;
@@ -1168,145 +1184,3 @@ margin-bottom: 10px;
   header#sidebar ul#user_meta li.feed { display: none }
 }
 
-@media all and (min-width:1300px),all and (device-width:768px) and (device-height:1024px) and (orientation:landscape) { 
-  header#sidebar {
-    margin-left: 0;
-    padding-left: 40px;
-  }
-  header#sidebar h2#tagline {
-    font-size: 18px;
-    line-height: 25px;
-  }
-  ul#user_meta {
-    max-width: 300px;
-    width: 65%;
-  }
-  header#sidebar h1#project_name a {
-    font-size: 30px;
-    line-height: 30px;
-  }
-  aside#logo {
-    width: 190px;
-    height: 153px;
-  }
-}
-
-@media all and (device-width:768px) and (device-height:1024px) and (orientation:portrait),all and (device-width:768px) and (device-height:1024px) and (orientation:landscape) { 
-  body { min-width: 0 }
-  body section#river {
-    background-color: #fff;
-    min-width: 0;
-    max-width: auto;
-    padding-left: 0;
-    margin-left: 0;
-  }
-  body section#river article {
-    padding-left: 30px;
-    padding-top: 10px;
-    padding-right: 50px;
-  }
-  body article p img,
-  body article img.bleed,
-  body article iframe,
-  body article iframe.bleed,
-  body article p object {
-    width: auto;
-    margin-left: -30px;
-    max-width: 520px;
-    min-width: 520px;
-  }
-  body article li p img,
-  body article li img.bleed,
-  body article li iframe,
-  body article li iframe.bleed,
-  body article li p object { margin-left: -50px }
-}
-@media all and (device-width:768px) and (device-height:1024px) and (orientation:portrait) { 
-  body section#river {
-    max-width: 550px;
-    margin-left: 250px;
-  }
-  body header#sidebar {
-    width: 240px;
-    max-width: auto;
-    min-width: 0;
-    margin: 0;
-  }
-  header#sidebar h1#project_name a {
-    font-size: 25px;
-    line-height: 25px;
-    width: 100%;
-    max-width: auto;
-    min-width: 0;
-    padding: 0;
-    margin: 0;
-  }
-  header#sidebar h2#project_owner a {
-    font-size: 12px;
-    margin-top: -5px;
-  }
-  header#sidebar h2#tagline { font-size: 15px }
-  body article pre code {
-    margin-left: -30px;
-    padding-left: 30px;
-    width: 480px;
-    min-width: 480px;
-    max-width: 480px;
-  }
-}
-
-@media all and (device-width:768px) and (device-height:1024px) and (orientation:landscape) { 
-  body article code.highlight {
-    max-width: auto;
-    margin-left: -70px;
-    padding-left: 70px;
-    width: auto;
-    min-width: 560px;
-    padding-right: 70px;
-  }
-  body article p code.highlight {
-    padding-right: 5px;
-    padding-left: 5px;
-    min-width: 0;
-    max-width: auto;
-    margin-left: 0;
-  }
-  body article p img,
-  body article img.bleed,
-  body article iframe,
-  body article iframe.bleed,
-  body article p object {
-    display: block;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    float: none;
-    margin-left: -70px;
-    width: 700px;
-    max-width: 700px;
-    min-width: 700px;
-  }
-  body article li p img,
-  body article li img.bleed,
-  body article li iframe,
-  body article li iframe.bleed,
-  body article li p object { margin-left: -90px }
-  body article p img.nostyle {
-    width: 100%;
-    max-width: auto;
-    min-width: 0;
-    margin: 0;
-  }
-  ul#user_meta {
-    max-width: 230px;
-    width: 100%;
-  }
-  header#sidebar h2#tagline {
-    font-size: 15px;
-    line-height: 20px;
-  }
-  header#sidebar h1#project_name a {
-    font-size: 25px;
-    line-height: 25px;
-  }
-}
