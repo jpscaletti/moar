@@ -1,6 +1,5 @@
 title: Thumbnailer class
 template: page.html
-prev: [thumbnails](/thumbnail.md)
 
 
 # Thumbnailer class
