@@ -895,10 +895,16 @@ aside#logo a {
   padding: 0;
   background-color: transparent;
   overflow: hidden;
+  -moz-border-radius: 0 10px 0 10px;
+  -webkit-border-radius: 0 10px 0 10px;
+  border-radius: 0 10px 0 10px;
 }
 aside#logo a img {
   width: 100%;
   height: auto;
+  -moz-border-radius: 0 10px 0 10px;
+  -webkit-border-radius: 0 10px 0 10px;
+  border-radius: 0 10px 0 10px;
 }
 
 section.preview header#begin h2,
