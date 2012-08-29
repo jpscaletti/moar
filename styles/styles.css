@@ -409,7 +409,6 @@ ul {
 }
 article.post ul {
   list-style-type: disc;
-  max-width: 470px;
 }
 article.post ul li,
 article.post ol li {
@@ -859,7 +858,7 @@ td {
 * maintoc
 ******************************************************************************/
 .maintoc {
-  width: 75%;
+  width: 100%;
   margin: 30px 0 30px -50px;
   padding: 20px 0 40px 50px;
   border-bottom: 1px solid #ccc;
