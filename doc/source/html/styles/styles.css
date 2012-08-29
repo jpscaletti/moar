@@ -626,22 +626,25 @@ header#sidebar h2#tagline {
   margin: 0;
   margin-bottom: 25px;
 }
-ul#user_meta {
+ul#metadata {
   clear: both;
   margin: 0;
   padding: 0;
   width: 75%;
 }
-ul#user_meta li {
+ul#metadata li {
   display: block;
   clear: both;
   margin: 0;
   padding: 0;
   margin-bottom: 15px;
 }
-ul#user_meta li.project_name { margin-bottom: 0 }
-ul#user_meta li.tagline { margin-top: 0 }
-ul#user_meta a {
+ul#metadata li.project_name {
+  margin-bottom: 0;
+  display: none;
+}
+ul#metadata li.tagline { margin-top: 0 }
+ul#metadata a {
   display: inline-block;
   font-size: 16px;
   border: 4px solid #f8f8f8;
@@ -654,7 +657,7 @@ ul#user_meta a {
   font-weight: 600;
   position: relative;
 }
-ul#user_meta a:hover {
+ul#metadata a:hover {
   color: #000;
   border-color: #000;
 }
@@ -879,8 +882,8 @@ blockquote {
   border-color: #3A74D0;
 }
 aside#logo, aside#logo div a,
-ul#user_meta a:hover span.link_logo_inside,
-ul#user_meta a:hover span.link_logo {
+ul#metadata a:hover span.link_logo_inside,
+ul#metadata a:hover span.link_logo {
   background-color: #3A74D0;
   /*background-color: #007020;*/
 }
@@ -907,11 +910,11 @@ aside#logo a img {
 }
 
 section.preview header#begin h2,
-ul#user_meta a:hover,
+ul#metadata a:hover,
 nav.pagination a {
   color: #3A74D0;
 }
-ul#user_meta a:hover,
+ul#metadata a:hover,
 nav.pagination a {
   border-color: #3A74D0;
 }
@@ -990,13 +993,13 @@ margin-bottom: 10px;
   aside#logo a img {
     width: 332px;
   }
-  ul#user_meta {
+  ul#metadata {
     width: auto;
     margin: 0 auto;
     padding: 0;
     text-align: center;
   }
-  ul#user_meta li.link {
+  ul#metadata li.link {
     display: inline-block;
     float: none;
     width: auto;
@@ -1004,9 +1007,9 @@ margin-bottom: 10px;
     margin: 0;
     margin-bottom: 5px;
   }
-  ul#user_meta li.link:first-child { margin-left: 5px }
-  ul#user_meta li.link:last-child { margin-right: 5px }
-  ul#user_meta li.link a { margin-left: 0 }
+  ul#metadata li.link:first-child { margin-left: 5px }
+  ul#metadata li.link:last-child { margin-right: 5px }
+  ul#metadata li.link a { margin-left: 0 }
   header#sidebar {
     display: block;
     position: relative;
@@ -1163,7 +1166,7 @@ margin-bottom: 10px;
     border-bottom: 1px solid #fff;
     margin-bottom: -1px;
   }
-  header#sidebar ul#user_meta li.feed { display: none }
+  header#sidebar ul#metadata li.feed { display: none }
 
   nav.pagination span.prev,
   nav.pagination span.next {

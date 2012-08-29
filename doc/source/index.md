@@ -1,4 +1,4 @@
-title: Moar thumbnails
+title: Moar: on-the-fly image thumbnailer
 template: index.html
 
 
