@@ -812,9 +812,8 @@ nav.pagination a {
   -webkit-border-radius: 30px;
   border-radius: 30px;
   font-weight: 700;
-  text-transform: uppercase;
   border: 3px solid;
-  font-size: 12px;
+  font-size: 13px;
 }
 nav.pagination a:hover {
   color: #000;
