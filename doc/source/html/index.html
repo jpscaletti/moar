@@ -1,5 +1,9 @@
 {% extends theme_prefix + 'base.html' %}
 
+{% block links %}
+  <img src="/{{ theme_prefix }}/images/moar-cat.jpg"/>
+{% endblock %}
+
 {% block river %}
   <article class="post">
     {% block content %}{% endblock %}
