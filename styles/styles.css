@@ -1,10 +1,9 @@
 @font-face {
-    font-family: 'futura_std_bookbold_bookbold';
-    src: url('fonts/futurastd-bold-webfont.eot');
-    src: url('fonts/futurastd-bold-webfont.eot?#iefix') format('embedded-opentype'),
-         url('fonts/futurastd-bold-webfont.woff') format('woff'),
-         url('fonts/futurastd-bold-webfont.ttf') format('truetype'),
-         url('fonts/futurastd-bold-webfont.svg#futura_std_bookbold_bookbold') format('svg');
+    font-family: 'museo_slab';
+    src: url('fonts/museo_slab_500-webfont.eot');
+    src: url('fonts/museo_slab_500-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/museo_slab_500-webfont.woff') format('woff'),
+         url('fonts/museo_slab_500-webfont.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
@@ -538,6 +537,7 @@ article pre code ol li {
 article blockquote code ol { margin-left: 28px }
 article blockquote pre code { margin-left: 0 }
 header#sidebar {
+  padding: 30px 0;
   width: 23%;
   margin: 0 2%;
   position: absolute;
@@ -545,6 +545,13 @@ header#sidebar {
   min-height: 100%;
   min-width: 240px;
 }
+header#sidebar img{
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
 section#river {
   margin-left: 27%;
   min-width: 658px;
@@ -563,7 +570,7 @@ aside#logo {
   background-color: #000;
   display: block;
   width: 100%;
-  margin-top: 30px;
+  margin-top: 20px;
   margin-bottom: 30px;
 }
 aside#logo a {
@@ -574,27 +581,18 @@ aside#logo a {
 }
 header#sidebar h1#project_name {
   font-weight: bold;
-  margin-top: 20px;
+  margin-top: 2 0px;
   margin-bottom: 10px;
 }
 header#sidebar h1#project_name a {
-  font-family: futura_std_bookbold,sans-serif;
-  font-weight: 900;
-  font-size: 30px;
+  font-family: museo_slab, sans-serif;
+  font-size: 66px;
   line-height: 1;
   border: none;
   padding: 0;
   display: block;
-  color: #000;
+  color: #111;
   margin-left: 0;
-}
-header#sidebar h1#project_name a i {
-  color: #999;
-  font-style: normal;
-}
-header#sidebar li.project_owner {
-  margin: 0;
-  padding: 0;
 }
 header#sidebar h2#project_owner {
   font-weight: bold;
@@ -604,20 +602,6 @@ header#sidebar h2#project_owner {
   margin: 0;
   max-width: none;
 }
-header#sidebar h2#project_owner a {
-  font-family: futura_std_bookbold,sans-serif;
-  font-weight: 900;
-  letter-spacing: 1px;
-  font-size: 14px;
-  line-height: 1.2;
-  border: none;
-  padding: 0 25px;
-  display: block;
-  color: #585858;
-  margin-left: 0;
-  margin-bottom: 10px;
-  text-transform: uppercase;
-}
 header#sidebar h2#tagline {
   font-weight: 300;
   font-size: 16px;
@@ -626,38 +610,28 @@ header#sidebar h2#tagline {
   margin: 0;
   margin-bottom: 25px;
 }
-ul#metadata {
-  clear: both;
-  margin: 0;
-  padding: 0;
-  width: 75%;
-}
-ul#metadata li {
+
+span.link {
   display: block;
   clear: both;
   margin: 0;
   padding: 0;
   margin-bottom: 15px;
 }
-ul#metadata li.project_name {
-  margin-bottom: 0;
-  display: none;
-}
-ul#metadata li.tagline { margin-top: 0 }
-ul#metadata a {
+span.link a{
   display: inline-block;
   font-size: 16px;
   border: 4px solid #f8f8f8;
-  -moz-border-radius: 20px;
-  -webkit-border-radius: 20px;
-  border-radius: 20px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
   z-index: 999;
   padding: 7px 15px;
   color: #999;
   font-weight: 600;
   position: relative;
 }
-ul#metadata a:hover {
+span.link a:hover {
   color: #000;
   border-color: #000;
 }
@@ -676,7 +650,7 @@ header#begin time#top_time {
   font-size: 16px;
   letter-spacing: 1px;
   line-height: 33px;
-  font-family: futura_std_bookbold,sans-serif;
+  font-family: museo_slab,sans-serif;
 }
 section.preview header#begin h2 {
   color: #000;
@@ -685,7 +659,7 @@ section.preview header#begin h2 {
   margin-bottom: 0;
   line-height: 35px;
   margin-top: 20px;
-  font-family: futura_std_bookbold,sans-serif;
+  font-family: museo_slab,sans-serif;
 }
 section.preview header#begin a.live_link { border-bottom: 1px solid #ccc }
 section.preview header#begin h4 {
@@ -724,9 +698,10 @@ article h1 a:active {
   color: black;
   text-decoration: none;
   border-bottom: 1px solid #CCC;
-  font-family: futura_std_bookbold,sans-serif;
+  font-family: museo_slab,sans-serif;
   font-weight: 700;
   -webkit-font-smoothing: antialiased;
+  border: none;
 }
 article h2 a:link,
 article h2 a:hover,
@@ -735,7 +710,7 @@ article h2 a:active {
   color: black;
   text-decoration: none;
   border-bottom: 1px solid #CCC;
-  font-family: futura_std_bookbold,sans-serif;
+  font-family: museo_slab,sans-serif;
   font-weight: 700;
   -webkit-font-smoothing: antialiased;
 }
@@ -746,7 +721,7 @@ article h3 a:active {
   color: black;
   text-decoration: none;
   border-bottom: 1px solid #CCC;
-  font-family: futura_std_bookbold,sans-serif;
+  font-family: museo_slab,sans-serif;
   font-weight: 700;
   -webkit-font-smoothing: antialiased;
 }
@@ -811,9 +786,9 @@ nav.pagination a {
   padding: 10px;
   padding-left: 20px;
   padding-right: 20px;
-  -moz-border-radius: 30px;
-  -webkit-border-radius: 30px;
-  border-radius: 30px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
   font-weight: 700;
   border: 3px solid;
   font-size: 13px;
@@ -881,9 +856,7 @@ article.post .maintoc li a {
 blockquote {
   border-color: #3A74D0;
 }
-aside#logo, aside#logo div a,
-ul#metadata a:hover span.link_logo_inside,
-ul#metadata a:hover span.link_logo {
+aside#logo, aside#logo div a {
   background-color: #3A74D0;
   /*background-color: #007020;*/
 }
@@ -897,24 +870,24 @@ aside#logo a {
   padding: 0;
   background-color: transparent;
   overflow: hidden;
-  -moz-border-radius: 0 10px 0 10px;
-  -webkit-border-radius: 0 10px 0 10px;
-  border-radius: 0 10px 0 10px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
 }
 aside#logo a img {
   width: 100%;
   height: auto;
-  -moz-border-radius: 0 10px 0 10px;
-  -webkit-border-radius: 0 10px 0 10px;
-  border-radius: 0 10px 0 10px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
 }
 
 section.preview header#begin h2,
-ul#metadata a:hover,
+span.link a:hover,
 nav.pagination a {
   color: #3A74D0;
 }
-ul#metadata a:hover,
+span.link a:hover,
 nav.pagination a {
   border-color: #3A74D0;
 }
@@ -993,23 +966,17 @@ margin-bottom: 10px;
   aside#logo a img {
     width: 332px;
   }
-  ul#metadata {
+  #links {
     width: auto;
     margin: 0 auto;
     padding: 0;
     text-align: center;
   }
-  ul#metadata li.link {
-    display: inline-block;
+  span.link a{
     float: none;
     width: auto;
-    clear: none;
-    margin: 0;
-    margin-bottom: 5px;
+    margin: 0 5px 5px 0;
   }
-  ul#metadata li.link:first-child { margin-left: 5px }
-  ul#metadata li.link:last-child { margin-right: 5px }
-  ul#metadata li.link a { margin-left: 0 }
   header#sidebar {
     display: block;
     position: relative;
@@ -1030,7 +997,9 @@ margin-bottom: 10px;
     max-width: none;
     min-width: 0;
   }
-  header#sidebar h1#project_name { margin-top: 10px }
+  header#sidebar h1#project_name {
+    margin-top: 10px;
+  }
   header#sidebar h2#tagline {
     margin: 0 auto;
     padding: 0;
@@ -1166,7 +1135,7 @@ margin-bottom: 10px;
     border-bottom: 1px solid #fff;
     margin-bottom: -1px;
   }
-  header#sidebar ul#metadata li.feed { display: none }
+  header#sidebar ul#links li.feed { display: none }
 
   nav.pagination span.prev,
   nav.pagination span.next {
