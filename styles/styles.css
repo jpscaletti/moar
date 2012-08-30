@@ -544,13 +544,13 @@ header#sidebar {
   z-index: 1;
   min-height: 100%;
   min-width: 240px;
+  max-width: 360px;
 }
 header#sidebar img{
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
   border-radius: 4px;
   margin-bottom: 20px;
-  width: 100%;
 }
 
 section#river {
@@ -595,19 +595,10 @@ header#sidebar h1#project_name a {
   color: #111;
   margin-left: 0;
 }
-header#sidebar h2#project_owner {
-  font-weight: bold;
-  margin-top: 0;
-  margin-bottom: 0;
-  padding: 0;
-  margin: 0;
-  max-width: none;
-}
 header#sidebar h2#tagline {
   font-weight: 300;
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
-  max-width: none;
   margin: 0;
   margin-bottom: 25px;
 }
@@ -997,7 +988,6 @@ margin-bottom: 10px;
     width: auto;
     display: block;
     position: relative;
-    max-width: none;
     min-width: 0;
   }
   header#sidebar h1#project_name {
@@ -1006,8 +996,10 @@ margin-bottom: 10px;
   header#sidebar h2#tagline {
     margin: 0 auto;
     padding: 0;
-    max-width: 280px;
     margin-top: 10px;
+  }
+  header#sidebar img{
+    width: 100%;
   }
   section#river {
     margin: 0;
