@@ -52,7 +52,7 @@ Prerequisites:
 
 ## Getting the source code
 
-Moar is actively developed on GitHub, where the code is [always available]({{ github_url }}).
+Moar is actively developed on GitHub, where the code is [always available]({{ GITHUB_URL }}).
 
 You can either clone the public repository
 

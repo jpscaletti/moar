@@ -6,17 +6,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="generator" content="clay.lucumalabs.com">
   <meta name="description" content="">
-  <link href="/{{ theme_prefix }}styles/styles.css" media="screen" rel="stylesheet">
-  <link href="/{{ theme_prefix }}styles/pygments/friendly.css" rel="stylesheet">
+  <link href="/{{ LAYOUTS }}styles/styles.css" media="screen" rel="stylesheet">
+  <link href="/{{ LAYOUTS }}styles/pygments/friendly.css" rel="stylesheet">
 </head>
 <body>
-  <script>var _gaq = _gaq || []; _gaq.push(['_setAccount', '{{ google_analytics_code }}']); _gaq.push(['_trackPageview']);</script><script src="http://www.google-analytics.com/ga.js" async></script>
+  <script>var _gaq = _gaq || []; _gaq.push(['_setAccount', '{{ GOOGLE_ANALYTICS_CODE }}']); _gaq.push(['_trackPageview']);</script><script src="http://www.google-analytics.com/ga.js" async></script>
   <header id="sidebar">
     <h1 id="project_name"><a href="index.html">Moar</a></h1>
     <h2 id="tagline">On-the-fly image thumbnailer with no strings attached.</h2>
     <div id="links">
       {% block links %}{% endblock %}
-      <span class="link github"><a href="{{ github_url }}">github</a></span>
+      <span class="link github"><a href="{{ GITHUB_URL }}">github</a></span>
       <span class="link email"><a href="mailto:juanpablo@lucumalabs.com?subject=hi">say hello</a></span>
     </div>
   </header>
@@ -25,7 +25,7 @@
   {% block river %}{% endblock %}
   </section>
 
-  <script data-cfasync="false" src="/{{ theme_prefix }}scripts/jquery-1.8.0.min.js"></script>
-  <script src="/{{ theme_prefix }}scripts/scripts.js"></script>
+  <script data-cfasync="false" src="/{{ LAYOUTS }}scripts/jquery-1.8.0.min.js"></script>
+  <script src="/{{ LAYOUTS }}scripts/scripts.js"></script>
 </body>
 </html>
