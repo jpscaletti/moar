@@ -73,23 +73,6 @@ def test_geometry_w():
     remove_thumb(name)
 
 
-def test_geometry_w_upscale():
-    thumbnail = moar.Thumbnailer(engine=ENGINE)
-
-    source = get_source('b94x200.png')
-    thumb = thumbnail(source, '141', upscale=False)
-    name = thumb.key + '.jpg'
-    assert_size(name, width=94, height=200)
-
-    remove_thumb(name)
-
-    thumb = thumbnail(source, '141', upscale=True)
-    name = thumb.key + '.jpg'
-    assert_size(name, width=141, height=300)
-
-    remove_thumb(name)
-
-
 def test_geometry_h():
     thumbnail = moar.Thumbnailer(engine=ENGINE)
 
@@ -101,35 +84,18 @@ def test_geometry_h():
     remove_thumb(name)
 
 
-def test_geometry_h_upscale():
-    thumbnail = moar.Thumbnailer(engine=ENGINE)
-
-    source = get_source('a200x140.jpg')
-    thumb = thumbnail(source, 'x280', upscale=False)
-    name = thumb.key + '.jpg'
-    assert_size(name, width=200, height=140)
-
-    remove_thumb(name)
-
-    thumb = thumbnail(source, 'x280', upscale=True)
-    name = thumb.key + '.jpg'
-    assert_size(name, width=400, height=280)
-
-    remove_thumb(name)
-
-
 def test_geometry_wh():
     thumbnail = moar.Thumbnailer(engine=ENGINE)
 
     source = get_source('a200x140.png')
-    thumb = thumbnail(source, '50x50', format='PNG')
+    thumb = thumbnail(source, '50x50', format='PNG', resize='fit')
     name = thumb.key + '.png'
     assert_size(name, width=50, height=35)
 
     remove_thumb(name)
 
     source = get_source('b94x200.png')
-    thumb = thumbnail(source, '50x50', format='PNG')
+    thumb = thumbnail(source, '50x50', format='PNG', resize='fit')
     name = thumb.key + '.png'
     assert_size(name, width=24, height=50)
 
@@ -140,7 +106,7 @@ def test_geometry_wh_upscale():
     thumbnail = moar.Thumbnailer(engine=ENGINE)
 
     source = get_source('a200x140.jpg')
-    thumb = thumbnail(source, '400x400', upscale=True)
+    thumb = thumbnail(source, '400x400', upscale=True, resize='fit')
     name = thumb.key + '.jpg'
     assert_size(name, width=400, height=280)
 
@@ -151,7 +117,7 @@ def test_geometry_wh_resize():
     thumbnail = moar.Thumbnailer(engine=ENGINE)
 
     source = get_source('a200x140.jpg')
-    thumb = thumbnail(source, '50x50', resize=True)
+    thumb = thumbnail(source, '50x50', resize='stretch')
     name = thumb.key + '.jpg'
     assert_size(name, width=50, height=50)
 

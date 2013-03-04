@@ -53,8 +53,8 @@ class BaseEngine(object):
 
         if width and height:
             # Smaller than the target?
-            smaller = (im_width < width) and (im_height < height)
-            if not options['upscale'] and smaller:
+            smaller = (im_width <= width) and (im_height <= height)
+            if smaller and options['upscale'] == False:
                 return im
 
             resize = options.get('resize', 'fill')

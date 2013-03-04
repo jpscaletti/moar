@@ -88,9 +88,9 @@ class Thumbnailer(object):
     resize:
         When setting the new geometry, this controls if the image is deformed
         to match exactly the given dimensions, regardless of the aspect ratio
-        of the original image. If `resize` is `True`, the `upscale` option
-        is ignored.
-        Default value is `False`.
+        of the original image.
+        This can be `fill`, `fit` or `upscale`.
+        Default value is `fill`.
     """
 
     def __init__(self, engine=PILEngine, storage=None, filters=None, **default_options):
