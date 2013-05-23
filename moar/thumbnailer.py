@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
-"""
-
-"""
 from hashlib import md5
+import os
 import sys
 
 from .engines.pil import Engine as PILEngine
@@ -21,7 +19,8 @@ RESIZE_OPTIONS = ('fill', 'fit', 'stretch')
 
 class Thumb(object):
 
-    def __init__(self, source, geometry, filters, options):
+    def __init__(self, base_path, source, geometry, filters, options):
+        self.base_path = base_path
         self.source = source
         self.geometry = geometry
         self.filters = filters
@@ -29,29 +28,35 @@ class Thumb(object):
 
         self.url = None
         self.key = self.get_key()
-    
+        self.source.fullpath = self.get_fullpath()
+
+    def get_fullpath(self):
+        path = self.source.path.lstrip(os.path.sep)
+        return os.path.join(self.base_path, path)
+
     def get_key(self):
         l = [str(self.source), str(self.geometry), str(self.filters),
-            str(self.options)]
+             str(self.options)]
         seed = ' '.join(l)
         return md5(seed).hexdigest()
-    
+
     def __repr__(self):
-        return self.url
+        return self.url or u''
 
 
 class Thumbnailer(object):
+
     """
     engine:
         An `Engine` class. By default `moar.engines.PILEngine`.
-    
+
     storage:
         An `Storage` class. By default `moar.storages.filesystem.Storage`.
-    
+
     filters:
         Dictionary of extra filters than are added to
         those available by default.
-    
+
     upscale:
         A boolean that controls if the image can be upscaled or not.
         For example if your source is `100x100` and you request a thumbnail
@@ -76,10 +81,10 @@ class Thumbnailer(object):
         Default value is `True`.
 
     format:
-        This controls the write format and thumbnail extension. Formats 
+        This controls the write format and thumbnail extension. Formats
         supported by the shipped engines are `'JPEG'` and `'PNG'`.
         Default value is `'JPEG'`.
-    
+
     fit:
         A boolean that controls if the image is fitted in the given dimensions
         (even if doesn't match exactly the size) or if is expanded to cover
@@ -93,20 +98,24 @@ class Thumbnailer(object):
         Default value is `fill`.
     """
 
-    def __init__(self, engine=PILEngine, storage=None, filters=None, **default_options):
+    def __init__(self, base_path, base_url, engine=PILEngine,
+                 storage=None, filters=None, **default_options):
+        self.base_path = base_path.rstrip('/')
+        self.base_url = base_url.rstrip('/')
+
         if not pil_available and engine == PILEngine:
             print INSTALL_PIL_MSG
             sys.exit(1)
-        if type(engine) == type:
+        if isinstance(engine, type):
             engine = engine()
         self.engine = engine
 
         if storage is None:
-            storage = filesystem.Storage
-        if type(storage) == type:
+            storage = filesystem.Storage(base_path, base_url)
+        if isinstance(storage, type):
             storage = storage()
-        self.storage = storage;
-        
+        self.storage = storage
+
         self.custom_filters = filters or {}
 
         resize = default_options.get('resize', RESIZE_OPTIONS[0])
@@ -119,14 +128,14 @@ class Thumbnailer(object):
         self.quality = int(default_options.get('quality', 90))
         self.progressive = bool(default_options.get('progressive', True))
         self.orientation = bool(default_options.get('orientation', True))
-    
+
     def parse_geometry(self, geometry):
         if not geometry:
             return
-        
+
         if callable(geometry):
             geometry = geometry()
-        
+
         geometry = geometry.split('x')
 
         if len(geometry) == 1:
@@ -136,26 +145,26 @@ class Thumbnailer(object):
             w = geometry[0]
             width = int(w) if w else None
             height = int(geometry[1])
-        
+
         return (width, height)
-    
+
     def __call__(self, source, geometry=None, *filters, **options):
         filters = list(filters)
-        
+
         if isinstance(source, dict):
             source = StorageDict(source)
-        
+
         # No geometry provided
         if isinstance(geometry, (tuple, list)):
             filters.insert(0, geometry)
             geometry = None
-        
+
         geometry = self.parse_geometry(geometry)
 
         resize = options.get('resize', self.resize)
         if resize not in RESIZE_OPTIONS:
             resize = self.resize
-        
+
         _options = {
             'upscale': bool(options.get('upscale', self.upscale)),
             'resize': resize,
@@ -165,7 +174,7 @@ class Thumbnailer(object):
             'orientation': bool(options.get('orientation', self.orientation)),
         }
 
-        thumb = Thumb(source, geometry, filters, _options)
+        thumb = Thumb(self.base_path, source, geometry, filters, _options)
         url = self.storage.get(thumb)
         if url:
             thumb.url = url
@@ -173,4 +182,3 @@ class Thumbnailer(object):
         raw_data = self.engine.process(thumb, self.custom_filters)
         thumb.url = self.storage.save(thumb, raw_data)
         return thumb
-

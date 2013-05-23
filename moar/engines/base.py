@@ -16,7 +16,7 @@ class BaseEngine(object):
     
     def process(self, thumb, custom_filters):
         options = thumb.options
-        path = self.get_source_path(thumb.source)
+        path = thumb.source.fullpath
         im = self.load_image(path)
         if im is None:
             return ''
@@ -82,9 +82,6 @@ class BaseEngine(object):
         
         im = self._scale(im, new_width, new_height)
         return im
-    
-    def get_source_path(self, source):
-        return source.path
     
     def apply_filters(self, im, filters, custom_filters, options):
         for f in filters:
