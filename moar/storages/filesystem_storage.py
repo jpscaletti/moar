@@ -29,7 +29,7 @@ class FileStorage(BaseStorage):
         self.thumbsdir = thumbsdir
 
     def get_thumb(self, path, key, format):
-        name = '%s.%s' % (key, format)
+        name = '%s.%s' % (key, format.lower())
         thumbpath = self.get_thumbpath(path, name)
         fullpath = join(self.base_path, thumbpath)
         if isfile(fullpath):
@@ -38,7 +38,7 @@ class FileStorage(BaseStorage):
         return None
 
     def save(self, path, key, format, data, w=None, h=None):
-        name = '%s.%s' % (key, format)
+        name = '%s.%s' % (key, format.lower())
         thumbpath = self.get_thumbpath(path, name)
         fullpath = join(self.base_path, thumbpath)
         self.save_thumb(fullpath, data)

@@ -35,3 +35,6 @@ def test_survive_invalid_source_image(engine, tmpdir):
     thumb = t(path, '100x70')
     assert thumb
 
+    thumb = t(None, '100x70')
+    assert thumb.url == ''
+

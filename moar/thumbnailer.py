@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 from os.path import join as pjoin
+from os.path import splitext
 from hashlib import sha1
 
 from moar.engines.pil_engine import PILEngine
 from moar.storages.filesystem_storage import FileStorage
+from moar.thumb import Thumb
 
 
 INSTALL_PIL_MSG_OR_CHANGE_ENGINE = '''Moar uses by default the Python Image Library (PIL) but we couldn't found it installed.
@@ -122,8 +124,10 @@ class Thumbnailer(object):
         self.orientation = bool(options.get('orientation', DEFAULTS['orientation']))
 
     def __call__(self, path, geometry=None, *filters, **options):
-        filters = list(filters)
         path = self.parse_path(path)
+        if not path:
+            return Thumb('', None)
+        filters = list(filters)
 
         # No geometry provided
         if isinstance(geometry, (tuple, list)):
@@ -132,29 +136,42 @@ class Thumbnailer(object):
         else:
             geometry = self.parse_geometry(geometry)
 
-        options = self.parse_options(options)
-        format =(options['format'] or '').lower()
+        options = self.parse_options(path, options)
         key = self.get_key(path, geometry, filters, options)
 
-        thumb = self.storage.get_thumb(path, key, format)
+        thumb = self.storage.get_thumb(path, key, options['format'])
         if thumb:
             thumb._engine = self.engine
             return thumb
+
         fullpath = pjoin(self.base_path, path)
-        data, w, h = self.process_image(fullpath, geometry, filters, options)
-        thumb = self.storage.save(path, key, format, data, w, h)
+        im = self.engine.open_image(fullpath)
+        if im is None:
+            return Thumb('', None)
+        data, w, h = self.process_image(im, geometry, filters, options)
+        thumb = self.storage.save(path, key, options['format'], data, w, h)
         return thumb
 
     def parse_path(self, path):
+        """Parse the path argument maintaining backwards compatibility.
+        """
+        if not path:
+            return None
+
         if isinstance(path, basestring):
             return path
-        if not isinstance(path, dict):
-            raise ValueError('`path` must be a string or a dictionary')
+
+        if hasattr(path, 'path'):
+            return getattr(path, 'path')
+        if hasattr(path, 'relpath') and hasattr(path, 'name'):
+            return pjoin(getattr(path, 'relpath').strip('/'), getattr(path, 'name'))
+
         if 'path' in path:
             return path['path']
         if 'relpath' in path and 'name' in path:
             return pjoin(path['relpath'].strip('/'), path['name'])
-        raise ValueError('invalid `path`')
+
+        return None
 
     def parse_geometry(self, geometry):
         """Parse a geometry string and returns a (width, height) tuple
@@ -181,36 +198,38 @@ class Thumbnailer(object):
             height = int(geometry[1])
         return (width, height)
 
-    def parse_options(self, options):
+    def parse_options(self, path, options):
         resize = options.get('resize', self.resize)
         if resize not in RESIZE_OPTIONS:
             resize = self.resize
-        format = options.get('format', self.format)
-        if format:
-            format = format.upper()
-            if format == 'JPG':
-                format = 'JPEG'
 
         return {
             'upscale': bool(options.get('upscale', self.upscale)),
             'resize': resize,
-            'format': format,
+            'format': self.get_format(path, options),
             'quality': int(options.get('quality', self.quality)),
             'progressive': bool(options.get('progressive', self.progressive)),
             'orientation': bool(options.get('orientation', self.orientation)),
         }
 
+    def get_format(self, path, options):
+        format = options.get('format', self.format)
+        if not format:
+            _, ext = splitext(path)
+            if ext:
+                format = ext[1:].upper()
+        format = format or 'JPEG'
+        format = format.upper()
+        if format == 'JPG':
+            format = 'JPEG'
+        return format
+
     def get_key(self, path, geometry, filters, options):
         seed = ' '.join([str(path), str(geometry), str(filters), str(options)])
         return sha1(seed).hexdigest()
 
-    def process_image(self, fullpath, geometry, filters, options):
-        data, w, h = '', None, None
+    def process_image(self, im, geometry, filters, options):
         eng = self.engine
-        im = eng.open_image(fullpath)
-        if im is None:
-            return data, w, h
-
         if options.get('orientation'):
             im = eng.set_orientation(im)
         im = eng.set_geometry(im, geometry, options)
