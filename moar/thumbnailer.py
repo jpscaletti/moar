@@ -140,7 +140,8 @@ class Thumbnailer(object):
             thumb._engine = self.engine
             return thumb
 
-        fullpath = pjoin(self.base_path, path)
+        fullpath = self.get_source_path(path)
+
         im = self.engine.open_image(fullpath)
         if im is None:
             return Thumb('', None)
@@ -223,6 +224,13 @@ class Thumbnailer(object):
     def get_key(self, path, geometry, filters, options):
         seed = ' '.join([str(path), str(geometry), str(filters), str(options)])
         return sha1(seed).hexdigest()
+
+    def get_source_path(self, path):
+        """Returns the absolute path of the source image.
+        Overwrite this to load the image from a place that isn't the filesystem
+        into a temporal file.
+        """
+        return pjoin(self.base_path, path)
 
     def process_image(self, im, geometry, filters, options):
         eng = self.engine
