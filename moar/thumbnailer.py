@@ -38,8 +38,15 @@ class Thumbnailer(object):
         An `Storage` class. By default `moar.FileStorage`.
 
     filters:
-        Dictionary of extra filters than are added to
+        Dictionary of custom extra filters than are added to
         those available by default.
+
+    resize:
+        When setting the new geometry, this controls if the image is deformed
+        to match exactly the given dimensions, regardless of the aspect ratio
+        of the original image.
+        This can be `fill`, `fit` or `upscale`.
+        Default value is `fill`.
 
     upscale:
         A boolean that controls if the image can be upscaled or not.
@@ -49,6 +56,11 @@ class Thumbnailer(object):
         If upscale were `True` this would result in a thumbnail size
         `200x200` (upscaled).
         The default value is `True`.
+
+    format:
+        This controls the write format and thumbnail extension. Formats
+        supported by the shipped engines are `'JPEG'` and `'PNG'`.
+        Default value is `'JPEG'`.
 
     quality:
         When the output format is jpeg, quality is a value between 0-100
@@ -64,22 +76,6 @@ class Thumbnailer(object):
         respect to the source EXIF tags for orientation.
         Default value is `True`.
 
-    format:
-        This controls the write format and thumbnail extension. Formats
-        supported by the shipped engines are `'JPEG'` and `'PNG'`.
-        Default value is `'JPEG'`.
-
-    fit:
-        A boolean that controls if the image is fitted in the given dimensions
-        (even if doesn't match exactly the size) or if is expanded to cover
-        Default value is `False`.
-
-    resize:
-        When setting the new geometry, this controls if the image is deformed
-        to match exactly the given dimensions, regardless of the aspect ratio
-        of the original image.
-        This can be `fill`, `fit` or `upscale`.
-        Default value is `fill`.
     """
 
     def __init__(self, base_path, base_url=None, storage=None,
