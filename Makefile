@@ -17,8 +17,6 @@ clean-pyc:
 	find . -name '*~' -exec rm -f {} \;
 
 test:
-	find tests/assets/t -name '*.png' -exec rm -f {} \;
-	find tests/assets/t -name '*.jpeg' -exec rm -f {} \;
 	py.test --cov-config .coveragerc --cov moar tests/
 
 publish: clean
