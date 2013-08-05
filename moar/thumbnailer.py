@@ -227,8 +227,8 @@ class Thumbnailer(object):
 
     def get_source_path(self, path):
         """Returns the absolute path of the source image.
-        Overwrite this to load the image from a place that isn't the filesystem
-        into a temporal file.
+        Overwrite this to load the image from a place different than the
+        filesystem into a temporal file.
         """
         return pjoin(self.base_path, path)
 
