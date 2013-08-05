@@ -37,6 +37,35 @@ def test_new_thumbnailer():
     assert t.storage.base_url == BASE_URL
 
 
+def test_parse_path():
+    """Test for backwards compatibility.
+    """
+    t = Thumbnailer(RES_PATH, BASE_URL)
+
+    p = 'test.jpg'
+    assert t.parse_path(p) == p
+
+    p = 'asset/003578b2_1.png.370x277_q85_crop-0,0.png'
+    assert t.parse_path(p) == p
+
+    p = {
+        "name": "b5eec05f48730350cc7ec1cd87de2f9d.jpg",
+        "url": "/static/media/images/b5eec05f48730350cc7ec1cd87de2f9d.jpg",
+        "relpath": "images",
+        "type": "",
+        "size": 26444
+    }
+    assert t.parse_path(p) == 'images/b5eec05f48730350cc7ec1cd87de2f9d.jpg'
+
+    p = {
+        "url": "/static/media/photos/home-banner01.jpg",
+        "name": "home-banner01.jpg",
+        "content_type": "image/jpeg",
+        "relpath": "photos"
+    }
+    assert t.parse_path(p) == 'photos/home-banner01.jpg'
+
+
 def test_parse_geometry():
     t = Thumbnailer(RES_PATH, BASE_URL)
     assert t.parse_geometry('200x140') == (200, 140)

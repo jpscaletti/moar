@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from os.path import join
+from os.path import join as pjoin
 from hashlib import sha1
 
 from moar.engines.pil_engine import PILEngine
@@ -123,8 +123,7 @@ class Thumbnailer(object):
 
     def __call__(self, path, geometry=None, *filters, **options):
         filters = list(filters)
-        if isinstance(path, dict):
-            path = path['path']
+        path = self.parse_path(path)
 
         # No geometry provided
         if isinstance(geometry, (tuple, list)):
@@ -134,17 +133,28 @@ class Thumbnailer(object):
             geometry = self.parse_geometry(geometry)
 
         options = self.parse_options(options)
-        format = options['format'].lower()
+        format =(options['format'] or '').lower()
         key = self.get_key(path, geometry, filters, options)
 
         thumb = self.storage.get_thumb(path, key, format)
         if thumb:
             thumb._engine = self.engine
             return thumb
-        fullpath = join(self.base_path, path)
+        fullpath = pjoin(self.base_path, path)
         data, w, h = self.process_image(fullpath, geometry, filters, options)
         thumb = self.storage.save(path, key, format, data, w, h)
         return thumb
+
+    def parse_path(self, path):
+        if isinstance(path, basestring):
+            return path
+        if not isinstance(path, dict):
+            raise ValueError('`path` must be a string or a dictionary')
+        if 'path' in path:
+            return path['path']
+        if 'relpath' in path and 'name' in path:
+            return pjoin(path['relpath'].strip('/'), path['name'])
+        raise ValueError('invalid `path`')
 
     def parse_geometry(self, geometry):
         """Parse a geometry string and returns a (width, height) tuple
@@ -195,7 +205,7 @@ class Thumbnailer(object):
         return sha1(seed).hexdigest()
 
     def process_image(self, fullpath, geometry, filters, options):
-        data, w, h = None, None, None
+        data, w, h = '', None, None
         eng = self.engine
         im = eng.open_image(fullpath)
         if im is None:

@@ -1,18 +1,37 @@
 # -*- coding: utf-8 -*-
+import os
+import shutil
 from moar import Thumbnailer
 
-from .utils import RES_PATH, assert_image
+from .utils import get_impath, assert_image
 
 
-BASE_URL = 'http://media.example.com'
+def test_full(engine, tmpdir):
+    base_path = str(tmpdir)
+    base_url = 'http://media.example.com'
+    t = Thumbnailer(base_path, base_url)
+    path = 'images/a200x140.png'
 
+    # Copy the source image to the test dir
+    sourcepath = str(tmpdir.mkdir('images'))
+    shutil.copy2(get_impath('a200x140.png'), sourcepath)
 
-def test_full(engine):
-    t = Thumbnailer(RES_PATH, BASE_URL)
-    path = 'a200x140.png'
     thumb = t(path, '100x70', ('crop', 50, 50, 0, 0), ('rotate', 45), format='jpeg')
-    print(thumb.fullpath)
-    out = engine.name + '-full.jpeg'
 
-    assert_image(thumb.fullpath, out)
-    assert str(thumb) == '/'.join([BASE_URL, 't', thumb.key + '.jpeg'])
+    assert str(thumb) == '/'.join([base_url, 'images/t', thumb.key + '.jpeg'])
+    assert thumb.fullpath == os.path.join(base_path, 'images', 't', thumb.key + '.jpeg')
+    ref = engine.name + '-full.jpeg'
+    assert_image(thumb.fullpath, ref)
+
+    thumb = t(path, '100x70', ('crop', 50, 50, 0, 0), ('rotate', 45), format='jpeg')
+    assert thumb
+
+
+def test_survive_invalid_source_image(engine, tmpdir):
+    base_path = str(tmpdir)
+    base_url = 'http://media.example.com'
+    t = Thumbnailer(base_path, base_url)
+    path = 'noimage.png'
+    thumb = t(path, '100x70')
+    assert thumb
+
