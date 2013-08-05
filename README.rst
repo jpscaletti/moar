@@ -11,8 +11,7 @@ or in _docs/source: https://github.com/lucuma/moar/tree/master/docs/source .
 Features at a glance
 ---------------------
 
-* Pluggable engine support (_PIL: http://www.pythonware.com/products/pil/ and 
-_GraphicsMagick: http://www.graphicsmagick.org/ included).
+* Pluggable engine support (PIL/Pillow and _Wand: http://docs.wand-py.org/ included).
 * Automatic cache: a thumbnail is generated only once.
 * Pluggable storage support (FileSystem included).
 * Flexible, simple syntax, generates no HTML.
