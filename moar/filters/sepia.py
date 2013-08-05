@@ -30,7 +30,7 @@ SEPIA_DEFAULT_TONE = (255, 240, 192)
 
 
 def pil(im, *args, **options):
-    ramp = get_ramp(args)
+    ramp = options.get('ramp', get_ramp(args))
     original_mode = im.mode
     # Make grayscale
     im = ImageOps.autocontrast(im.convert('L'))
@@ -38,13 +38,11 @@ def pil(im, *args, **options):
     im.putpalette(ramp)
     # Restore mode
     im = im.convert(original_mode)
-
     return im
 
 
 def wand(im, *args, **options):
-    ramp = get_ramp(args)
-    raise NotImplemented
+    raise NotImplementedError
     return im
 
 
@@ -55,7 +53,6 @@ def get_ramp(args):
         tone = hex_to_rgb(args[0])
     else:
         tone = args[:3]
-    
     return make_linear_ramp(tone)
 
 
@@ -68,25 +65,19 @@ def hex_to_rgb(color):
     len_color = len(color)
     try:
         if len_color >= 6:
-            return tuple([int(c, 16)
-                for c in (color[0:2], color[2:4], color[4:6])
-            ])
+            return tuple([int(c, 16) for c in (color[0:2], color[2:4], color[4:6])])
         elif len_color >= 3:
-            return tuple([int(c, 16) * 17
-                for c in color[0:3]
-            ])
+            return tuple([int(c, 16) * 17 for c in color[0:3]])
         raise ValueError
-    except ValueError, error:
-        raise ValueError("'%s' is not an hex color (%s)" %
-            (color, error.message))
+    except ValueError as error:
+        raise ValueError("'%s' is not an hex color (%s)" % (color, error.message))
 
 
 def make_linear_ramp(white):
-    """ Normalizes a RGB tuple to 0..1 values """ 
+    """ Normalizes a RGB tuple to 0..1 values.
+    """
     ramp = []
     r, g, b = white
     for i in range(255):
         ramp.extend([(r * i) / 255, (g * i) / 255, (b * i) / 255])
-    
     return ramp
-

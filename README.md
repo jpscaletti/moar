@@ -1,7 +1,7 @@
 
 # Welcome to Moar
 
-Hi, this is Moar, a on-the-fly thubnailer library written in Python and MIT licensed.
+Moar is a on-the-fly thubnailer library written in Python and MIT licensed.
 
 Your site design changes a lot, but that means manually generate new thumbnails for all the uploaded images.
 
@@ -28,9 +28,9 @@ or in [doc/source](https://github.com/lucuma/moar/tree/master/doc/source).
     * Rotation
     * Blur
     * Grayscale/Sepia
-* Easily extendable.
-
+* Easily extendable without much code
 
 ---------------------------------------
-[MIT License] (http://www.opensource.org/licenses/mit-license.php).
-© [Lúcuma] (http://lucumalabs.com).  
+[MIT License](http://www.opensource.org/licenses/mit-license.php).
+
+© 2011 by [Lúcuma labs](http://lucumalabs.com).  

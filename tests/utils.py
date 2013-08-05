@@ -1,67 +1,25 @@
 # -*- coding: utf-8 -*-
-import io
 import os
+from StringIO import StringIO
 
 from PIL import Image, ImageChops
 
 
-__all__ = [
-    'get_cpath',
-    'get_tpath',
-    'get_source',''
-    'assert_exists',
-    'assert_image',
-    'assert_size',
-    'remove_thumb',
-]
+THIS_PATH = os.path.dirname(__file__)
+RES_PATH = os.path.join(THIS_PATH, 'assets')
+tmpdir = os.path.join(RES_PATH, 't')
 
 
-BASE_PATH = os.path.dirname(__file__)
-BASE_URL = '/media'
-PATH = 'res'
-
-THUMBSDIR = 't'
-CONTROLDIR = 'c'
+def get_impath(name='a200x140.png'):
+    return os.path.join(RES_PATH, name)
 
 
-def get_cpath(name):
-    return os.path.join(BASE_PATH, PATH, CONTROLDIR, name)
+def almost_equal(val1, val2, error=2):
+    return abs(val1 - val2) <= error
 
 
-def get_tpath(name):
-    return os.path.join(BASE_PATH, PATH, THUMBSDIR, name)
-
-
-def get_source(name):
-    return {
-        'path': os.path.join(BASE_PATH, PATH, name),
-        'url': '/'.join([BASE_URL, PATH, name]),
-    }
-
-
-def assert_image(test, control, assert_equal=True):
-    tp = get_tpath(test)
-    cp = get_cpath(control)
-
-    test_image = Image.open(tp).convert('RGB')
-    control_image = Image.open(cp).convert('RGB')
-    try:
-        diff = ImageChops.difference(test_image, control_image).getbbox()
-        print 'DIFF:', diff
-        equal = diff is None
-    except ValueError, e:
-        print e
-        equal = False
-    
-    if assert_equal:
-        assert equal
-    else:
-        assert not equal
-
-
-def assert_size(name, width=None, height=None):
-    tpath = get_tpath(name)
-    im = Image.open(tpath)
+def assert_size(path, width=None, height=None):
+    im = Image.open(path)
     w, h = im.size
     if width:
         assert w == width
@@ -69,12 +27,44 @@ def assert_size(name, width=None, height=None):
         assert h == height
 
 
-def assert_exists(name):
-    tpath = get_tpath(name)
-    assert os.path.exists(tpath)
+def assert_image(tp, cname, assert_equal=True):
+    test = Image.open(tp).convert('RGB')
+    cp = get_impath(cname)
+    control = Image.open(cp).convert('RGB')
+    try:
+        diff = ImageChops.difference(test, control).getbbox()
+        print('DIFF', diff)
+        equal = diff is None
+    except ValueError as e:
+        print(e)
+        equal = False
+    if assert_equal:
+        assert equal
+    else:
+        assert not equal
 
 
-def remove_thumb(name):
-    path = get_tpath(name)
-    os.remove(path)
+def get_raw_data(path, format=None):
+    buf = StringIO()
+    im = Image.open(path)
+    format = format or im.format
+    im.save(buf, format=format)
+    raw_data = buf.getvalue()
+    buf.close()
+    return raw_data
+
+
+class MockMethod(object):
+    was_called = False
+    args = None
+    kwargs = None
+
+    def __init__(self, return_value=None):
+        self.return_value = return_value
+
+    def __call__(self, *args, **kwargs):
+        self.was_called = True
+        self.args = args
+        self.kwargs = kwargs
+        return self.return_value
 

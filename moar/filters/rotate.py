@@ -22,28 +22,25 @@ except ImportError:
     pass
 
 
-def pil(im, *args, **options):
-    angle = args[0]
+def pil(im, angle, *args, **options):
     im = im.convert('RGBA')
-    im = im.rotate(angle, resample=Image.BICUBIC,
-        expand=True)
-
-    if options['format'] != 'PNG':
+    im = im.rotate(angle, resample=Image.BICUBIC, expand=True)
+    format = options.get('format', im.format)
+    if format and format.lower() != 'png':
         # a white image same size as rotated image
-        fff = Image.new('RGB', im.size, (255,)*3)
+        white = Image.new('RGB', im.size, (255, 255, 255))
         # create a composite image using the alpha
         # layer of im as a mask
-        im = Image.composite(im, fff, im)
-    
+        im = Image.composite(im, white, im)
     return im
 
 
-def wand(im, *args, **options):
-    angle = - args[0]
+def wand(im, angle, *args, **options):
+    angle = - angle  # Wand rotates clockwise
     background = None
+    format = options.get('format', im.format)
     with Color('#fff') as white:
-        if options['format'] != 'PNG':
+        if format and format.lower() != 'png':
             background = white
         im.rotate(angle, background=background, reset_coords=True)
     return im
-

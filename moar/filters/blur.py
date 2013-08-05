@@ -11,6 +11,7 @@ Example:
 ```python
 thumbnail(source, '200x100', ('blur', 4) )
 ```
+
 """
 try:
     from PIL import ImageFilter
@@ -21,22 +22,19 @@ try:
 
         def __init__(self, radius=2):
             self.radius = radius
-        
+
         def filter(self, image):
             return image.gaussian_blur(self.radius)
-    
+
 except ImportError:
     pass
 
-    
-def pil(im, *args, **options):
-    radius = args[0]
+
+def pil(im, radius, *args, **options):
     im = im.filter(MyGaussianBlur(radius))
     return im
 
 
-def wand(im, *args, **options):
-    radius = args[0]
+def wand(im, radius, *args, **options):
     im.resize(blur=radius)
     return im
-

@@ -1,4 +1,4 @@
-.PHONY: clean clean-pyc test upload doc
+.PHONY: clean clean-pyc test publish
 
 all: clean clean-pyc test
 
@@ -6,7 +6,9 @@ clean: clean-pyc
 	rm -rf build
 	rm -rf dist
 	rm -rf *.egg-info
-	rm -rf tests/res/t
+	rm -rf tests/__pycache__
+	find tests/assets/t -name '*.png' -exec rm -f {} \;
+	find tests/assets/t -name '*.jpeg' -exec rm -f {} \;
 	find . -name '.DS_Store' -exec rm -f {} \;
 
 clean-pyc:
@@ -15,17 +17,10 @@ clean-pyc:
 	find . -name '*~' -exec rm -f {} \;
 
 test:
-	rm -rf tests/res/t
-	python runtests.py tests
-	rm -rf tests/__pycache__
+	find tests/assets/t -name '*.png' -exec rm -f {} \;
+	find tests/assets/t -name '*.jpeg' -exec rm -f {} \;
+	py.test --cov-config .coveragerc --cov moar tests/
 
-upload: clean
+publish: clean
 	python setup.py sdist upload
 
-doc:
-	cd doc; rm -rf build; clay build
-	git add .; git commit -m "Update doc"; git push origin master
-	cp -r doc/build/html ../_html;
-	git checkout gh-pages; rm *.html; rm -rf images scripts styles; cp -r ../_html/* .; git add .; git commit -m "Update doc"; git push origin gh-pages; git checkout master
-	rm -rf ../_html
-	

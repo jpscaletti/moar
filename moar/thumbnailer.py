@@ -1,57 +1,39 @@
 # -*- coding: utf-8 -*-
-from hashlib import md5
-import os
-import sys
+from os.path import join
+from hashlib import sha1
 
-from .engines.pil import Engine as PILEngine
-from .engines.pil import available as pil_available
-from .storages import filesystem
-from .utils import StorageDict
+from moar.engines.pil_engine import PILEngine
+from moar.storages.filesystem_storage import FileStorage
 
 
-INSTALL_PIL_MSG = '''Moar uses by default the Python Image Library (PIL) but
-we couldn't found it installed.
+INSTALL_PIL_MSG_OR_CHANGE_ENGINE = '''Moar uses by default the Python Image Library (PIL) but we couldn't found it installed.
 Please see the documentation of Moar to find how to install it or how to choose
 a different engine.'''
 
+NO_STORAGE_FOUND = '''
+No storage was defined.
+'''
+
 RESIZE_OPTIONS = ('fill', 'fit', 'stretch')
 
-
-class Thumb(object):
-
-    def __init__(self, base_path, source, geometry, filters, options):
-        self.base_path = base_path
-        self.source = source
-        self.geometry = geometry
-        self.filters = filters
-        self.options = options
-
-        self.url = None
-        self.key = self.get_key()
-        self.source.fullpath = self.get_fullpath()
-
-    def get_fullpath(self):
-        path = self.source.path.lstrip(os.path.sep)
-        return os.path.join(self.base_path, path)
-
-    def get_key(self):
-        l = [str(self.source), str(self.geometry), str(self.filters),
-             str(self.options)]
-        seed = ' '.join(l)
-        return md5(seed).hexdigest()
-
-    def __repr__(self):
-        return self.url or u''
+DEFAULTS = {
+    'resize': 'fill',
+    'upscale': True,
+    'format': None,
+    'quality': 90,
+    'progressive': True,
+    'orientation': True,
+}
 
 
 class Thumbnailer(object):
 
     """
     engine:
-        An `Engine` class. By default `moar.engines.PILEngine`.
+        An `Engine` class. By default `moar.PILEngine`.
 
     storage:
-        An `Storage` class. By default `moar.storages.filesystem.Storage`.
+        An `Storage` class. By default `moar.FileStorage`.
 
     filters:
         Dictionary of extra filters than are added to
@@ -98,87 +80,130 @@ class Thumbnailer(object):
         Default value is `fill`.
     """
 
-    def __init__(self, base_path, base_url, engine=PILEngine,
-                 storage=None, filters=None, **default_options):
-        self.base_path = base_path.rstrip('/')
-        self.base_url = base_url.rstrip('/')
+    def __init__(self, base_path, base_url=None, storage=None,
+                 engine=PILEngine, filters=None, **options):
+        self.base_path = base_path
+        self.set_storage(base_path, base_url, storage)
+        self.set_engine(engine)
+        self.custom_filters = filters or {}
+        self.set_default_options(options)
 
-        if not pil_available and engine == PILEngine:
-            print INSTALL_PIL_MSG
-            sys.exit(1)
-        if isinstance(engine, type):
-            engine = engine()
-        self.engine = engine
-
+    def set_storage(self, base_path, base_url, storage):
         if storage is None:
-            storage = filesystem.Storage(base_path, base_url)
+            if not base_url:
+                raise ValueError(NO_STORAGE_FOUND)
+            storage = FileStorage(base_path, base_url)
         if isinstance(storage, type):
             storage = storage()
         self.storage = storage
 
-        self.custom_filters = filters or {}
+    def set_engine(self, engine):
+        if engine == PILEngine and not PILEngine.available:
+            raise ImportError(INSTALL_PIL_MSG_OR_CHANGE_ENGINE)
+        if isinstance(engine, type):
+            engine = engine()
+        self.engine = engine
 
-        resize = default_options.get('resize', RESIZE_OPTIONS[0])
+    def set_default_options(self, options):
+        resize = options.get('resize', DEFAULTS['resize'])
         if resize not in RESIZE_OPTIONS:
-            resize = RESIZE_OPTIONS[0]
+            resize = DEFAULTS['resize']
+        format = options.get('format', DEFAULTS['format'])
+        if format:
+            format = format.upper()
+            if format == 'JPG':
+                format = 'JPEG'
 
-        self.upscale = bool(default_options.get('upscale', True))
         self.resize = resize
-        self.format = default_options.get('format', 'JPEG').upper()
-        self.quality = int(default_options.get('quality', 90))
-        self.progressive = bool(default_options.get('progressive', True))
-        self.orientation = bool(default_options.get('orientation', True))
+        self.upscale = bool(options.get('upscale', DEFAULTS['upscale']))
+        self.format = format
+        self.quality = int(options.get('quality', DEFAULTS['quality']))
+        self.progressive = bool(options.get('progressive', DEFAULTS['progressive']))
+        self.orientation = bool(options.get('orientation', DEFAULTS['orientation']))
+
+    def __call__(self, path, geometry=None, *filters, **options):
+        filters = list(filters)
+        if isinstance(path, dict):
+            path = path['path']
+
+        # No geometry provided
+        if isinstance(geometry, (tuple, list)):
+            filters.insert(0, geometry)
+            geometry = None
+        else:
+            geometry = self.parse_geometry(geometry)
+
+        options = self.parse_options(options)
+        format = options['format'].lower()
+        key = self.get_key(path, geometry, filters, options)
+
+        thumb = self.storage.get_thumb(path, key, format)
+        if thumb:
+            thumb._engine = self.engine
+            return thumb
+        fullpath = join(self.base_path, path)
+        data, w, h = self.process_image(fullpath, geometry, filters, options)
+        thumb = self.storage.save(path, key, format, data, w, h)
+        return thumb
 
     def parse_geometry(self, geometry):
+        """Parse a geometry string and returns a (width, height) tuple
+        Eg:
+            '100x200' ==> (100, 200)
+            '50' ==> (50, None)
+            '50x' ==> (50, None)
+            'x100' ==> (None, 100)
+            None ==> None
+
+        A callable `geometry` parameter is also supported.
+        """
         if not geometry:
             return
-
         if callable(geometry):
             geometry = geometry()
-
         geometry = geometry.split('x')
-
-        if len(geometry) == 1:
+        if len(geometry) == 1 or (len(geometry) > 1 and not geometry[1]):
             width = int(geometry[0])
             height = None
         else:
             w = geometry[0]
             width = int(w) if w else None
             height = int(geometry[1])
-
         return (width, height)
 
-    def __call__(self, source, geometry=None, *filters, **options):
-        filters = list(filters)
-
-        if isinstance(source, dict):
-            source = StorageDict(source)
-
-        # No geometry provided
-        if isinstance(geometry, (tuple, list)):
-            filters.insert(0, geometry)
-            geometry = None
-
-        geometry = self.parse_geometry(geometry)
-
+    def parse_options(self, options):
         resize = options.get('resize', self.resize)
         if resize not in RESIZE_OPTIONS:
             resize = self.resize
+        format = options.get('format', self.format)
+        if format:
+            format = format.upper()
+            if format == 'JPG':
+                format = 'JPEG'
 
-        _options = {
+        return {
             'upscale': bool(options.get('upscale', self.upscale)),
             'resize': resize,
-            'format': options.get('format', self.format).upper(),
+            'format': format,
             'quality': int(options.get('quality', self.quality)),
             'progressive': bool(options.get('progressive', self.progressive)),
             'orientation': bool(options.get('orientation', self.orientation)),
         }
 
-        thumb = Thumb(self.base_path, source, geometry, filters, _options)
-        url = self.storage.get(thumb)
-        if url:
-            thumb.url = url
-            return thumb
-        raw_data = self.engine.process(thumb, self.custom_filters)
-        thumb.url = self.storage.save(thumb, raw_data)
-        return thumb
+    def get_key(self, path, geometry, filters, options):
+        seed = ' '.join([str(path), str(geometry), str(filters), str(options)])
+        return sha1(seed).hexdigest()
+
+    def process_image(self, fullpath, geometry, filters, options):
+        data, w, h = None, None, None
+        eng = self.engine
+        im = eng.open_image(fullpath)
+        if im is None:
+            return data, w, h
+        im = eng.set_orientation(im, options)
+        im = eng.set_geometry(im, geometry, options)
+        im = eng.apply_filters(im, filters, self.custom_filters, options)
+        data = eng.get_data(im, options)
+        w, h = eng.get_size(im)
+        eng.close_image(im)
+        return data, w, h
