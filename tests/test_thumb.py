@@ -9,6 +9,7 @@ KEY = 'qwertyuiop'
 PATH = 'abc/qwertyuiop.jpg'
 FULLPATH = RES_PATH + PATH
 
+
 def make_thumb(url=URL, key=KEY, width=None, height=None, fullpath=FULLPATH):
     return Thumb(url, key, width, height, fullpath)
 

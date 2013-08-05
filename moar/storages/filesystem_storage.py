@@ -9,6 +9,7 @@ import os
 from os.path import join, dirname, isfile, isdir
 
 from moar.thumb import Thumb
+from moar.storages.base import BaseStorage
 
 
 def make_dirs(path):
@@ -20,7 +21,7 @@ def make_dirs(path):
     return path
 
 
-class FileStorage(object):
+class FileStorage(BaseStorage):
 
     def __init__(self, base_path, base_url='', thumbsdir='t'):
         self.base_path = base_path.rstrip('/')

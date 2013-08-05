@@ -54,7 +54,7 @@ class WandEngine(BaseEngine):
         im.resize(width, height)
         return im
 
-    def _set_orientation(self, im):
+    def set_orientation(self, im):
         orientation = im.orientation
         if not orientation or orientation == 'top_left':
             return im

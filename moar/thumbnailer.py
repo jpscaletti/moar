@@ -200,7 +200,9 @@ class Thumbnailer(object):
         im = eng.open_image(fullpath)
         if im is None:
             return data, w, h
-        im = eng.set_orientation(im, options)
+
+        if options.get('orientation'):
+            im = eng.set_orientation(im)
         im = eng.set_geometry(im, geometry, options)
         im = eng.apply_filters(im, filters, self.custom_filters, options)
         data = eng.get_data(im, options)

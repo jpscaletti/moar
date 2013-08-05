@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from abc import ABCMeta, abstractmethod
 import inspect
 from math import ceil
 
@@ -7,27 +8,29 @@ from moar import filters as available_filters
 
 class BaseEngine(object):
 
+    __metaclass__ = ABCMeta
+
+    @abstractmethod
     def open_image(self, fullpath):
-        raise NotImplementedError
+        pass
 
     def close_image(self, im):
         pass
 
+    @abstractmethod
     def get_size(self, im):
-        raise NotImplementedError
+        pass
 
+    @abstractmethod
     def get_data(self, im, options):
-        raise NotImplementedError
+        pass
 
+    @abstractmethod
     def scale(self, im, width, height):
-        raise NotImplementedError
-
-    def set_orientation(self, im, options):
-        if options['orientation']:
-            im = self._set_orientation(im)
         return im
 
-    def _set_orientation(self, im):
+    @abstractmethod
+    def set_orientation(self, im):
         return im
 
     def set_geometry(self, im, geometry, options=None):

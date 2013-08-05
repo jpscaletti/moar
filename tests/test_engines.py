@@ -43,7 +43,7 @@ def test_orientation(engine, tmpdir):
     for name in test_images:
         impath = get_impath(name)
         im = engine.open_image(impath)
-        im = engine.set_orientation(im, options)
+        im = engine.set_orientation(im)
         tmp = join(str(tmpdir), name)
         engine._save_to(im, tmp, 'png')
 

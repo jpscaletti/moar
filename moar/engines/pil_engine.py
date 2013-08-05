@@ -78,7 +78,7 @@ class PILEngine(BaseEngine):
     def scale(self, im, width, height):
         return im.resize((width, height), resample=Image.ANTIALIAS)
 
-    def _set_orientation(self, im):
+    def set_orientation(self, im):
         """Orientate the resulting thumbnail with respect to the orientation
         EXIF tags (if available)."""
         try:
