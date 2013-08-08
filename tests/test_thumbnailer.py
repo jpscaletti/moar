@@ -81,10 +81,19 @@ def test_parse_geometry():
 def test_get_key():
     t = Thumbnailer(RES_PATH, BASE_URL)
     #t.get_key(path, geometry, filters, options)
-    assert t.get_key(u'abc.png', (100, 30), [], {}) == 'abc.png-100x30'
-    assert t.get_key(u'abc.png', None, [], {}) == 'abc.png'
-    assert t.get_key(u'abc.png', None, [('rotate', 60)], {'format': 'JPEG'}) == 'abc.png-830c69b6d2566d2142dbaf41be1a21e0'
-    assert t.get_key(u'abc.png', (100, 30), [], {'resize': 'fit'}) == 'abc.png-100x30-73a622c55e1f66ab1e6128d92db7cdf8'
+
+    assert t.get_key('qwertyuiop.jpg') == t.get_key('qwertyuiop.jpg')
+    assert t.get_key('abc.png', (100, 30), [], {}) == \
+        '8820aadc6048490c65d46c997d40c2aa'
+    assert t.get_key('abc.png', None, [], {}) == \
+        '88db0e707dc54b57a5e0c9e52699c6cd'
+    assert t.get_key('abc.png', None, [('rotate', 60)], {'format': 'JPEG'}) == \
+        '2469c18428fe35fb2422bc94d7acff23'
+    assert t.get_key('abc.png', None, [], {'resize': 'fit'}) == \
+        'cc88837caa4d797437decd01e187dde1'
+    assert t.get_key('abc.png', (100, 30), [], {'resize': 'fit'}) == \
+        'a5fde43ca5ab38038805e7687b2c586e'
+
 
 
 def test_options():

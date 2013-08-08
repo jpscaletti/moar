@@ -30,14 +30,15 @@ def test_get_thumbsdir():
 def test_save():
     s = FileStorage(RES_PATH, BASE_URL)
     path = 'a200x140.png'
+    name, _ = os.path.splitext(os.path.basename(path))
     key = get_random_key()
     data = get_raw_data(get_impath(path))
     w, h = 60, 40
     thumb = s.save(path, key, 'png', data, w, h)
 
-    assert thumb.url == '/'.join([BASE_URL, 't', key + '.png'])
+    assert thumb.url == '/'.join([BASE_URL, 't', key, name + '.png'])
     assert thumb.key == key
-    assert thumb.fullpath == os.path.join(RES_PATH, 't', key + '.png')
+    assert thumb.fullpath == os.path.join(RES_PATH, 't', key, name  + '.png')
     assert thumb.width == w
     assert thumb.height == h
     assert os.path.exists(thumb.fullpath)

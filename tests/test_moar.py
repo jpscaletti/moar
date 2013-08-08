@@ -18,8 +18,8 @@ def test_full(engine, tmpdir):
 
     thumb = t(path, '100x70', ('crop', 50, 50, 0, 0), ('rotate', 45), format='jpeg')
 
-    assert str(thumb) == '/'.join([base_url, 'images/t', thumb.key + '.jpeg'])
-    assert thumb.fullpath == os.path.join(base_path, 'images', 't', thumb.key + '.jpeg')
+    assert str(thumb) == '/'.join([base_url, 'images/t', thumb.key, 'a200x140.jpeg'])
+    assert thumb.fullpath == os.path.join(base_path, 'images', 't', thumb.key, 'a200x140.jpeg')
     ref = engine.name + '-full.jpeg'
     assert_image(thumb.fullpath, ref)
 

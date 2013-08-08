@@ -6,7 +6,7 @@ Local file system storage.
 import errno
 import io
 import os
-from os.path import join, dirname, isfile, isdir
+from os.path import join, split, dirname, isfile, isdir, basename, splitext
 
 from moar.thumb import Thumb
 from moar.storages.base import BaseStorage
@@ -29,8 +29,7 @@ class FileStorage(BaseStorage):
         self.thumbsdir = thumbsdir
 
     def get_thumb(self, path, key, format):
-        name = '%s.%s' % (key, format.lower())
-        thumbpath = self.get_thumbpath(path, name)
+        thumbpath = self.get_thumbpath(path, key, format)
         fullpath = join(self.base_path, thumbpath)
         if isfile(fullpath):
             url = self.get_url(thumbpath)
@@ -38,8 +37,7 @@ class FileStorage(BaseStorage):
         return None
 
     def save(self, path, key, format, data, w=None, h=None):
-        name = '%s.%s' % (key, format.lower())
-        thumbpath = self.get_thumbpath(path, name)
+        thumbpath = self.get_thumbpath(path, key, format)
         fullpath = join(self.base_path, thumbpath)
         self.save_thumb(fullpath, data)
         url = self.get_url(thumbpath)
@@ -51,17 +49,19 @@ class FileStorage(BaseStorage):
         with io.open(fullpath, 'wb') as f:
             f.write(data)
 
-    def get_thumbpath(self, path, name):
+    def get_thumbpath(self, path, key, format):
+        thumbsdir = self.get_thumbsdir(path)
         relpath = dirname(path)
-        thumbsdir = self.get_thumbsdir(name)
-        return join(relpath, thumbsdir, name)
+        name, _ = splitext(basename(path))
+        name = '%s.%s' % (name, format.lower())
+        return join(relpath, thumbsdir, key, name)
 
-    def get_thumbsdir(self, name):
+    def get_thumbsdir(self, path):
         # Thumbsdir could be a callable
-        # In that case, the path is built on the fly, based on the thumbs name
+        # In that case, the path is built on the fly, based on the source path
         thumbsdir = self.thumbsdir
         if callable(self.thumbsdir):
-            thumbsdir = self.thumbsdir(name)
+            thumbsdir = self.thumbsdir(path)
         return thumbsdir
 
     def get_url(self, thumbpath):

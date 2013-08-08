@@ -221,18 +221,8 @@ class Thumbnailer(object):
         return format
 
     def get_key(self, path, geometry, filters, options):
-        key = path.encode('utf8', 'ignore')
-        if geometry:
-            sgeom = 'x'.join([
-                str(geometry[0] or ''),
-                str(geometry[1] or ''),
-            ])
-            key = '%s-%s' % (key, sgeom)
-        if filters or options:
-            seed = ' '.join([str(filters), str(options)])
-            coda = md5(seed).hexdigest()
-            key = '%s-%s' % (key, coda)
-        return key
+        seed = ' '.join([str(path), str(geometry), str(filters), str(options)])
+        return md5(seed).hexdigest()
 
     def get_source_path(self, path):
         """Returns the absolute path of the source image.

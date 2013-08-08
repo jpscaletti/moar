@@ -31,4 +31,4 @@ pip-log.txt
 ## Unit test / coverage reports
 .coverage
 .tox
-tests/assets/t/*.*
+tests/assets/t
