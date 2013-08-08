@@ -82,7 +82,7 @@ def test_get_key():
     t = Thumbnailer(RES_PATH, BASE_URL)
     #t.get_key(path, geometry, filters, options)
 
-    assert t.get_key('qwertyuiop.jpg') == t.get_key('qwertyuiop.jpg')
+    assert t.get_key('qwertyuiop.jpg', None, [], {}) == t.get_key('qwertyuiop.jpg', None, [], {})
     assert t.get_key('abc.png', (100, 30), [], {}) == \
         '8820aadc6048490c65d46c997d40c2aa'
     assert t.get_key('abc.png', None, [], {}) == \
