@@ -81,10 +81,10 @@ def test_parse_geometry():
 def test_get_key():
     t = Thumbnailer(RES_PATH, BASE_URL)
     #t.get_key(path, geometry, filters, options)
-    assert t.get_key('abc.png', (100, 30), [], {}) == '0383c362d5dda23db68f2182c3d9daf61dd82fb3'
-    assert t.get_key('abc.png', None, [], {}) == 'f877c5654a3e32ad8e3fcba7e12b55c75c674311'
-    assert t.get_key('abc.png', None, [('rotate', 60)], {'format': 'JPEG'}) == '332ae2a539ab3bb9deec62d27daf89c5ae18a041'
-    assert t.get_key('abc.png', None, [], {'resize': 'fit'}) == '9079af3e35c36987454da55f55f75850d48a446f'
+    assert t.get_key(u'abc.png', (100, 30), [], {}) == 'abc.png-100x30'
+    assert t.get_key(u'abc.png', None, [], {}) == 'abc.png'
+    assert t.get_key(u'abc.png', None, [('rotate', 60)], {'format': 'JPEG'}) == 'abc.png-830c69b6d2566d2142dbaf41be1a21e0'
+    assert t.get_key(u'abc.png', (100, 30), [], {'resize': 'fit'}) == 'abc.png-100x30-73a622c55e1f66ab1e6128d92db7cdf8'
 
 
 def test_options():
