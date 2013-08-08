@@ -14,7 +14,6 @@ Not anymore. With **Moar** you can upload once and generate thumbnails on the fl
 The thumbnails are cached and can be deleted or regenerated transparently. And the library can be extended to store them in custom backends.
 
 See the documentation online at http://lucuma.github.com/moar/
-or in [doc/source](https://github.com/lucuma/moar/tree/master/doc/source).
 
 
 ## Features at a glance
