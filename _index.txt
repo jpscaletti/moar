@@ -1,0 +1,11 @@
+http://0.0.0.0:8080/extending.md
+http://0.0.0.0:8080/index.md
+http://0.0.0.0:8080/installation.md
+http://0.0.0.0:8080/quickstart.md
+http://0.0.0.0:8080/thumbnail.md
+http://0.0.0.0:8080/thumbnailer.md
+http://0.0.0.0:8080/0.5/index.md
+http://0.0.0.0:8080/0.5/installation.md
+http://0.0.0.0:8080/0.5/quickstart.md
+http://0.0.0.0:8080/0.5/thumbnail.md
+http://0.0.0.0:8080/0.5/thumbnailer.md

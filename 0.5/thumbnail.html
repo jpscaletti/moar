@@ -7,26 +7,26 @@
   <title>Thumbnail generation</title>
   <meta name="generator" content="Clay (http://lucuma.github.com/Clay/)">
   <meta name="description" content="">
-  <link href="theme/styles/styles.css" media="screen" rel="stylesheet">
-  <link href="theme/styles/pygments-friendly.css" rel="stylesheet">
+  <link href="../theme/styles/styles.css" media="screen" rel="stylesheet">
+  <link href="../theme/styles/pygments-friendly.css" rel="stylesheet">
 </head>
 <body>
   <script>var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-1495972-14']); _gaq.push(['_trackPageview']);</script><script src="http://www.google-analytics.com/ga.js" async></script>
   <header id="sidebar">
-    <h1 id="project_name"><a href="index.html">Moar</a></h1>
+    <h1 id="project_name"><a href="../index.html">Moar</a></h1>
     <h2 id="tagline">On-the-fly image thumbnailer with no strings attached.</h2>
 
     <div class="docversions">
       <select onchange="location.href=this.value;">
         <option value="/">Latest release (1.x)</option>
-        <option value="/0.5/">Version 0.5</option>
+        <option value="/0.5/" selected="selected">Version 0.5</option>
       </select>
     </div>
 
     <div id="links">  
       
   <span class="link toc">
-    <a href="index.html#table-of-contents">table of contents</a>
+    <a href="../0.5/index.html#table-of-contents">table of contents</a>
   </span>
 
       <span class="link github"><a href="https://github.com/lucuma/moar">github</a></span>
@@ -36,7 +36,9 @@
 
   <section id="river">
     <article class="post">
-      
+      <div class="docversion note">
+        <p>This documentation is for the older, 0.5 version of the library. The newest documentation is <a href="../index.html">here</a>.</p>
+      </div>
 
       <h1 id="thumbnail-generation">Thumbnail generation</h1>
 <p>Syntax:</p>
@@ -44,7 +46,7 @@
 </code></pre>
 
 
-<p>The <code>thumbnail</code> function takes a source image, a geometry parameter, a number of optionals filters as tuples and/or a number of custom options (the same ones of the <a href="thumbnailer.html">Thumbnailer</a> class), and returns the URL of the generated thumbnail.</p>
+<p>The <code>thumbnail</code> function takes a source image, a geometry parameter, a number of optionals filters as tuples and/or a number of custom options (the same ones of the <a href="../0.5/thumbnailer.html">Thumbnailer</a> class), and returns the URL of the generated thumbnail.</p>
 <pre><code class="language-jinja"><span class="x">&lt;img src=&quot;</span><span class="cp">{{</span> <span class="nv">thumbnail</span><span class="o">(</span> <span class="err">...</span> <span class="o">)</span> <span class="cp">}}</span><span class="x">&quot; /&gt;</span>
 </code></pre>
 
@@ -81,7 +83,7 @@ Width and height are in pixels. </p>
 <pre><code>['filter1', value], ['filter2', value1, value2], ['filter3'] ...
 </code></pre>
 <p>They are defined this way instead of using keyword arguments because the order in which are applied could matter.</p>
-<p>The filters described below are those available in the shipped engines, but you can easily add more (see the section "<a href="extending.html#filters">extending the library</a>" for more info about that).</p>
+<p>The filters described below are those available in the shipped engines, but you can easily add more (see the section "<a href="../0.5/extending.html#filters">extending the library</a>" for more info about that).</p>
 <h3 id="crop-width-height-x0-y0">crop (width, height, x=0, y=0)</h3>
 <p>Crop accepts a width, height and one or two optional values as the coordinates of the new top-left corner (<code>(0, 0)</code> by default). These last values can be integers (pixels), percentages or 'center'.</p>
 <p>For example, some valid values are:</p>
@@ -127,7 +129,7 @@ Width and height are in pixels. </p>
 
 
 <h2 id="options">Options</h2>
-<p>The options overwrite the default ones defined in the <a href="thumbnailer.html">Thumbnailer</a> class.</p>
+<p>The options overwrite the default ones defined in the <a href="../0.5/thumbnailer.html">Thumbnailer</a> class.</p>
 <p><dl>
 <dt>upscale</dt>
 <dd>Upscale is a boolean that controls if the image can be upscaled or not. For example if your source is <code>"100x100"</code> and you request a thumbnail of size <code>"200x200"</code> and upscale is <code>False</code> this will return a thumbnail of size 100x100. If upscale were <code>True</code> this would result in a thumbnail size <code>"200x200"</code> (upscaled). The default value is <code>True</code>.</dd>
@@ -145,11 +147,11 @@ Width and height are in pixels. </p>
     </article>
     
 <nav class="pagination">
-  <span class="prev"><a href="quickstart.html">Anterior</a></span>
+  <span class="prev"><a href="../0.5/quickstart.html">Anterior</a></span>
   <span class="back_to_index">
-    <a href="index.html">Home</a>
+    <a href="../0.5/index.html">Home</a>
   </span>
-  <span class="next"><a href="thumbnailer.html">Siguiente</a></span>
+  <span class="next"><a href="../0.5/thumbnailer.html">Siguiente</a></span>
 </nav>
 
   </section>
