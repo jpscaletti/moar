@@ -18,8 +18,8 @@
 
     <div class="docversions">
       <select onchange="location.href=this.value;">
-        <option value="/">Latest release (1.x)</option>
-        <option value="/0.5/">Version 0.5</option>
+        <option value="http://lucuma.github.io/moar/">Latest release (1.x)</option>
+        <option value="http://lucuma.github.io/moar/0.5/">Version 0.5</option>
       </select>
     </div>
 
@@ -50,18 +50,7 @@
 
 
 <h2 id="source">Source</h2>
-<p>Source must be a local image represented as an object or a dictionary with the following attributes or keys:</p>
-<dl>
-<dt>path</dt>
-<dd>absolute path to the image, including it's name.<br>
-Eg: <code>/var/example.com/media/2012/05/05/lena.jpg</code>.</dd>
-<dt>url</dt>
-<dd>URL to the container of the images, either absolute or relative to the domain.<br>
-Eg: <code><a href="http://lucumalabs.com/media/2012/05/05/lena.jpg">http://lucumalabs.com/media/2012/05/05/lena.jpg</a></code>, <code>/media/2012/05/05/lena.jpg</code>.</dd>
-</dl>
-<div class="admonition note">
-<p>Some python web frameworks (like Django) use image objects with both of these attributes.</p>
-</div>
+<p>Source must be a relative path to a local image. </p>
 <h2 id="geometry">Geometry</h2>
 <p>Geometry is specified as <code>width</code>x<code>height</code>, <code>width</code> or x<code>height</code>.<br>
 Width and height are in pixels. </p>
@@ -129,18 +118,35 @@ Width and height are in pixels. </p>
 <h2 id="options">Options</h2>
 <p>The options overwrite the default ones defined in the <a href="thumbnailer.html">Thumbnailer</a> class.</p>
 <p><dl>
-<dt>upscale</dt>
-<dd>Upscale is a boolean that controls if the image can be upscaled or not. For example if your source is <code>"100x100"</code> and you request a thumbnail of size <code>"200x200"</code> and upscale is <code>False</code> this will return a thumbnail of size 100x100. If upscale were <code>True</code> this would result in a thumbnail size <code>"200x200"</code> (upscaled). The default value is <code>True</code>.</dd>
-<dt>quality</dt>
-<dd>When the output format is jpeg, quality is a value between 0-100 that controls the thumbnail write quality. Default value is <code>90</code>.</dd>
-<dt>progressive</dt>
-<dd>This controls whether to save jpeg thumbnails as progressive jpegs. Default value is <code>True</code>.</dd>
-<dt>orientation</dt>
-<dd>This controls whether to orientate the resulting thumbnail with respect to the source EXIF tags for orientation. Default value is <code>True</code>.</dd>
-<dt>format</dt>
-<dd>This controls the write format and thumbnail extension. Formats supported by the shipped engines are <code>"JPEG"</code> and <code>"PNG"</code>. Default value is <code>"JPEG"</code>.</dd>
 <dt>resize</dt>
-<dd>When setting the new geometry, this controls if the image is deformed to match exactly the given dimensions, regardless of the aspect ratio of the original image. If <code>resize</code> is <code>True</code>, the <code>upscale</code> option is ignored. Default value is <code>False</code>.</dd>
+<dd>When setting the new geometry, this controls if the image is deformed<br>
+to match exactly the given dimensions, regardless of the aspect ratio<br>
+of the original image.<br>
+This can be <code>fill</code>, <code>fit</code> or <code>upscale</code>.<br>
+Default value is <code>fill</code>.</dd>
+<dt>upscale</dt>
+<dd>A boolean that controls if the image can be upscaled or not.<br>
+For example if your source is <code>100x100</code> and you request a thumbnail<br>
+of size <code>200x200</code> and upscale is <code>False</code> this will return a<br>
+thumbnail of size 100x100.<br>
+If upscale were <code>True</code> this would result in a thumbnail size<br>
+<code>200x200</code> (upscaled).<br>
+The default value is <code>True</code>.</dd>
+<dt>format</dt>
+<dd>This controls the write format and thumbnail extension. Formats<br>
+supported by the shipped engines are <code>'JPEG'</code> and <code>'PNG'</code>.<br>
+Default value is <code>'JPEG'</code>.</dd>
+<dt>quality</dt>
+<dd>When the output format is jpeg, quality is a value between 0-100<br>
+that controls the thumbnail write quality.<br>
+Default value is <code>90</code>.</dd>
+<dt>progressive</dt>
+<dd>This controls whether to save jpeg thumbnails as progressive jpegs.<br>
+Default value is <code>True</code>.</dd>
+<dt>orientation</dt>
+<dd>This controls whether to orientate the resulting thumbnail with<br>
+respect to the source EXIF tags for orientation.<br>
+Default value is <code>True</code>.</dd>
 </dl></p>
     </article>
     

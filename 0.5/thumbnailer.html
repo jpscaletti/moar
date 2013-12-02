@@ -18,8 +18,8 @@
 
     <div class="docversions">
       <select onchange="location.href=this.value;">
-        <option value="/">Latest release (1.x)</option>
-        <option value="/0.5/" selected="selected">Version 0.5</option>
+        <option value="http://lucuma.github.io/moar/">Latest release (1.x)</option>
+        <option value="http://lucuma.github.io/moar/0.5/" selected="selected">Version 0.5</option>
       </select>
     </div>
 
@@ -66,18 +66,35 @@
 <h2 id="default-options">Default Options</h2>
 <p>These options are the default for all thumbnails. However, they can be overwritten in individual <code>thumbnail</code> calls.</p>
 <p><dl>
-<dt>upscale</dt>
-<dd>Upscale is a boolean that controls if the image can be upscaled or not. For example if your source is <code>"100x100"</code> and you request a thumbnail of size <code>"200x200"</code> and upscale is <code>False</code> this will return a thumbnail of size 100x100. If upscale were <code>True</code> this would result in a thumbnail size <code>"200x200"</code> (upscaled). The default value is <code>True</code>.</dd>
-<dt>quality</dt>
-<dd>When the output format is jpeg, quality is a value between 0-100 that controls the thumbnail write quality. Default value is <code>90</code>.</dd>
-<dt>progressive</dt>
-<dd>This controls whether to save jpeg thumbnails as progressive jpegs. Default value is <code>True</code>.</dd>
-<dt>orientation</dt>
-<dd>This controls whether to orientate the resulting thumbnail with respect to the source EXIF tags for orientation. Default value is <code>True</code>.</dd>
-<dt>format</dt>
-<dd>This controls the write format and thumbnail extension. Formats supported by the shipped engines are <code>"JPEG"</code> and <code>"PNG"</code>. Default value is <code>"JPEG"</code>.</dd>
 <dt>resize</dt>
-<dd>When setting the new geometry, this controls if the image is deformed to match exactly the given dimensions, regardless of the aspect ratio of the original image. If <code>resize</code> is <code>True</code>, the <code>upscale</code> option is ignored. Default value is <code>False</code>.</dd>
+<dd>When setting the new geometry, this controls if the image is deformed<br>
+to match exactly the given dimensions, regardless of the aspect ratio<br>
+of the original image.<br>
+This can be <code>fill</code>, <code>fit</code> or <code>upscale</code>.<br>
+Default value is <code>fill</code>.</dd>
+<dt>upscale</dt>
+<dd>A boolean that controls if the image can be upscaled or not.<br>
+For example if your source is <code>100x100</code> and you request a thumbnail<br>
+of size <code>200x200</code> and upscale is <code>False</code> this will return a<br>
+thumbnail of size 100x100.<br>
+If upscale were <code>True</code> this would result in a thumbnail size<br>
+<code>200x200</code> (upscaled).<br>
+The default value is <code>True</code>.</dd>
+<dt>format</dt>
+<dd>This controls the write format and thumbnail extension. Formats<br>
+supported by the shipped engines are <code>'JPEG'</code> and <code>'PNG'</code>.<br>
+Default value is <code>'JPEG'</code>.</dd>
+<dt>quality</dt>
+<dd>When the output format is jpeg, quality is a value between 0-100<br>
+that controls the thumbnail write quality.<br>
+Default value is <code>90</code>.</dd>
+<dt>progressive</dt>
+<dd>This controls whether to save jpeg thumbnails as progressive jpegs.<br>
+Default value is <code>True</code>.</dd>
+<dt>orientation</dt>
+<dd>This controls whether to orientate the resulting thumbnail with<br>
+respect to the source EXIF tags for orientation.<br>
+Default value is <code>True</code>.</dd>
 </dl></p>
     </article>
     

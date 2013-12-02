@@ -18,8 +18,8 @@
 
     <div class="docversions">
       <select onchange="location.href=this.value;">
-        <option value="/">Latest release (1.x)</option>
-        <option value="/0.5/">Version 0.5</option>
+        <option value="http://lucuma.github.io/moar/">Latest release (1.x)</option>
+        <option value="http://lucuma.github.io/moar/0.5/">Version 0.5</option>
       </select>
     </div>
 
@@ -42,19 +42,19 @@
 <p>Syntax:</p>
 <pre><code class="language-python"><span class="kn">from</span> <span class="nn">moar</span> <span class="kn">import</span> <span class="n">Thumbnailer</span>
 
-<span class="n">thumbnail</span> <span class="o">=</span> <span class="n">Thumbnailer</span><span class="p">([</span><span class="n">engine</span><span class="p">],</span> <span class="p">[</span><span class="n">storage</span><span class="p">],</span>
-                <span class="p">[</span><span class="n">filters</span><span class="o">=</span><span class="n">extra_filters</span><span class="p">],</span> <span class="p">[</span><span class="o">**</span><span class="n">default_options</span><span class="p">])</span>
+<span class="n">thumbnail</span> <span class="o">=</span> <span class="n">Thumbnailer</span><span class="p">(</span><span class="n">base_path</span><span class="p">,</span> <span class="n">base_url</span><span class="p">,</span> <span class="p">[</span><span class="n">storage</span><span class="p">],</span> <span class="p">[</span><span class="n">engine</span><span class="p">],</span>
+                        <span class="p">[</span><span class="n">filters</span><span class="p">],</span> <span class="p">[</span><span class="o">**</span><span class="n">options</span><span class="p">])</span>
 </code></pre>
 
 
-<p>Moar come with support for pluggable engines and storages. By default it use <code>moar.engines.pil.Engine</code> and <code>moar.storages.filesystem.Storage</code>.</p>
+<p>Moar come with support for pluggable engines and storages. By default it use <code>moar.engines.pil_engine.PILEngine</code> and <code>moar.storages.file_storage.FileStorage</code>.</p>
 <p>When you call the thumbnail instance, the current storage class will generates a key that represent a thumbnail made from that image with that specific filters and options. If a thumbnail with that key hasn't been generated before, it'll make a new one, store it using the key as an id, and returns it.</p>
-<p>The default storage class (<code>moar.storages.filesystem.Storage</code>) store the generated thumbnails inside a <code>"t"</code> folder in the same path as the source image (this can be changed). Other storages will operate different, for example, storing the key in a local database and uploading the thumbnail to a remote server.</p>
+<p>The default storage class (<code>moar.storages.file_storage.FileStorage</code>) store the generated thumbnails inside a <code>"t"</code> folder in the same path as the source image (this can be changed). Other storages will operate different, for example, storing the key in a local database and uploading the thumbnail to a remote server.</p>
 <h2 id="filters">Filters</h2>
 <p>You can use the <code>filters</code> parameter to define a list of custom filters, adding them to those included by default. E.g.:</p>
 <pre><code class="language-python"><span class="kn">from</span> <span class="nn">image_filters</span> <span class="kn">import</span> <span class="n">watermak</span><span class="p">,</span> <span class="n">enhace</span>
 
-<span class="n">thumbnail</span> <span class="o">=</span> <span class="n">Thumbnailer</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="p">[</span><span class="n">watermak</span><span class="p">,</span> <span class="n">enhace</span><span class="p">])</span>
+<span class="n">thumbnail</span> <span class="o">=</span> <span class="n">Thumbnailer</span><span class="p">(</span><span class="n">MEDIA_PATH</span><span class="p">,</span> <span class="n">MEDIA_URL</span><span class="p">,</span> <span class="n">filters</span><span class="o">=</span><span class="p">[</span><span class="n">watermak</span><span class="p">,</span> <span class="n">enhace</span><span class="p">])</span>
 </code></pre>
 
 
@@ -64,18 +64,35 @@
 <h2 id="default-options">Default Options</h2>
 <p>These options are the default for all thumbnails. However, they can be overwritten in individual <code>thumbnail</code> calls.</p>
 <p><dl>
-<dt>upscale</dt>
-<dd>Upscale is a boolean that controls if the image can be upscaled or not. For example if your source is <code>"100x100"</code> and you request a thumbnail of size <code>"200x200"</code> and upscale is <code>False</code> this will return a thumbnail of size 100x100. If upscale were <code>True</code> this would result in a thumbnail size <code>"200x200"</code> (upscaled). The default value is <code>True</code>.</dd>
-<dt>quality</dt>
-<dd>When the output format is jpeg, quality is a value between 0-100 that controls the thumbnail write quality. Default value is <code>90</code>.</dd>
-<dt>progressive</dt>
-<dd>This controls whether to save jpeg thumbnails as progressive jpegs. Default value is <code>True</code>.</dd>
-<dt>orientation</dt>
-<dd>This controls whether to orientate the resulting thumbnail with respect to the source EXIF tags for orientation. Default value is <code>True</code>.</dd>
-<dt>format</dt>
-<dd>This controls the write format and thumbnail extension. Formats supported by the shipped engines are <code>"JPEG"</code> and <code>"PNG"</code>. Default value is <code>"JPEG"</code>.</dd>
 <dt>resize</dt>
-<dd>When setting the new geometry, this controls if the image is deformed to match exactly the given dimensions, regardless of the aspect ratio of the original image. If <code>resize</code> is <code>True</code>, the <code>upscale</code> option is ignored. Default value is <code>False</code>.</dd>
+<dd>When setting the new geometry, this controls if the image is deformed<br>
+to match exactly the given dimensions, regardless of the aspect ratio<br>
+of the original image.<br>
+This can be <code>fill</code>, <code>fit</code> or <code>upscale</code>.<br>
+Default value is <code>fill</code>.</dd>
+<dt>upscale</dt>
+<dd>A boolean that controls if the image can be upscaled or not.<br>
+For example if your source is <code>100x100</code> and you request a thumbnail<br>
+of size <code>200x200</code> and upscale is <code>False</code> this will return a<br>
+thumbnail of size 100x100.<br>
+If upscale were <code>True</code> this would result in a thumbnail size<br>
+<code>200x200</code> (upscaled).<br>
+The default value is <code>True</code>.</dd>
+<dt>format</dt>
+<dd>This controls the write format and thumbnail extension. Formats<br>
+supported by the shipped engines are <code>'JPEG'</code> and <code>'PNG'</code>.<br>
+Default value is <code>'JPEG'</code>.</dd>
+<dt>quality</dt>
+<dd>When the output format is jpeg, quality is a value between 0-100<br>
+that controls the thumbnail write quality.<br>
+Default value is <code>90</code>.</dd>
+<dt>progressive</dt>
+<dd>This controls whether to save jpeg thumbnails as progressive jpegs.<br>
+Default value is <code>True</code>.</dd>
+<dt>orientation</dt>
+<dd>This controls whether to orientate the resulting thumbnail with<br>
+respect to the source EXIF tags for orientation.<br>
+Default value is <code>True</code>.</dd>
 </dl></p>
     </article>
     
