@@ -1,7 +1,8 @@
+docversion: 0.5
 title: Installation
 layout: /theme/page.html
 description: Instructions to install Moar
-next: /quickstart.html
+next: /0.5/quickstart.html
 
 
 # Installation

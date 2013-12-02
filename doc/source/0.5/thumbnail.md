@@ -1,7 +1,8 @@
+docversion: 0.5
 title: Thumbnail generation
 layout: /theme/page.html
-prev: /quickstart.html
-next: /thumbnailer.html
+prev: /0.5/quickstart.html
+next: /0.5/thumbnailer.html
 
 
 # Thumbnail generation
@@ -21,7 +22,19 @@ The `thumbnail` function takes a source image, a geometry parameter, a number of
 
 ## Source
 
-Source must be a relative path to a local image. 
+Source must be a local image represented as an object or a dictionary with the following attributes or keys:
+
+path
+:   absolute path to the image, including it's name.
+    Eg: `/var/example.com/media/2012/05/05/lena.jpg`.
+
+url
+:   URL to the container of the images, either absolute or relative to the domain.
+    Eg: `http://lucumalabs.com/media/2012/05/05/lena.jpg`, `/media/2012/05/05/lena.jpg`.
+
+!!! note
+    Some python web frameworks (like Django) use image objects with both of these attributes.
+
 
 ## Geometry
 
@@ -52,7 +65,7 @@ The filters are defined as a sequence of list or tuples.
 
 They are defined this way instead of using keyword arguments because the order in which are applied could matter.
 
-The filters described below are those available in the shipped engines, but you can easily add more (see the section "[extending the library](extending.html#filters)" for more info about that).
+The filters described below are those available in the shipped engines, but you can easily add more (see the section "[extending the library](/0.5/extending.html#filters)" for more info about that).
 
 
 ### crop (width, height, x=0, y=0)
@@ -124,5 +137,5 @@ The options overwrite the default ones defined in the [Thumbnailer][thumbnailer]
 {% include "options.md" %}
 
 
-[thumbnailer]: thumbnailer.html
+[thumbnailer]: /0.5/thumbnailer.html
 

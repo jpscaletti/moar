@@ -1,5 +1,5 @@
 title: Extending the library
-template: page.html
+layout: /theme/page.html
 
 # Extending the library
 

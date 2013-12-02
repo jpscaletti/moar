@@ -1,0 +1,26 @@
+{% extends "theme/base.html" %}
+
+{% block links %}
+  <span class="link toc">
+    <a href="/
+    {%- if self.docversion %}{{ self.docversion() }}/{% endif -%}
+    index.html#table-of-contents">table of contents</a>
+  </span>
+{% endblock %}
+
+{% block pagination %}
+<nav class="pagination">
+  {% if self.prev -%}
+  <span class="prev"><a href="{{ self.prev() }}">Anterior</a></span>
+  {%- endif %}
+  <span class="back_to_index">
+    <a href="/
+    {%- if self.docversion %}{{ self.docversion() }}/{% endif -%}
+    index.html">Home</a>
+  </span>
+  {% if self.next -%}
+  <span class="next"><a href="{{ self.next() }}">Siguiente</a></span>
+  {%- endif %}
+</nav>
+{% endblock %}
+

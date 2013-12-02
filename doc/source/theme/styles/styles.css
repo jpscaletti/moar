@@ -7,15 +7,6 @@
     font-weight: normal;
     font-style: normal;
 }
-@font-face {
-    font-family: 'proxima_nova';
-    src: url('fonts/proximanova-light-webfont.eot');
-    src: url('fonts/proximanova-light-webfont.eot?#iefix') format('embedded-opentype'),
-         url('fonts/proximanova-light-webfont.woff') format('woff'),
-         url('fonts/proximanova-light-webfont.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
 
 article, aside, details, figcaption, figure, footer, header, hgroup, nav, section {
   display: block
@@ -240,6 +231,19 @@ td { vertical-align: top }
 }
 .clearfix:after { clear: both }
 .clearfix { *zoom: 1 }
+
+.docversions {
+  padding: 10px 0;
+  margin-bottom: 10px;
+}
+.docversions select {
+  width: 100%;
+  font-size: 15px;
+  color: #999;
+  padding: 5px;
+}
+
+
 @media print { 
   * {
     background: transparent!important;
@@ -269,7 +273,7 @@ td { vertical-align: top }
 
 body {
   background-color: #fff;
-  font-family: 'proxima_nova',sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 400;
   min-width: 895px;
 }
@@ -313,7 +317,6 @@ p {
   margin-top: 20px;
   margin-bottom: 20px;
   color: #4d4d4d;
-  font-family: 'proxima_nova',sans-serif;
   font-weight: 400;
 }
 p img { margin: 0 }
@@ -918,7 +921,13 @@ margin-bottom: 10px;
   background-color: #fff9d8;
   border-color: #ffec84;
 }
-
+.docversion {
+  border-top: 2px solid #ddd;
+  border-bottom: 2px solid #ddd;
+}
+.docversion p {
+  text-align: center;
+}
 
 /******************************************************************************
 * media queries

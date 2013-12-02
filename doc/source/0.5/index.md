@@ -1,3 +1,4 @@
+docversion: 0.5
 title: Moar: on-the-fly image thumbnailer
 layout: /theme/index.html
 
@@ -17,18 +18,17 @@ The thumbnails are cached and can be deleted or regenerated transparently. And t
 
 # Table of contents
 
-* [Installation](/installation.html)
-* [Quickstart](/quickstart.html)
-* [Thumbnail generation](/thumbnail.html)
-* [Thumbnailer class](/thumbnailer.html)
-<!-- * [Extending the library](/extending.html) -->
+* [Installation](/0.5/installation.html)
+* [Quickstart](/0.5/quickstart.html)
+* [Thumbnail generation](/0.5/thumbnail.html)
+* [Thumbnailer class](/0.5/thumbnailer.html)
 
 
 # Features at a glance
 
 * Pluggable engine support ([PIL][pil]{:target=_blank} and [Wand][wand]{:target=_blank} (a wrapper for [ImageMagick][imagemagick]{:target=_blank}) included<sup>*</sup>).
 * Automatic cache: a thumbnail is generated only once.
-* Pluggable storage support.
+* Pluggable storage support (FileSystem included).
 * Flexible, simple syntax, generates no HTML.
 * Auto-rotates the image according to its EXIF information.
 * Several filters available by default:

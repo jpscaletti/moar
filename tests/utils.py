@@ -14,7 +14,7 @@ def get_impath(name='a200x140.png'):
     return os.path.join(RES_PATH, name)
 
 
-def almost_equal(val1, val2, error=2):
+def almost_equal(val1, val2, error=3):
     return abs(val1 - val2) <= error
 
 

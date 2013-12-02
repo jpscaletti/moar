@@ -1,4 +1,4 @@
-.PHONY: clean clean-pyc test publish
+.PHONY: test
 
 all: clean clean-pyc test
 
@@ -22,3 +22,11 @@ test:
 publish: clean
 	python setup.py sdist upload
 
+publish-doc:
+	cd doc && clay build
+	cp -R doc/build/* doc/gh-pages/
+	rm -rf doc/build
+	cd doc/gh-pages && \
+	git add --all . && \
+	git commit -am "Update documentation" && \
+	git push origin gh-pages
