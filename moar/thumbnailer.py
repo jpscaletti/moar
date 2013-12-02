@@ -4,7 +4,7 @@ from os.path import splitext
 from hashlib import md5
 
 from moar.engines.pil_engine import PILEngine
-from moar.storages.filesystem_storage import FileStorage
+from moar.storages.file_storage import FileStorage
 from moar.thumb import Thumb
 
 
