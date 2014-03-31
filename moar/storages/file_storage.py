@@ -25,7 +25,7 @@ class FileStorage(BaseStorage):
 
     def __init__(self, base_path, base_url='', thumbsdir='t'):
         self.base_path = base_path.rstrip('/')
-        self.base_url = base_url.rstrip('/') or '/'
+        self.base_url = base_url.rstrip('/') or ''
         self.thumbsdir = thumbsdir
 
     def get_thumb(self, path, key, format):
