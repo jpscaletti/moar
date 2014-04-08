@@ -82,18 +82,15 @@ def test_get_key():
     t = Thumbnailer(RES_PATH, BASE_URL)
     #t.get_key(path, geometry, filters, options)
 
-    assert t.get_key('qwertyuiop.jpg', None, [], {}) == \
-        t.get_key('qwertyuiop.jpg', None, [], {})
-    assert t.get_key('abc.png', (100, 30), [], {}) == \
-        '8820aadc6048490c65d46c997d40c2aa'
-    assert t.get_key('abc.png', None, [], {}) == \
-        '88db0e707dc54b57a5e0c9e52699c6cd'
-    assert t.get_key('abc.png', None, [('rotate', 60)], {'format': 'JPEG'}) == \
-        '2469c18428fe35fb2422bc94d7acff23'
-    assert t.get_key('abc.png', None, [], {'resize': 'fit'}) == \
-        'cc88837caa4d797437decd01e187dde1'
-    assert t.get_key('abc.png', (100, 30), [], {'resize': 'fit'}) == \
-        'a5fde43ca5ab38038805e7687b2c586e'
+    assert t.get_key('qwertyuiop.jpg', None, [], {}) == t.get_key('qwertyuiop.jpg', None, [], {})
+    assert t.get_key('abc.png', (100, 30), [], {}) == '6cf9f4fea91bbb9e1ee5c5e17af93e6b'
+    assert t.get_key('abc.png', None, [], {}) == 'f4dffd86f12230909466489666c2e5bf'
+    assert t.get_key('abc.png', None, [('rotate', 60)], {'format': 'JPEG'}) == '6d10dc77022a292c429ee546383c5aab'
+    assert t.get_key('abc.png', None, [], {'resize': 'fit'}) == '17c5fc9cb5bae41a460880c326db37f9'
+    assert t.get_key('abc.png', (100, 30), [], {'resize': 'fit'}) == '511fc406c76255d129dc58e06e692af1'
+
+    assert t.get_key('qwertyuiop.jpg', None, [], {}) != t.get_key('qwertyuiop.jpg', None, [], {}, 123)
+    assert t.get_key('qwertyuiop.jpg', None, [], {}, 123) == t.get_key('qwertyuiop.jpg', None, [], {}, 123)
 
 
 def test_options():
@@ -126,11 +123,10 @@ def test_make_thumb():
     s = MockStorage()
     e = MockEngine()
     t = Thumbnailer(RES_PATH, BASE_URL, storage=s, engine=e)
-    path = 'abc.jpg'
     geometry = '20x10'
     filters = [('blur', 20), ('crop', '50%', '50%')]
     options = {'format': 'PNG'}
-    mthumb = t(path, geometry, *filters, **options)
+    mthumb = t(RES_PATH, geometry, *filters, **options)
 
     assert s.get_thumb.was_called
     assert e.open_image.was_called
@@ -143,8 +139,8 @@ def test_make_thumb():
     assert s.save.was_called
     assert mthumb == 'thumb'
 
-    assert path in s.get_thumb.args
-    assert e.open_image.args[0].endswith(path)
+    assert RES_PATH in s.get_thumb.args
+    assert e.open_image.args[0].endswith(RES_PATH)
     assert e.get_size.args[0] == 'im'
     assert e.get_data.args[0] == 'im'
     assert e.set_orientation.args[0] == 'im'
@@ -166,9 +162,8 @@ def test_make_existing_thumb():
     geometry = '20x10'
     filters = [('blur', 20)]
     options = {'format': 'PNG'}
-    mthumb = t(path, geometry, *filters, **options)
+    t(path, geometry, *filters, **options)
 
-    assert s.get_thumb.was_called
     assert not e.open_image.was_called
     assert not e.close_image.was_called
     assert not e.get_size.was_called
@@ -177,4 +172,3 @@ def test_make_existing_thumb():
     assert not e.set_geometry.was_called
     assert not e.apply_filters.was_called
     assert not s.save.was_called
-    assert mthumb is mock_thumb

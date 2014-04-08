@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from os.path import join as pjoin
-from os.path import splitext
+from os.path import splitext, exists, getmtime
 from hashlib import md5
 
 from moar.engines.pil_engine import PILEngine
@@ -133,14 +133,17 @@ class Thumbnailer(object):
             geometry = self.parse_geometry(geometry)
 
         options = self.parse_options(path, options)
-        key = self.get_key(path, geometry, filters, options)
+        fullpath = self.get_source_path(path)
+        if not exists(fullpath):
+            return Thumb('', None)
+
+        timestamp = self.get_timestamp(fullpath)
+        key = self.get_key(path, geometry, filters, options, timestamp)
 
         thumb = self.storage.get_thumb(path, key, options['format'])
         if thumb:
             thumb._engine = self.engine
             return thumb
-
-        fullpath = self.get_source_path(path)
 
         im = self.engine.open_image(fullpath)
         if im is None:
@@ -199,15 +202,14 @@ class Thumbnailer(object):
         if resize not in RESIZE_OPTIONS:
             resize = self.resize
 
-        options = options.copy()
-        options.update({
+        return {
             'upscale': bool(options.get('upscale', self.upscale)),
             'resize': resize,
             'format': self.get_format(path, options),
             'quality': int(options.get('quality', self.quality)),
             'progressive': bool(options.get('progressive', self.progressive)),
             'orientation': bool(options.get('orientation', self.orientation)),
-        })
+        }
         return options
 
     def get_format(self, path, options):
@@ -222,8 +224,20 @@ class Thumbnailer(object):
             format = 'JPEG'
         return format
 
-    def get_key(self, path, geometry, filters, options):
-        seed = ' '.join([str(path), str(geometry), str(filters), str(options)])
+    def get_timestamp(self, fullpath):
+        try:
+            return getmtime(fullpath)
+        except OSError:
+            return 0
+
+    def get_key(self, path, geometry, filters, options, timestamp=0):
+        seed = ' '.join([
+            str(path),
+            str(geometry),
+            str(filters),
+            str(options),
+            str(timestamp),
+        ])
         return md5(seed).hexdigest()
 
     def get_source_path(self, path):
