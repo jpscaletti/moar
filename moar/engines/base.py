@@ -75,10 +75,22 @@ class BaseEngine(object):
             elif resize == 'stretch':
                 new_width = width
                 new_height = height
+
         elif height:
+            # Smaller than the target?
+            smaller = im_height <= height
+            if smaller and not options['upscale']:
+                return im
+
             new_width = int(ceil(height * ratio))
             new_height = height
+
         else:
+            # Smaller than the target?
+            smaller = im_width <= width
+            if smaller and not options['upscale']:
+                return im
+
             new_width = width
             new_height = int(ceil(width / ratio))
 

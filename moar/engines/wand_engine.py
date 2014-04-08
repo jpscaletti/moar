@@ -9,6 +9,7 @@ from os.path import splitext
 available = True
 try:
     from wand.image import Image
+    from wand.exceptions import BlobError
 except ImportError:
     available = False
 
@@ -21,7 +22,11 @@ class WandEngine(BaseEngine):
     available = available
 
     def open_image(self, path):
-        return Image(filename=path)
+        try:
+            im = Image(filename=path)
+        except (BlobError, IOError):
+            return None
+        return im
 
     def close_image(self, im):
         im.close()

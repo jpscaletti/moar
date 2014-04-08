@@ -199,14 +199,16 @@ class Thumbnailer(object):
         if resize not in RESIZE_OPTIONS:
             resize = self.resize
 
-        return {
+        options = options.copy()
+        options.update({
             'upscale': bool(options.get('upscale', self.upscale)),
             'resize': resize,
             'format': self.get_format(path, options),
             'quality': int(options.get('quality', self.quality)),
             'progressive': bool(options.get('progressive', self.progressive)),
             'orientation': bool(options.get('orientation', self.orientation)),
-        }
+        })
+        return options
 
     def get_format(self, path, options):
         format = options.get('format', self.format)

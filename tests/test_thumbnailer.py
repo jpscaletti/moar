@@ -82,7 +82,8 @@ def test_get_key():
     t = Thumbnailer(RES_PATH, BASE_URL)
     #t.get_key(path, geometry, filters, options)
 
-    assert t.get_key('qwertyuiop.jpg', None, [], {}) == t.get_key('qwertyuiop.jpg', None, [], {})
+    assert t.get_key('qwertyuiop.jpg', None, [], {}) == \
+        t.get_key('qwertyuiop.jpg', None, [], {})
     assert t.get_key('abc.png', (100, 30), [], {}) == \
         '8820aadc6048490c65d46c997d40c2aa'
     assert t.get_key('abc.png', None, [], {}) == \
@@ -93,7 +94,6 @@ def test_get_key():
         'cc88837caa4d797437decd01e187dde1'
     assert t.get_key('abc.png', (100, 30), [], {'resize': 'fit'}) == \
         'a5fde43ca5ab38038805e7687b2c586e'
-
 
 
 def test_options():
@@ -159,6 +159,7 @@ def test_make_existing_thumb():
     s = MockStorage()
     mock_thumb = MockThumb()
     s.get_thumb = MockMethod(mock_thumb)
+
     e = MockEngine()
     t = Thumbnailer(RES_PATH, BASE_URL, storage=s, engine=e)
     path = 'abc.jpg'
@@ -177,4 +178,3 @@ def test_make_existing_thumb():
     assert not e.apply_filters.was_called
     assert not s.save.was_called
     assert mthumb is mock_thumb
-
