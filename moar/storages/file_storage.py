@@ -23,14 +23,15 @@ def make_dirs(path):
 
 class FileStorage(BaseStorage):
 
-    def __init__(self, base_path, base_url='', thumbsdir='t'):
+    def __init__(self, base_path, base_url='/', thumbsdir='t', out_path=None):
         self.base_path = base_path.rstrip('/')
-        self.base_url = base_url.rstrip('/') or ''
+        self.base_url = base_url.rstrip('/') or '/'
         self.thumbsdir = thumbsdir
+        self.out_path = (out_path or self.base_path).rstrip('/')
 
     def get_thumb(self, path, key, format):
         thumbpath = self.get_thumbpath(path, key, format)
-        fullpath = join(self.base_path, thumbpath)
+        fullpath = join(self.out_path, thumbpath)
         if isfile(fullpath):
             url = self.get_url(thumbpath)
             return Thumb(url, key, fullpath=fullpath)
@@ -38,7 +39,7 @@ class FileStorage(BaseStorage):
 
     def save(self, path, key, format, data, w=None, h=None):
         thumbpath = self.get_thumbpath(path, key, format)
-        fullpath = join(self.base_path, thumbpath)
+        fullpath = join(self.out_path, thumbpath)
         self.save_thumb(fullpath, data)
         url = self.get_url(thumbpath)
         thumb = Thumb(url, key, width=w, height=h, fullpath=fullpath)

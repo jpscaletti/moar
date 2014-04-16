@@ -78,7 +78,7 @@ class Thumbnailer(object):
 
     """
 
-    def __init__(self, base_path, base_url=None, storage=None,
+    def __init__(self, base_path, base_url='/', storage=None,
                  engine=PILEngine, filters=None, **options):
         self.base_path = base_path
         self.set_storage(base_path, base_url, storage)
