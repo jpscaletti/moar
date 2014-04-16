@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from __future__ import print_function
+
 from os.path import join as pjoin
 from os.path import splitext, exists, getmtime
 from hashlib import md5
@@ -79,11 +81,12 @@ class Thumbnailer(object):
     """
 
     def __init__(self, base_path, base_url='/', storage=None,
-                 engine=PILEngine, filters=None, **options):
+                 engine=PILEngine, filters=None, echo=False, **options):
         self.base_path = base_path
         self.set_storage(base_path, base_url, storage)
         self.set_engine(engine)
         self.custom_filters = filters or {}
+        self.echo = echo
         self.set_default_options(options)
 
     def set_storage(self, base_path, base_url, storage):
@@ -143,6 +146,8 @@ class Thumbnailer(object):
         thumb = self.storage.get_thumb(path, key, options['format'])
         if thumb:
             thumb._engine = self.engine
+            if self.echo:
+                print(' ', thumb.url)
             return thumb
 
         im = self.engine.open_image(fullpath)
@@ -150,6 +155,8 @@ class Thumbnailer(object):
             return Thumb('', None)
         data, w, h = self.process_image(im, geometry, filters, options)
         thumb = self.storage.save(path, key, options['format'], data, w, h)
+        if self.echo:
+            print(' ', thumb.url)
         return thumb
 
     def parse_path(self, path):

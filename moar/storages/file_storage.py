@@ -6,7 +6,7 @@ Local file system storage.
 import errno
 import io
 import os
-from os.path import join, split, dirname, isfile, isdir, basename, splitext
+from os.path import join, dirname, isfile, basename, splitext
 
 from moar.thumb import Thumb
 from moar.storages.base import BaseStorage
@@ -66,5 +66,5 @@ class FileStorage(BaseStorage):
         return thumbsdir
 
     def get_url(self, thumbpath):
-        return '/'.join([self.base_url, thumbpath.strip('/')])
+        return join(self.base_url, thumbpath.strip('/'))
 
