@@ -38,4 +38,4 @@ from moar.engines.wand_engine import WandEngine
 from moar.storages.file_storage import FileStorage
 
 
-__version__ = '1.2.2'
+__version__ = '1.2.3'

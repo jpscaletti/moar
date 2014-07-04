@@ -11,8 +11,7 @@ from moar.thumb import Thumb
 
 
 INSTALL_PIL_MSG_OR_CHANGE_ENGINE = '''Moar uses by default the Python Image Library (PIL) but we couldn't found it installed.
-Please see the documentation of Moar to find how to install it or how to choose
-a different engine.'''
+Please see the documentation of Moar to find how to install it or how to choose a different engine.'''
 
 NO_STORAGE_FOUND = '''
 No storage was defined.
@@ -147,7 +146,7 @@ class Thumbnailer(object):
         if thumb:
             thumb._engine = self.engine
             if self.echo:
-                print(' ', thumb.url)
+                print(' ', thumb.url.strip('/'))
             return thumb
 
         im = self.engine.open_image(fullpath)
@@ -156,7 +155,7 @@ class Thumbnailer(object):
         data, w, h = self.process_image(im, geometry, filters, options)
         thumb = self.storage.save(path, key, options['format'], data, w, h)
         if self.echo:
-            print(' ', thumb.url)
+            print(' ', thumb.url.strip('/'))
         return thumb
 
     def parse_path(self, path):
