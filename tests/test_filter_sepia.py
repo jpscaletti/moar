@@ -18,7 +18,7 @@ def test_sepia_rgb(engine):
     if engine.name == 'wand':
         pytest.xfail("not implemented yet")
     ini = 'a200x140.png'
-    out = engine.name + '-sepia240|220|190.png'
+    out = engine.name + '-sepia240_220_190.png'
     tp = apply_filter(engine, 'sepia', ini, out, 240, 220, 190)
     assert_image(tp, out)
 

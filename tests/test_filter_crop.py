@@ -12,7 +12,7 @@ def test_crop(engine):
 
 def test_crop_xy_px(engine):
     ini = 'a200x140.png'
-    out = engine.name + '-crop50x50-100|20.png'
+    out = engine.name + '-crop50x50-100_20.png'
     tp = apply_filter(engine, 'crop', ini, out, 50, 50, 100, 20)
     assert_image(tp, out)
 
@@ -26,7 +26,7 @@ def test_crop_xy_short(engine):
 
 def test_crop_xy_pc(engine):
     ini = 'a200x140.png'
-    out = engine.name + '-crop50x50-30pc|50pc.png'
+    out = engine.name + '-crop50x50-30pc_50pc.png'
     tp = apply_filter(engine, 'crop', ini, out, 50, 50, '30%', '50%')
     assert_image(tp, out)
 
