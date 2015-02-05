@@ -2,8 +2,7 @@
 from __future__ import print_function
 
 from os.path import join as pjoin
-from os.path import splitext, exists, getmtime
-from hashlib import md5
+from os.path import splitext, exists
 
 from moar.engines.pil_engine import PILEngine
 from moar.storages.file_storage import FileStorage
@@ -79,7 +78,7 @@ class Thumbnailer(object):
 
     """
 
-    def __init__(self, base_path, base_url='/', storage=None,
+    def __init__(self, base_path=None, base_url='/', storage=None,
                  engine=PILEngine, filters=None, echo=False, **options):
         self.base_path = base_path
         self.set_storage(base_path, base_url, storage)
@@ -135,19 +134,18 @@ class Thumbnailer(object):
             geometry = self.parse_geometry(geometry)
 
         options = self.parse_options(path, options)
-        fullpath = self.get_source_path(path)
-        if not exists(fullpath):
-            return Thumb('', None)
 
-        timestamp = self.get_timestamp(fullpath)
-        key = self.get_key(path, geometry, filters, options, timestamp)
-
+        key = self.storage.get_key(path, geometry, filters, options)
         thumb = self.storage.get_thumb(path, key, options['format'])
         if thumb:
             thumb._engine = self.engine
             if self.echo:
                 print(' ', thumb.url.strip('/'))
             return thumb
+
+        fullpath = self.storage.get_source_path(path)
+        if not exists(fullpath):
+            return Thumb('', None)
 
         im = self.engine.open_image(fullpath)
         if im is None:
@@ -229,29 +227,6 @@ class Thumbnailer(object):
         if format == 'JPG':
             format = 'JPEG'
         return format
-
-    def get_timestamp(self, fullpath):
-        try:
-            return getmtime(fullpath)
-        except OSError:
-            return 0
-
-    def get_key(self, path, geometry, filters, options, timestamp=0):
-        seed = ' '.join([
-            str(path),
-            str(geometry),
-            str(filters),
-            str(options),
-            str(timestamp),
-        ])
-        return md5(seed).hexdigest()
-
-    def get_source_path(self, path):
-        """Returns the absolute path of the source image.
-        Overwrite this to load the image from a place different than the
-        filesystem into a temporal file.
-        """
-        return pjoin(self.base_path, path)
 
     def process_image(self, im, geometry, filters, options):
         eng = self.engine

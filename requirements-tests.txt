@@ -1,0 +1,6 @@
+-r requirements.txt
+ipdb
+pytest-cov
+pillow
+tox
+wand>=0.3

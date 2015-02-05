@@ -29,6 +29,13 @@ class FileStorage(BaseStorage):
         self.thumbsdir = thumbsdir
         self.out_path = (out_path or self.base_path).rstrip('/')
 
+    def get_source_path(self, path):
+        """Returns the absolute path of the source image.
+        Overwrite this to load the image from a place different than the
+        filesystem into a temporal file.
+        """
+        return join(self.base_path, path)
+
     def get_thumb(self, path, key, format):
         thumbpath = self.get_thumbpath(path, key, format)
         fullpath = join(self.out_path, thumbpath)
@@ -67,4 +74,3 @@ class FileStorage(BaseStorage):
 
     def get_url(self, thumbpath):
         return join(self.base_url, thumbpath.strip('/'))
-
