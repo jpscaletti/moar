@@ -15,7 +15,7 @@ See the documentation online at http://lucuma.github.com/moar/
 Features at a glance
 ---------------------
 
-* Pluggable engine support (PIL/Pillow and _Wand: http://docs.wand-py.org/ included).
+* Pluggable engine support (PIL/Pillow and `Wand <http://docs.wand-py.org/>` included).
 * Automatic cache: a thumbnail is generated only once.
 * Pluggable storage support (FileSystem included).
 * Flexible, simple syntax, generates no HTML.
@@ -26,10 +26,9 @@ Features at a glance
     * Grayscale/Sepia
 * Easily extendable.
 
----------------------------------------
-_MIT License: http://www.opensource.org/licenses/mit-license.php
 
-© 2011 by _Lúcuma labs: http://lucumalabs.com
+:copyright: `Juan-Pablo Scaletti <http://jpscaletti.com>`_.
+:license: MIT, see LICENSE for more details.
 
 """
 from moar.thumbnailer import Thumbnailer

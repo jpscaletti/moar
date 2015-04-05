@@ -68,7 +68,7 @@ setup(
     package_data=find_packages_data(PACKAGE, 'tests'),
     zip_safe=False,
     url='http://github.com/lucuma/Moar',
-    license='MIT license (http://www.opensource.org/licenses/mit-license.php)',
+    license='MIT license (see LICENSE)',
     description='Easy thumbnails for everyone',
     long_description=get_description(),
     install_requires=get_requirements(),
