@@ -9,11 +9,10 @@ from os.path import splitext
 available = True
 try:
     from wand.image import Image
-    from wand.exceptions import WandError, WandFatalError
 except ImportError:
     available = False
 
-from moar.engines.base import BaseEngine
+from .base import BaseEngine
 
 
 class WandEngine(BaseEngine):
@@ -25,7 +24,7 @@ class WandEngine(BaseEngine):
         assert available
         try:
             im = Image(filename=path)
-        except (ValueError, IOError, WandError, WandFatalError):
+        except Exception:
             return None
         return im
 

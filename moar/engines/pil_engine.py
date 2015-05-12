@@ -12,7 +12,7 @@ try:
 except ImportError:
     available = False
 
-from moar.engines.base import BaseEngine
+from .base import BaseEngine
 
 
 TOP_LEFT = 1
