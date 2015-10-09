@@ -4,15 +4,11 @@ Rackspace's CloudFiles storage.
 
 """
 import errno
+from io import BytesIO
 import mimetypes
 import os
-import urllib
-import urlparse
-try:
-    from cStringIO import StringIO
-except:
-    from StringIO import StringIO
 
+from moar._compat import urlparse, url_quote
 from moar.thumb import Thumb
 from moar.storages.base import BaseStorage
 
@@ -54,7 +50,7 @@ class RackspaceStorage(BaseStorage):
         except Exception:
             return None
         fullpath = os.path.join(self.base_path, path)
-        encoded_name = urllib.quote(obj.name)
+        encoded_name = url_quote(obj.name)
         url = urlparse.urljoin(self.container.cdn_uri, encoded_name)
         return Thumb(url, key, fullpath=fullpath)
 
@@ -70,11 +66,11 @@ class RackspaceStorage(BaseStorage):
         else:
             content_type = None
         obj = self.container.upload_file(
-            StringIO(data),
+            BytesIO(data),
             obj_name=thumbpath,
             content_type=content_type,
         )
         fullpath = os.path.join(self.base_path, path)
-        encoded_name = urllib.quote(obj.name)
+        encoded_name = url_quote(obj.name)
         url = urlparse.urljoin(self.container.cdn_uri, encoded_name)
         return Thumb(url, key, fullpath=fullpath)

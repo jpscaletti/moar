@@ -24,6 +24,7 @@ try:
     from PIL import ImageOps
 except ImportError:
     pass
+from moar._compat import string_types
 
 
 SEPIA_DEFAULT_TONE = (255, 240, 192)
@@ -59,7 +60,7 @@ def get_ramp(args):
 def hex_to_rgb(color):
     """Transforms an hex color (eg: #ffaf2e, #fff) into a RGB tuple.
     """
-    if not isinstance(color, basestring):
+    if not isinstance(color, string_types):
         return color
     color = color.lstrip('#')
     len_color = len(color)

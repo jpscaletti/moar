@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
+from io import BytesIO
 import os
-from StringIO import StringIO
 
 from PIL import Image, ImageChops
 
 
 THIS_PATH = os.path.dirname(__file__)
-RES_PATH = os.path.join(THIS_PATH, 'assets')
-tmpdir = os.path.join(RES_PATH, 't')
+RES_PATH = os.path.join(THIS_PATH, u'assets')
+tmpdir = os.path.join(RES_PATH, u't')
 
 
 def get_impath(name='a200x140.png'):
@@ -45,7 +45,7 @@ def assert_image(tp, cname, assert_equal=True):
 
 
 def get_raw_data(path, format=None):
-    buf = StringIO()
+    buf = BytesIO()
     im = Image.open(path)
     format = format or im.format
     im.save(buf, format=format)

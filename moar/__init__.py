@@ -37,4 +37,4 @@ from moar.engines.wand_engine import WandEngine
 from moar.storages.file_storage import FileStorage
 from moar.storages.rackspace_storage import RackspaceStorage
 
-__version__ = '1.3.3'
+__version__ = '1.4.0'

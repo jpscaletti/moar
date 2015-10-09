@@ -4,6 +4,7 @@ from __future__ import print_function
 from os.path import join as pjoin
 from os.path import splitext, exists
 
+from moar._compat import string_types
 from moar.engines.pil_engine import PILEngine
 from moar.storages.file_storage import FileStorage
 from moar.thumb import Thumb
@@ -161,7 +162,7 @@ class Thumbnailer(object):
         """
         if not path:
             return None
-        if isinstance(path, basestring):
+        if isinstance(path, string_types):
             return path
 
         if hasattr(path, 'path'):

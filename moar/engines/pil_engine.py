@@ -1,18 +1,17 @@
 # -*- coding: utf-8 -*-
 """
-PIL/Pillow based engine
+Pillow based engine
 
 """
-from StringIO import StringIO
+from io import BytesIO
 from os.path import splitext
 
+from moar.engines.base import BaseEngine
 available = True
 try:
     from PIL import Image, ImageFile
 except ImportError:
     available = False
-
-from .base import BaseEngine
 
 
 TOP_LEFT = 1
@@ -54,7 +53,7 @@ class PILEngine(BaseEngine):
         """
         options = options or {}
         ImageFile.MAXBLOCK = 1024 * 1024
-        buf = StringIO()
+        buf = BytesIO()
         format = options.get('format', im.format)
         if format == 'JPG':
             format = 'JPEG'
@@ -71,6 +70,7 @@ class PILEngine(BaseEngine):
             im = im.convert('RGB')
 
         im.save(buf, **params)
+
         raw_data = buf.getvalue()
         buf.close()
         return raw_data

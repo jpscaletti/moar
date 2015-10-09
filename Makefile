@@ -12,21 +12,20 @@ clean: clean-pyc
 	find . -name '.DS_Store' -exec rm -f {} \;
 
 clean-pyc:
-	find . -name '*.pyc' -exec rm -f {} \;
-	find . -name '*.pyo' -exec rm -f {} \;
-	find . -name '*~' -exec rm -f {} \;
+	find . -name '*.pyc' -delete
+	find . -name '*.pyo' -delete
+	find . -name '*~' -delete
+	find . -name '*,cover' -delete
 
 test:
+	py.test -x tests/
+
+testcov:
 	py.test --cov-config .coveragerc --cov moar tests/
+
+coverage:
+	py.test --cov-config .coveragerc --cov-report html --cov moar tests/
 
 publish: clean
 	python setup.py sdist upload
 
-publish-doc:
-	cd doc && clay build
-	cp -R doc/build/* doc/gh-pages/
-	rm -rf doc/build
-	cd doc/gh-pages && \
-	git add --all . && \
-	git commit -am "Update documentation" && \
-	git push origin gh-pages

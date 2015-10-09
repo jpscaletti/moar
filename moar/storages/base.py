@@ -13,13 +13,13 @@ class BaseStorage(object):
 
     def get_key(self, path, geometry, filters, options, timestamp=None):
         timestamp = timestamp or self.get_timestamp(path)
-        seed = ' '.join([
+        seed = u' '.join([
             str(path),
             str(geometry),
             str(filters),
             str(options),
             str(timestamp),
-        ])
+        ]).encode('utf8')
         return md5(seed).hexdigest()
 
     def get_timestamp(self, path):

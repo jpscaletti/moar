@@ -83,7 +83,7 @@ def test_parse_geometry():
 
 def test_get_key():
     sto = FileStorage(RES_PATH, BASE_URL)
-    #t.get_key(path, geometry, filters, options)
+    # t.get_key(path, geometry, filters, options)
 
     assert sto.get_key('qwertyuiop.jpg', None, [], {}) == sto.get_key('qwertyuiop.jpg', None, [], {})
     assert sto.get_key('abc.png', (100, 30), [], {}) == '6cf9f4fea91bbb9e1ee5c5e17af93e6b'

@@ -39,7 +39,6 @@ def test_orientation(engine, tmpdir):
         '7_rightbottom.jpg',
         '8_leftbottom.jpg',
     ]
-    options = {'orientation': True}
     for name in test_images:
         impath = get_impath(name)
         im = engine.open_image(impath)
@@ -165,4 +164,3 @@ def test_apply_filters(engine):
     tmp = join(str(tmpdir), out)
     engine._save_to(im, tmp)
     assert_image(tmp, out)
-

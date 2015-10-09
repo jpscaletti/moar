@@ -16,6 +16,7 @@ thumbnail(source, '200x100', ('crop', 50, 50, 'center', 0) )
 thumbnail(source, '200x100', ('crop', 50, 50, 'center', 'center') )
 ```
 """
+from moar._compat import string_types
 
 
 def pil(im, *args, **options):
@@ -43,7 +44,7 @@ def get_box(args, imw, imh):
     x = args[2]
     y = args[3]
 
-    if isinstance(x, basestring):
+    if isinstance(x, string_types):
         if x.endswith('%'):
             x = imw * int(x[:-1]) / 100
         elif x == 'center':
@@ -53,21 +54,20 @@ def get_box(args, imw, imh):
 
     x = int(x)
 
-    if isinstance(y, basestring):
+    if isinstance(y, string_types):
         if y.endswith('%'):
             y = int(imh * int(y[:-1]) / 100)
         elif y == 'center':
             y = (imh - height) / 2
         elif y.endswith('px'):
             y = int(y[:-2])
-    
+
     y = int(y)
-    
+
     # Do not overflow
     if width + x > imw:
         width = imw - x
     if height + y > imh:
         height = imh - y
-    
-    return x, y, x + width, y + height
 
+    return x, y, x + width, y + height

@@ -26,6 +26,7 @@ var
 sdist
 develop-eggs
 .installed.cfg
+docs/_build
 
 ## Installer logs
 pip-log.txt
@@ -33,4 +34,7 @@ pip-log.txt
 ## Unit test / coverage reports
 .coverage
 .tox
-tests/assets/t
+htmlcov
+htmlcov/*
+realworld
+temp/*

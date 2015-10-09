@@ -38,7 +38,7 @@ def test_save():
 
     assert thumb.url == '/'.join([BASE_URL, 't', key, name + '.png'])
     assert thumb.key == key
-    assert thumb.fullpath == os.path.join(RES_PATH, 't', key, name  + '.png')
+    assert thumb.fullpath == os.path.join(RES_PATH, 't', key, name + '.png')
     assert thumb.width == w
     assert thumb.height == h
     assert os.path.exists(thumb.fullpath)
@@ -62,4 +62,3 @@ def test_get_saved_thumb():
 
     thumb2 = s.get_thumb(path, key, 'jpeg')
     assert thumb.url == thumb2.url
-
