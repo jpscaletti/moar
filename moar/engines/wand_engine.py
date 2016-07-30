@@ -6,13 +6,14 @@ Wand is a ctypes-based simple MagickWand API (http://docs.wand-py.org/).
 """
 from os.path import splitext
 
+from .base import BaseEngine
+from moar._compat import string_types
+
 available = True
 try:
     from wand.image import Image
 except ImportError:
     available = False
-
-from .base import BaseEngine
 
 
 class WandEngine(BaseEngine):
@@ -20,10 +21,14 @@ class WandEngine(BaseEngine):
     name = 'wand'
     available = available
 
-    def open_image(self, path):
-        assert available
+    def open_image(self, path_or_stream):
+        assert available, 'Moar requires the Wand library http://docs.wand-py.org/ to be installed'
+        if isinstance(path_or_stream, string_types):
+            opts = {'filename': path_or_stream}
+        else:
+            opts = {'file': path_or_stream}
         try:
-            im = Image(filename=path)
+            im = Image(**opts)
         except Exception:
             return None
         return im

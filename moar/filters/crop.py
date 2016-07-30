@@ -19,12 +19,6 @@ thumbnail(source, '200x100', ('crop', 50, 50, 'center', 'center') )
 from moar._compat import string_types
 
 
-def pil(im, *args, **options):
-    imw, imh = im.size
-    box = get_box(args, imw, imh)
-    return im.crop(box)
-
-
 def wand(im, *args, **options):
     imw, imh = im.size
     box = get_box(args, imw, imh)

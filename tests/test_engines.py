@@ -125,14 +125,8 @@ def test_get_builtin_filter(engine):
     f = engine.get_filter('crop', {})
     assert f == getattr(moar.filters.crop, engine.name)
 
-    f = engine.get_filter('grayscale', {})
-    assert f == getattr(moar.filters.grayscale, engine.name)
-
     f = engine.get_filter('rotate', {})
     assert f == getattr(moar.filters.rotate, engine.name)
-
-    f = engine.get_filter('sepia', {})
-    assert f == getattr(moar.filters.sepia, engine.name)
 
 
 def test_get_unknown_filter(engine):
@@ -143,9 +137,6 @@ def test_get_unknown_filter(engine):
 def test_get_custom_filter(engine):
 
     class MyFilter(object):
-
-        def pil(self, im, *args, **options):
-            return im
 
         def wand(self, im, *args, **options):
             return im

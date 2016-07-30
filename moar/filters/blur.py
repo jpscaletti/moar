@@ -13,26 +13,6 @@ thumbnail(source, '200x100', ('blur', 4) )
 ```
 
 """
-try:
-    from PIL import ImageFilter
-
-    class MyGaussianBlur(ImageFilter.Filter):
-
-        name = "GaussianBlur"
-
-        def __init__(self, radius=2):
-            self.radius = radius
-
-        def filter(self, image):
-            return image.gaussian_blur(self.radius)
-
-except ImportError:
-    pass
-
-
-def pil(im, radius, *args, **options):
-    im = im.filter(MyGaussianBlur(radius))
-    return im
 
 
 def wand(im, radius, *args, **options):

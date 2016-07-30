@@ -11,7 +11,7 @@ class BaseEngine(object):
     __metaclass__ = ABCMeta
 
     @abstractmethod
-    def open_image(self, fullpath):
+    def open_image(self, path_or_stream):
         pass
 
     def close_image(self, im):

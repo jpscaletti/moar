@@ -1,20 +1,15 @@
 # -*- coding: utf-8 -*-
 from __future__ import print_function
 
-from os.path import join as pjoin
-from os.path import splitext, exists
+import os
 
-from moar._compat import string_types
-from moar.engines.pil_engine import PILEngine
-from moar.storages.file_storage import FileStorage
-from moar.thumb import Thumb
+from .engines.wand_engine import WandEngine
+from .storages.file_storage import FileStorage
+from .thumb import Thumb
 
-
-INSTALL_PIL_MSG_OR_CHANGE_ENGINE = '''Moar uses by default the Python Image Library (PIL) but we couldn't found it installed.
-Please see the documentation of Moar to find how to install it or how to choose a different engine.'''
 
 NO_STORAGE_FOUND = '''
-No storage was defined.
+No storage defined.
 '''
 
 RESIZE_OPTIONS = ('fill', 'fit', 'stretch')
@@ -32,11 +27,22 @@ DEFAULTS = {
 class Thumbnailer(object):
 
     """
-    engine:
-        An `Engine` class. By default `moar.PILEngine`.
+    base_path:
+        Optional. Used as argument for the default storages (`moar.FileStorage`)
 
-    storage:
-        An `Storage` class. By default `moar.FileStorage`.
+    base_url:
+        Optional. Used as argument for the default storages (`moar.FileStorage`)
+
+    source_storage:
+        An `Storage` class to read the source images.
+        By default `moar.FileStorage`.
+
+    thumbs_storage:
+        An `Storage` class to save the source images.
+        By default `moar.FileStorage`.
+
+    engine:
+        An `Engine` class. By default `moar.WandEngine`.
 
     filters:
         Dictionary of custom extra filters than are added to
@@ -79,30 +85,57 @@ class Thumbnailer(object):
 
     """
 
-    def __init__(self, base_path=None, base_url='/', storage=None,
-                 engine=PILEngine, filters=None, echo=False, **options):
-        self.base_path = base_path
-        self.set_storage(base_path, base_url, storage)
-        self.set_engine(engine)
+    def __init__(self, base_path=None, base_url='/',
+                 source_storage=None, thumbs_storage=None,
+                 engine=WandEngine, filters=None, echo=False, **options):
+        if source_storage is None:
+            if not self.base_url:
+                raise ValueError(NO_STORAGE_FOUND)
+            source_storage = FileStorage(self.base_path, self.base_url)
+        if thumbs_storage is None:
+            if not self.base_url:
+                raise ValueError(NO_STORAGE_FOUND)
+            thumbs_storage = FileStorage(self.base_path, self.base_url)
+        self.source_storage = source_storage
+        self.thumbs_storage = thumbs_storage
+        self.engine = engine
         self.custom_filters = filters or {}
         self.echo = echo
         self.set_default_options(options)
 
-    def set_storage(self, base_path, base_url, storage):
-        if storage is None:
-            if not base_url:
-                raise ValueError(NO_STORAGE_FOUND)
-            storage = FileStorage(base_path, base_url)
+    @property
+    def source_storage(self):
+        return self._source_storage
+
+    @source_storage.setter
+    def source_storage(self, storage):
         if isinstance(storage, type):
             storage = storage()
-        self.storage = storage
+        self._source_storage = storage
 
-    def set_engine(self, engine):
-        if engine == PILEngine and not PILEngine.available:
-            raise ImportError(INSTALL_PIL_MSG_OR_CHANGE_ENGINE)
+    @property
+    def thumbs_storage(self):
+        return self._thumbs_storage
+
+    @thumbs_storage.setter
+    def thumbs_storage(self, storage):
+        if storage is None:
+            if not self.base_url:
+                raise ValueError(NO_STORAGE_FOUND)
+            storage = FileStorage(self.base_path, self.base_url)
+        if isinstance(storage, type):
+            storage = storage()
+        self._thumbs_storage = storage
+
+    @property
+    def engine(self):
+        return self._source_storage
+
+    @engine.setter
+    def engine(self, engine):
         if isinstance(engine, type):
             engine = engine()
-        self.engine = engine
+        self._engine = engine
 
     def set_default_options(self, options):
         resize = options.get('resize', DEFAULTS['resize'])
@@ -122,7 +155,6 @@ class Thumbnailer(object):
         self.orientation = bool(options.get('orientation', DEFAULTS['orientation']))
 
     def __call__(self, path, geometry=None, *filters, **options):
-        path = self.parse_path(path)
         if not path:
             return Thumb('', None)
         filters = list(filters)
@@ -136,46 +168,26 @@ class Thumbnailer(object):
 
         options = self.parse_options(path, options)
 
-        key = self.storage.get_key(path, geometry, filters, options)
-        thumb = self.storage.get_thumb(path, key, options['format'])
+        key = self.source_storage.get_key(path, geometry, filters, options)
+        thumb = self.source_storage.get_thumb(path, key, options['format'])
         if thumb:
             thumb._engine = self.engine
             if self.echo:
                 print(' ', thumb.url.strip('/'))
             return thumb
 
-        fullpath = self.storage.get_source_path(path)
-        if not exists(fullpath):
+        fd = self.source_storage.get_source(path)
+        if not fd:
             return Thumb('', None)
-
-        im = self.engine.open_image(fullpath)
+        im = self.engine.open_image(fd)
         if im is None:
             return Thumb('', None)
+
         data, w, h = self.process_image(im, geometry, filters, options)
-        thumb = self.storage.save(path, key, options['format'], data, w, h)
+        thumb = self.thumbs_storage.save(path, key, options['format'], data, w, h)
         if self.echo:
             print(' ', thumb.url.strip('/'))
         return thumb
-
-    def parse_path(self, path):
-        """Parse the path argument maintaining backwards compatibility.
-        """
-        if not path:
-            return None
-        if isinstance(path, string_types):
-            return path
-
-        if hasattr(path, 'path'):
-            return getattr(path, 'path')
-        if hasattr(path, 'relpath') and hasattr(path, 'name'):
-            return pjoin(getattr(path, 'relpath').strip('/'), getattr(path, 'name'))
-
-        if 'path' in path:
-            return path['path']
-        if 'relpath' in path and 'name' in path:
-            return pjoin(path['relpath'].strip('/'), path['name'])
-
-        return None
 
     def parse_geometry(self, geometry):
         """Parse a geometry string and returns a (width, height) tuple
@@ -220,7 +232,7 @@ class Thumbnailer(object):
     def get_format(self, path, options):
         format = options.get('format', self.format)
         if not format:
-            _, ext = splitext(path)
+            _, ext = os.path.splitext(path)
             if ext:
                 format = ext[1:].upper()
         format = format or 'JPEG'

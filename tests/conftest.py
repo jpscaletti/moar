@@ -3,6 +3,6 @@ import moar
 import pytest
 
 
-@pytest.fixture(params=['PILEngine', 'WandEngine'])
+@pytest.fixture(params=['WandEngine'])
 def engine(request):
     return getattr(moar, request.param)()
