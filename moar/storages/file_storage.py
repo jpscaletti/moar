@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# coding=utf-8
 """
 Local file system storage.
 
@@ -30,20 +30,6 @@ class FileStorage(BaseStorage):
         self.out_path = (out_path or self.base_path).rstrip('/')
         super(self.__class__, self).__init__()
 
-    def get_key(self, path, geometry, filters, options):
-        timestamp = self.get_timestamp(path)
-        return super(self.__class__, self).get_key(
-            path, geometry, filters, options, timestamp)
-
-    def get_timestamp(self, path):
-        fullpath = path
-        if not os.path.isabs(path):
-            fullpath = os.path.join(self.base_path, path)
-        try:
-            return os.path.getmtime(fullpath)
-        except OSError:
-            return 0
-
     def get_source(self, path_or_url):
         """Returns the source image file descriptor.
 
@@ -53,51 +39,86 @@ class FileStorage(BaseStorage):
 
         """
         if path_or_url.startswith(('http://', 'https://')):
-            return urlopen(path_or_url)
+            try:
+                return urlopen(path_or_url)
+            except IOError:
+                return None
 
         if not os.path.isabs(path_or_url):
             fullpath = os.path.join(self.base_path, path_or_url)
-        return open(fullpath)
+        try:
+            return io.open(fullpath, 'rb')
+        except IOError:
+            return None
 
     def get_thumb(self, path, key, format):
         """Get the stored thumbnail if exists.
+
+        path:
+            path of the source image
+        key:
+            key of the thumbnail
+        format:
+            thumbnail's file extension
         """
         thumbpath = self.get_thumbpath(path, key, format)
         fullpath = os.path.join(self.out_path, thumbpath)
         if os.path.isfile(fullpath):
             url = self.get_url(thumbpath)
-            return Thumb(url, key, fullpath=fullpath)
-        return None
-
-    def save(self, path, key, format, data, w=None, h=None):
-        """Save a newly generated thumbnail.
-        """
-        thumbpath = self.get_thumbpath(path, key, format)
-        fullpath = os.path.join(self.out_path, thumbpath)
-        self.save_thumb(fullpath, data)
-        url = self.get_url(thumbpath)
-        thumb = Thumb(url, key, width=w, height=h, fullpath=fullpath)
-        return thumb
-
-    def save_thumb(self, fullpath, data):
-        make_dirs(fullpath)
-        with io.open(fullpath, 'wb') as f:
-            f.write(data)
+            return Thumb(url, key)
+        return Thumb()
 
     def get_thumbpath(self, path, key, format):
-        thumbsdir = self.get_thumbsdir(path)
+        """Return the relative path of the thumbnail.
+
+        path:
+            path of the source image
+        key:
+            key of the thumbnail
+        format:
+            thumbnail file extension
+        """
         relpath = os.path.dirname(path)
+        thumbsdir = self.get_thumbsdir(path)
         name, _ = os.path.splitext(os.path.basename(path))
-        name = '%s.%s' % (name, format.lower())
-        return os.path.join(relpath, thumbsdir, key, name)
+        name = '{}.{}.{}'.format(name, key, format.lower())
+        return os.path.join(relpath, thumbsdir, name)
 
     def get_thumbsdir(self, path):
+        """
+        path:
+            path of the source image
+        """
         # Thumbsdir could be a callable
         # In that case, the path is built on the fly, based on the source path
         thumbsdir = self.thumbsdir
         if callable(self.thumbsdir):
             thumbsdir = self.thumbsdir(path)
         return thumbsdir
+
+    def save(self, path, key, format, data):
+        """Save a newly generated thumbnail.
+
+        path:
+            path of the source image
+        key:
+            key of the thumbnail
+        format:
+            thumbnail's file extension
+        data:
+            thumbnail's binary data
+        """
+        thumbpath = self.get_thumbpath(path, key, format)
+        fullpath = os.path.join(self.out_path, thumbpath)
+        self.save_thumb(fullpath, data)
+        url = self.get_url(thumbpath)
+        thumb = Thumb(url, key)
+        return thumb
+
+    def save_thumb(self, fullpath, data):
+        make_dirs(fullpath)
+        with io.open(fullpath, 'wb') as f:
+            f.write(data)
 
     def get_url(self, thumbpath):
         return os.path.join(self.base_url, thumbpath.strip('/'))

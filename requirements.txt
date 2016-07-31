@@ -4,5 +4,4 @@
 #
 #     pip install -r requirements.txt
 
-# pillow
-# wand>=0.3
+wand>=0.3

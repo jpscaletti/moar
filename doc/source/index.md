@@ -26,7 +26,7 @@ The thumbnails are cached and can be deleted or regenerated transparently. And t
 
 # Features at a glance
 
-* Pluggable engine support ([PIL][pil]{:target=_blank} and [Wand][wand]{:target=_blank} (a wrapper for [ImageMagick][imagemagick]{:target=_blank}) included<sup>*</sup>).
+* Pluggable engine support (ships with [ImageMagick][imagemagick]{:target=_blank}) support).
 * Automatic cache: a thumbnail is generated only once.
 * Pluggable storage support.
 * Flexible, simple syntax, generates no HTML.
@@ -35,13 +35,7 @@ The thumbnails are cached and can be deleted or regenerated transparently. And t
     * Cropping
     * Rotation
     * Blur
-    * Grayscale/Sepia <sup>*</sup>
-* Easily extendable.
+* Easily extendable to add your oen filters.
 
-!!! warning
-    <sup>*</sup> The Wand engine doesn't have yet support for the grayscale/sepia filters.
-
-
-[pil]: http://www.pythonware.com/products/pil/
 [imagemagick]: http://www.imagemagick.org/script/index.php
-[wand]: http://styleshare.github.com/wand/
+

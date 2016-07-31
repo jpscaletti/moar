@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# coding=utf-8
 from __future__ import print_function
 
 import os
@@ -89,13 +89,13 @@ class Thumbnailer(object):
                  source_storage=None, thumbs_storage=None,
                  engine=WandEngine, filters=None, echo=False, **options):
         if source_storage is None:
-            if not self.base_url:
+            if not base_url:
                 raise ValueError(NO_STORAGE_FOUND)
-            source_storage = FileStorage(self.base_path, self.base_url)
+            source_storage = FileStorage(base_path, base_url)
         if thumbs_storage is None:
-            if not self.base_url:
+            if not base_url:
                 raise ValueError(NO_STORAGE_FOUND)
-            thumbs_storage = FileStorage(self.base_path, self.base_url)
+            thumbs_storage = FileStorage(base_path, base_url)
         self.source_storage = source_storage
         self.thumbs_storage = thumbs_storage
         self.engine = engine
@@ -129,7 +129,7 @@ class Thumbnailer(object):
 
     @property
     def engine(self):
-        return self._source_storage
+        return self._engine
 
     @engine.setter
     def engine(self, engine):
@@ -156,7 +156,7 @@ class Thumbnailer(object):
 
     def __call__(self, path, geometry=None, *filters, **options):
         if not path:
-            return Thumb('', None)
+            return Thumb()
         filters = list(filters)
 
         # No geometry provided
@@ -178,13 +178,13 @@ class Thumbnailer(object):
 
         fd = self.source_storage.get_source(path)
         if not fd:
-            return Thumb('', None)
+            return Thumb()
         im = self.engine.open_image(fd)
         if im is None:
-            return Thumb('', None)
+            return Thumb()
 
-        data, w, h = self.process_image(im, geometry, filters, options)
-        thumb = self.thumbs_storage.save(path, key, options['format'], data, w, h)
+        data = self.process_image(im, geometry, filters, options)
+        thumb = self.thumbs_storage.save(path, key, options['format'], data)
         if self.echo:
             print(' ', thumb.url.strip('/'))
         return thumb
@@ -248,6 +248,5 @@ class Thumbnailer(object):
         im = eng.set_geometry(im, geometry, options)
         im = eng.apply_filters(im, filters, self.custom_filters, options)
         data = eng.get_data(im, options)
-        w, h = eng.get_size(im)
         eng.close_image(im)
-        return data, w, h
+        return data

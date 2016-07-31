@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# coding=utf-8
 """
 =========
 Moar
@@ -17,7 +17,7 @@ Features at a glance
 
 * Pluggable engine support (`Wand <http://docs.wand-py.org/>` included).
 * Automatic cache: a thumbnail is generated only once.
-* Pluggable storage support (FileSystem included).
+* Pluggable storage support (includes local files and S3 storages).
 * Flexible, simple syntax, generates no HTML.
 * Several filters available by default:
     * Cropping
@@ -33,5 +33,6 @@ Features at a glance
 from moar.thumbnailer import Thumbnailer
 from moar.engines.wand_engine import WandEngine
 from moar.storages.file_storage import FileStorage
+from moar.storages.s3_storage import S3Storage
 
 __version__ = '2.0.0'

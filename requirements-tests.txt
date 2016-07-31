@@ -1,7 +1,8 @@
 -r requirements.txt
+ipython
 ipdb
+pytest
 pytest-cov
 pillow
 tox
-wand>=0.3
-flake
+flake8

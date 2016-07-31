@@ -39,3 +39,5 @@ htmlcov
 htmlcov/*
 realworld
 temp/*
+tests/assets/t/*.png
+tests/assets/t/*.jpeg

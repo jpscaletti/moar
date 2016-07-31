@@ -13,28 +13,7 @@ Install `pip` and then use it to install Moar:
 
 ## Requirements
 
-You need to have an image library installed. Moar ships with support for the [Python Imaging Library][pil]{:target=_blank} and [ImageMagick][imagemagick]{:target=_blank} via the [wand][wand]{:target=_blank} library. 
-
-
-### Python Imaging Library (PIL) installation
-
-Prerequisites: `libjpeg` and `zlib`.
-
-Ubuntu 10.04 package installation:
-
-    sudo apt-get install libjpeg8 libjpeg62-dev libfreetype6 libfreetype6-dev
-
-Then, install the [Python Imaging Library][pil]{:target=_blank} using pip:
-
-    pip install pillow
-
-Watch the output for messages on what support got compiled in, you at least want to see the following:
-
-    --- JPEG support available
-    --- ZLIB (PNG/ZIP) support available
-
-
-### Wand installation
+You need to have an [ImageMagick][imagemagick]{:target=_blank} and the python [wand][wand]{:target=_blank} library installed.
 
 Prerequisites:
 
@@ -68,7 +47,5 @@ or install it into your site-packages easily:
 
     python setup.py install
 
-
-[pil]: http://www.pythonware.com/products/pil/
 [imagemagick]: http://www.imagemagick.org/script/index.php
 [wand]: http://styleshare.github.com/wand/

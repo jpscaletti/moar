@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# coding=utf-8
 from abc import ABCMeta, abstractmethod
 import inspect
 from math import ceil

@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# coding=utf-8
 from io import BytesIO
 import os
 
@@ -67,4 +67,3 @@ class MockMethod(object):
         self.args = args
         self.kwargs = kwargs
         return self.return_value
-

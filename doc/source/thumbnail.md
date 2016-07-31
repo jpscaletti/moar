@@ -21,7 +21,11 @@ The `thumbnail` function takes a source image, a geometry parameter, a number of
 
 ## Source
 
-Source must be a relative path to a local image. 
+Source can be:
+
+- a path relative to `base_path`
+- an absolute path
+- an URL
 
 ## Geometry
 

@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# coding=utf-8
 from .utils import assert_image, assert_size
 from .test_filters import apply_filter
 

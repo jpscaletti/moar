@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# coding=utf-8
 from os.path import join
 
 import moar
@@ -6,10 +6,6 @@ from PIL import Image
 import pytest
 
 from .utils import get_impath, almost_equal, assert_size, tmpdir, assert_image
-
-
-def test_engine_availability(engine):
-    assert engine.available
 
 
 def test_open_close_image(engine):

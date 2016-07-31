@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# coding=utf-8
 from hashlib import sha1
 import os
 
@@ -33,15 +33,10 @@ def test_save():
     name, _ = os.path.splitext(os.path.basename(path))
     key = get_random_key()
     data = get_raw_data(get_impath(path))
-    w, h = 60, 40
-    thumb = s.save(path, key, 'png', data, w, h)
+    thumb = s.save(path, key, 'png', data)
 
-    assert thumb.url == '/'.join([BASE_URL, 't', key, name + '.png'])
+    assert thumb.url == '/'.join([BASE_URL, 't', name + '.' + key + '.png'])
     assert thumb.key == key
-    assert thumb.fullpath == os.path.join(RES_PATH, 't', key, name + '.png')
-    assert thumb.width == w
-    assert thumb.height == h
-    assert os.path.exists(thumb.fullpath)
 
 
 def test_get_nn_thumb():
@@ -49,7 +44,7 @@ def test_get_nn_thumb():
     path = 'a200x140.png'
     key = get_random_key()
     thumb = s.get_thumb(path, key, 'jpeg')
-    assert thumb is None
+    assert not thumb
 
 
 def test_get_saved_thumb():
@@ -57,8 +52,7 @@ def test_get_saved_thumb():
     path = 'a200x140.png'
     key = get_random_key()
     data = get_raw_data(get_impath(path))
-    w, h = 60, 40
-    thumb = s.save(path, key, 'jpeg', data, w, h)
+    thumb = s.save(path, key, 'jpeg', data)
 
     thumb2 = s.get_thumb(path, key, 'jpeg')
     assert thumb.url == thumb2.url
