@@ -35,4 +35,4 @@ from moar.engines.wand_engine import WandEngine
 from moar.storages.file_storage import FileStorage
 from moar.storages.s3_storage import S3Storage
 
-__version__ = '2.0.0'
+__version__ = '2.1.0'
