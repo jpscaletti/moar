@@ -5,9 +5,13 @@ Amazon S3 storage.
 """
 import os
 
-from ..thumb import Thumb
+import requests
 
+from ..thumb import Thumb
 from .base import BaseStorage
+
+
+HTTP_OK = 200
 
 
 class S3Storage(BaseStorage):
@@ -47,12 +51,10 @@ class S3Storage(BaseStorage):
         format:
             thumbnail's file extension
         """
-        thumbpath = self.get_thumbpath(path, key, format)
-        try:
-            self.client.get_object(Bucket=self.bucket_name, Key=thumbpath)
-        except:
+        url = self.get_url(key)
+        resp = requests.head(url)
+        if resp.status_code != HTTP_OK:
             return Thumb()
-        url = self.get_url(thumbpath)
         return Thumb(url=url, key=key)
 
     def get_thumbpath(self, path, key, format):
