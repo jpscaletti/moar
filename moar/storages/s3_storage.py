@@ -35,11 +35,20 @@ class S3Storage(BaseStorage):
         path:
             Path to the source image
         """
+        bucket_name = self.get_bucket(path)
         try:
-            img = self.client.get_object(Bucket=self.bucket_name, Key=path)
+            img = self.client.get_object(Bucket=bucket_name, Key=path)
             return img['Body']
         except:
             return None
+
+    def get_bucket(self, path):
+        # bucket_name could be a callable
+        # In that case, the name is built on the fly, based on the source path
+        bucket_name = self.bucket_name
+        if callable(self.bucket_name):
+            bucket_name = self.bucket_name(path)
+        return bucket_name
 
     def get_thumb(self, path, key, format):
         """Get the stored thumbnail if exists.
@@ -73,9 +82,10 @@ class S3Storage(BaseStorage):
         return os.path.join(relpath, name)
 
     def get_url(self, path):
+        bucket_name = self.get_bucket(path)
         return '{base}/{bucket}/{path}'.format(
             base=self.client.meta.endpoint_url,
-            bucket=self.bucket_name,
+            bucket=bucket_name,
             path=path,
         )
 
@@ -91,11 +101,12 @@ class S3Storage(BaseStorage):
         data:
             thumbnail's binary data
         """
+        bucket_name = self.get_bucket(path)
         thumbpath = self.get_thumbpath(path, key, format)
         self.client.put_object(
             ACL='public-read',
             Body=data,
-            Bucket=self.bucket_name,
+            Bucket=bucket_name,
             Key=thumbpath,
             StorageClass='REDUCED_REDUNDANCY'
         )
