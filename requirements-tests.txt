@@ -4,5 +4,6 @@ ipdb
 pytest
 pytest-cov
 pillow
+requests
 tox
 flake8

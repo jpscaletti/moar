@@ -5,8 +5,6 @@ Amazon S3 storage.
 """
 import os
 
-import requests
-
 from ..thumb import Thumb
 from .base import BaseStorage
 
@@ -39,7 +37,7 @@ class S3Storage(BaseStorage):
         try:
             img = self.client.get_object(Bucket=bucket_name, Key=path)
             return img['Body']
-        except:
+        except Exception:
             return None
 
     def get_bucket(self, path):
@@ -60,6 +58,8 @@ class S3Storage(BaseStorage):
         format:
             thumbnail's file extension
         """
+        import requests
+
         url = self.get_url(key)
         resp = requests.head(url)
         if resp.status_code != HTTP_OK:
