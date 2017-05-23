@@ -24,7 +24,7 @@ def apply_filter(engine, fname, ini, out, *args, **kwargs):
     return tmp
 
 
-@pytest.skip
+@pytest.mark.skip
 def test_blur(engine):
     if engine.name == 'wand':
         pytest.xfail("not implemented yet")
