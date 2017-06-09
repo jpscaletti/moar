@@ -44,17 +44,17 @@ class BaseEngine(object):
         if not width and not height:
             return im
 
-        im_width, im_height = self.get_size(im)
+        imw, imh = self.get_size(im)
         # Geometry match the current size?
-        if (width is None) or (im_width == width):
-            if (height is None) or (im_height == height):
+        if (width is None) or (imw == width):
+            if (height is None) or (imh == height):
                 return im
 
-        ratio = float(im_width) / im_height
+        ratio = float(imw) / imh
 
         if width and height:
             # Smaller than the target?
-            smaller = (im_width <= width) and (im_height <= height)
+            smaller = (imw <= width) and (imh <= height)
             if smaller and not options['upscale']:
                 return im
 
@@ -77,7 +77,7 @@ class BaseEngine(object):
 
         elif height:
             # Smaller than the target?
-            smaller = im_height <= height
+            smaller = imh <= height
             if smaller and not options['upscale']:
                 return im
 
@@ -86,7 +86,7 @@ class BaseEngine(object):
 
         else:
             # Smaller than the target?
-            smaller = im_width <= width
+            smaller = imw <= width
             if smaller and not options['upscale']:
                 return im
 

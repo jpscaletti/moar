@@ -8,7 +8,7 @@ from .engines.wand_engine import WandEngine
 from .storage import Storage
 from .thumb import Thumb
 from .optimage import optimage
-
+from .utils import parse_geometry
 
 RESIZE_OPTIONS = ('fill', 'fit', 'stretch')
 
@@ -125,7 +125,7 @@ class Thumbnailer(object):
             filters.insert(0, geometry)
             geometry = None
         else:
-            geometry = self.parse_geometry(geometry)
+            geometry = parse_geometry(geometry)
 
         options = self.parse_options(path, options)
 
@@ -152,31 +152,6 @@ class Thumbnailer(object):
         if options['optimize']:
             optimage(thumb.fullpath)
         return thumb
-
-    def parse_geometry(self, geometry):
-        """Parse a geometry string and returns a (width, height) tuple
-        Eg:
-            '100x200' ==> (100, 200)
-            '50' ==> (50, None)
-            '50x' ==> (50, None)
-            'x100' ==> (None, 100)
-            None ==> None
-
-        A callable `geometry` parameter is also supported.
-        """
-        if not geometry:
-            return
-        if callable(geometry):
-            geometry = geometry()
-        geometry = geometry.split('x')
-        if len(geometry) == 1 or (len(geometry) > 1 and not geometry[1]):
-            width = int(geometry[0])
-            height = None
-        else:
-            w = geometry[0]
-            width = int(w) if w else None
-            height = int(geometry[1])
-        return (width, height)
 
     def parse_options(self, path, options):
         resize = options.get('resize', self.resize)

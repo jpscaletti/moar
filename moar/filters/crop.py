@@ -2,21 +2,25 @@
 """
 # moar.filters.crop
 
-Crop accepts a width, height and one or two optional values as the
+Crop accepts a geometry and one or two optional values as the
 coordinates of the new top-left corner (0,0 by default).
 These last values can be integers (pixels), percentages or 'center'.
+
+The geometry parameter follow the same syntax as the one of the
+Thumbnailer class: It can be 'WIDTHxHEIGHT', 'WIDTH' or 'xHEIGHT'
 
 For example, some valid values are:
 
 ```python
-thumbnail(source, '200x100', ('crop', 50, 50) )
-thumbnail(source, '200x100', ('crop', 50, 50, '15%', '10%') )
-thumbnail(source, '200x100', ('crop', 50, 50, 150, 50) )
-thumbnail(source, '200x100', ('crop', 50, 50, 'center', 0) )
-thumbnail(source, '200x100', ('crop', 50, 50, 'center', 'center') )
+thumbnail(source, '200x100', ('crop', '50') )
+thumbnail(source, '200x100', ('crop', 'x50', '15%', '10%') )
+thumbnail(source, '200x100', ('crop', '50x50', 150, 50) )
+thumbnail(source, '200x100', ('crop', '50x50', 'center', 0) )
+thumbnail(source, '200x100', ('crop', '50x50', 'center', 'center') )
 ```
 """
 from moar._compat import string_types
+from moar.utils import parse_geometry
 
 
 def apply(im, *args, **options):
@@ -33,10 +37,16 @@ def get_box(args, imw, imh):
 
     if (len(args) == 3):
         args.append(args[2])
+    else:
+        args.extend([0, 0])
 
-    args.extend([0, 0])
-    width = int(args[0])
-    height = int(args[1])
+    width, height = parse_geometry(args[1])
+    ratio = float(imw) / imh
+    if not width:
+        width = int(height * ratio)
+    elif not height:
+        height = int(width / ratio)
+
     x = args[2]
     y = args[3]
 
