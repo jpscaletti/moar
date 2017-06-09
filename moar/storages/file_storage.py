@@ -44,6 +44,7 @@ class FileStorage(BaseStorage):
             except IOError:
                 return None
 
+        fullpath = path_or_url
         if not os.path.isabs(path_or_url):
             fullpath = os.path.join(self.base_path, path_or_url)
         try:
