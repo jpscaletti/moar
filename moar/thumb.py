@@ -5,9 +5,10 @@ class Thumb(object):
 
     _engine = None
 
-    def __init__(self, url='', key=None):
+    def __init__(self, url='', key=None, fullpath=None):
         self.url = url
         self.key = key
+        self.fullpath = fullpath
 
     def __nonzero__(self):
         return bool(self.url)

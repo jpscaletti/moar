@@ -4,12 +4,12 @@ Local file system storage.
 
 """
 import errno
+from hashlib import md5
 import io
 import os
 
-from .._compat import urlopen
-from ..thumb import Thumb
-from ..storages.base import BaseStorage
+from ._compat import urlopen
+from .thumb import Thumb
 
 
 def make_dirs(path):
@@ -21,7 +21,7 @@ def make_dirs(path):
     return path
 
 
-class FileStorage(BaseStorage):
+class Storage(object):
 
     def __init__(self, base_path, base_url='/', thumbsdir='t', out_path=None):
         self.base_path = base_path.rstrip('/')
@@ -29,6 +29,18 @@ class FileStorage(BaseStorage):
         self.thumbsdir = thumbsdir
         self.out_path = (out_path or self.base_path).rstrip('/')
         super(self.__class__, self).__init__()
+
+    def get_key(self, path, geometry, filters, options):
+        """Generates the thumbnail's key from it's arguments.
+        If the arguments doesn't change the key will not change
+        """
+        seed = u' '.join([
+            str(path),
+            str(geometry),
+            str(filters),
+            str(options),
+        ]).encode('utf8')
+        return md5(seed).hexdigest()
 
     def get_source(self, path_or_url):
         """Returns the source image file descriptor.
@@ -113,7 +125,7 @@ class FileStorage(BaseStorage):
         fullpath = os.path.join(self.out_path, thumbpath)
         self.save_thumb(fullpath, data)
         url = self.get_url(thumbpath)
-        thumb = Thumb(url, key)
+        thumb = Thumb(url, key, fullpath)
         return thumb
 
     def save_thumb(self, fullpath, data):

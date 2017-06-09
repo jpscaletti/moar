@@ -1,16 +1,14 @@
 # coding=utf-8
 from __future__ import print_function
 
+import inspect
 import os
 
 from .engines.wand_engine import WandEngine
-from .storages.file_storage import FileStorage
+from .storage import Storage
 from .thumb import Thumb
+from .optimage import optimage
 
-
-NO_STORAGE_FOUND = '''
-No storage defined.
-'''
 
 RESIZE_OPTIONS = ('fill', 'fit', 'stretch')
 
@@ -21,6 +19,7 @@ DEFAULTS = {
     'quality': 90,
     'progressive': True,
     'orientation': True,
+    'optimize': False,
 }
 
 
@@ -28,18 +27,10 @@ class Thumbnailer(object):
 
     """
     base_path:
-        Optional. Used as argument for the default storages (`moar.FileStorage`)
+        Optional. Used as argument for the storage (`moar.Storage`)
 
     base_url:
-        Optional. Used as argument for the default storages (`moar.FileStorage`)
-
-    source_storage:
-        An `Storage` class to read the source images.
-        By default `moar.FileStorage`.
-
-    thumbs_storage:
-        An `Storage` class to save the source images.
-        By default `moar.FileStorage`.
+        Optional. Used as argument for the storage (`moar.Storage`)
 
     engine:
         An `Engine` class. By default `moar.WandEngine`.
@@ -47,6 +38,9 @@ class Thumbnailer(object):
     filters:
         Dictionary of custom extra filters than are added to
         those available by default.
+
+    echo:
+        Be verbose
 
     resize:
         When setting the new geometry, this controls if the image is deformed
@@ -83,59 +77,25 @@ class Thumbnailer(object):
         respect to the source EXIF tags for orientation.
         Default value is `True`.
 
+    optimize:
+        Run jpegtran and jpegoptim or pngcrush and optipng trying
+        to get a smaller size file.
+        Default value is `False`.
+
     """
 
-    def __init__(self, base_path=None, base_url='/',
+    def __init__(self,
+                 base_path='.', base_url='/',
                  source_storage=None, thumbs_storage=None,
                  engine=WandEngine, filters=None, echo=False, **options):
-        if source_storage is None:
-            if not base_url:
-                raise ValueError(NO_STORAGE_FOUND)
-            source_storage = FileStorage(base_path, base_url)
-        if thumbs_storage is None:
-            if not base_url:
-                raise ValueError(NO_STORAGE_FOUND)
-            thumbs_storage = FileStorage(base_path, base_url)
-        self.source_storage = source_storage
-        self.thumbs_storage = thumbs_storage
+        self.source_storage = source_storage or Storage(base_path, base_url)
+        self.thumbs_storage = thumbs_storage or Storage(base_path, base_url)
+        if inspect.isclass(engine):
+            engine = engine()
         self.engine = engine
         self.custom_filters = filters or {}
         self.echo = echo
         self.set_default_options(options)
-
-    @property
-    def source_storage(self):
-        return self._source_storage
-
-    @source_storage.setter
-    def source_storage(self, storage):
-        if isinstance(storage, type):
-            storage = storage()
-        self._source_storage = storage
-
-    @property
-    def thumbs_storage(self):
-        return self._thumbs_storage
-
-    @thumbs_storage.setter
-    def thumbs_storage(self, storage):
-        if storage is None:
-            if not self.base_url:
-                raise ValueError(NO_STORAGE_FOUND)
-            storage = FileStorage(self.base_path, self.base_url)
-        if isinstance(storage, type):
-            storage = storage()
-        self._thumbs_storage = storage
-
-    @property
-    def engine(self):
-        return self._engine
-
-    @engine.setter
-    def engine(self, engine):
-        if isinstance(engine, type):
-            engine = engine()
-        self._engine = engine
 
     def set_default_options(self, options):
         resize = options.get('resize', DEFAULTS['resize'])
@@ -153,6 +113,7 @@ class Thumbnailer(object):
         self.quality = int(options.get('quality', DEFAULTS['quality']))
         self.progressive = bool(options.get('progressive', DEFAULTS['progressive']))
         self.orientation = bool(options.get('orientation', DEFAULTS['orientation']))
+        self.optimize = bool(options.get('optimize', DEFAULTS['optimize']))
 
     def __call__(self, path, geometry=None, *filters, **options):
         if not path:
@@ -187,6 +148,8 @@ class Thumbnailer(object):
         thumb = self.thumbs_storage.save(path, key, options['format'], data)
         if self.echo:
             print(' ', thumb.url.strip('/'))
+        if options.get('optimize'):
+            optimage(thumb.fullpath)
         return thumb
 
     def parse_geometry(self, geometry):

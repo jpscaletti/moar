@@ -2,7 +2,7 @@
 from hashlib import sha1
 import os
 
-from moar import FileStorage
+from moar import Storage
 
 from .utils import RES_PATH, get_impath, get_raw_data
 
@@ -17,18 +17,18 @@ def get_random_key():
 def test_get_thumbsdir():
     name = 'qwertyuiop'
 
-    s = FileStorage(RES_PATH, BASE_URL)
+    s = Storage(RES_PATH, BASE_URL)
     assert s.get_thumbsdir(name) == 't'
 
-    s = FileStorage(RES_PATH, BASE_URL, thumbsdir='thumbs')
+    s = Storage(RES_PATH, BASE_URL, thumbsdir='thumbs')
     assert s.get_thumbsdir(name) == 'thumbs'
 
-    s = FileStorage(RES_PATH, BASE_URL, thumbsdir=lambda n: n[:3])
+    s = Storage(RES_PATH, BASE_URL, thumbsdir=lambda n: n[:3])
     assert s.get_thumbsdir(name) == name[:3]
 
 
 def test_save():
-    s = FileStorage(RES_PATH, BASE_URL)
+    s = Storage(RES_PATH, BASE_URL)
     path = 'a200x140.png'
     name, _ = os.path.splitext(os.path.basename(path))
     key = get_random_key()
@@ -40,7 +40,7 @@ def test_save():
 
 
 def test_get_nn_thumb():
-    s = FileStorage(RES_PATH, BASE_URL)
+    s = Storage(RES_PATH, BASE_URL)
     path = 'a200x140.png'
     key = get_random_key()
     thumb = s.get_thumb(path, key, 'jpeg')
@@ -48,7 +48,7 @@ def test_get_nn_thumb():
 
 
 def test_get_saved_thumb():
-    s = FileStorage(RES_PATH, BASE_URL)
+    s = Storage(RES_PATH, BASE_URL)
     path = 'a200x140.png'
     key = get_random_key()
     data = get_raw_data(get_impath(path))

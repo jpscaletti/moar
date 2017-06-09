@@ -25,7 +25,7 @@ class WandEngine(BaseEngine):
             opts = {'file': path_or_stream}
         try:
             im = image.Image(**opts)
-        except:
+        except Exception:
             return None
         return im
 

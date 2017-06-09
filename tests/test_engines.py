@@ -22,6 +22,7 @@ def test_get_size(engine):
     w, h = engine.get_size(im)
     assert w == 200
     assert h == 140
+    engine.close_image(im)
 
 
 def test_orientation(engine, tmpdir):
@@ -46,6 +47,7 @@ def test_orientation(engine, tmpdir):
         assert almost_equal(im.getpixel((5, 15)), 85)  # grey
         assert almost_equal(im.getpixel((25, 15)), 168)  # light grey
         assert almost_equal(im.getpixel((15, 25)), 0)  # black
+        engine.close_image(im)
 
 
 def test_geometry_w(engine, tmpdir):
@@ -57,6 +59,7 @@ def test_geometry_w(engine, tmpdir):
     tmp = join(str(tmpdir), name)
     engine._save_to(im, tmp, 'png')
     assert_size(tmp, width=100, height=70)
+    engine.close_image(im)
 
 
 def test_geometry_h(engine, tmpdir):
@@ -68,6 +71,7 @@ def test_geometry_h(engine, tmpdir):
     tmp = join(str(tmpdir), name)
     engine._save_to(im, tmp, 'png')
     assert_size(tmp, width=47, height=100)
+    engine.close_image(im)
 
 
 def test_geometry_wh_landscape(engine, tmpdir):
@@ -79,6 +83,7 @@ def test_geometry_wh_landscape(engine, tmpdir):
     tmp = join(str(tmpdir), name)
     engine._save_to(im, tmp, 'png')
     assert_size(tmp, width=50, height=35)
+    engine.close_image(im)
 
 
 def test_geometry_wh_portrait(engine, tmpdir):
@@ -90,6 +95,7 @@ def test_geometry_wh_portrait(engine, tmpdir):
     tmp = join(str(tmpdir), name)
     engine._save_to(im, tmp, 'png')
     assert_size(tmp, width=24, height=50)
+    engine.close_image(im)
 
 
 def test_geometry_wh_upscale(engine, tmpdir):
@@ -101,6 +107,7 @@ def test_geometry_wh_upscale(engine, tmpdir):
     tmp = join(str(tmpdir), name)
     engine._save_to(im, tmp, 'png')
     assert_size(tmp, width=400, height=280)
+    engine.close_image(im)
 
 
 def test_geometry_wh_stretch(engine, tmpdir):
@@ -112,6 +119,7 @@ def test_geometry_wh_stretch(engine, tmpdir):
     tmp = join(str(tmpdir), name)
     engine._save_to(im, tmp, 'png')
     assert_size(tmp, width=50, height=50)
+    engine.close_image(im)
 
 
 def test_get_builtin_filter(engine):

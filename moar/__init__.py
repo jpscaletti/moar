@@ -30,9 +30,8 @@ Features at a glance
 :license: MIT, see LICENSE for more details.
 
 """
+from moar.storage import Storage
 from moar.thumbnailer import Thumbnailer
 from moar.engines.wand_engine import WandEngine
-from moar.storages.file_storage import FileStorage
-from moar.storages.s3_storage import S3Storage
 
-__version__ = '2.1.3'
+__version__ = '3.0.0'

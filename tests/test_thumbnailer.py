@@ -1,5 +1,5 @@
 # coding=utf-8
-from moar import FileStorage
+from moar import Storage
 from moar.thumbnailer import Thumbnailer, DEFAULTS, RESIZE_OPTIONS
 import pytest
 
@@ -58,13 +58,14 @@ def test_parse_geometry():
 
 
 def test_get_key():
-    sto = FileStorage(RES_PATH, BASE_URL)
+    sto = Storage(RES_PATH, BASE_URL)
     # t.get_key(path, geometry, filters, options)
 
     assert sto.get_key('qwertyuiop.jpg', None, [], {}) == sto.get_key('qwertyuiop.jpg', None, [], {})
     assert sto.get_key('abc.png', (100, 30), [], {}) == '8820aadc6048490c65d46c997d40c2aa'
     assert sto.get_key('abc.png', None, [], {}) == '88db0e707dc54b57a5e0c9e52699c6cd'
-    assert sto.get_key('abc.png', None, [('rotate', 60)], {'format': 'JPEG'}) == '2469c18428fe35fb2422bc94d7acff23'
+    assert sto.get_key('abc.png', None, [('rotate', 60)], {'format': 'JPEG'}) == \
+        '2469c18428fe35fb2422bc94d7acff23'
     assert sto.get_key('abc.png', None, [], {'resize': 'fit'}) == 'cc88837caa4d797437decd01e187dde1'
     assert sto.get_key('abc.png', (100, 30), [], {'resize': 'fit'}) == 'a5fde43ca5ab38038805e7687b2c586e'
 
