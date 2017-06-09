@@ -15,6 +15,6 @@ thumbnail(source, '200x100', ('blur', 4) )
 """
 
 
-def wand(im, radius, *args, **options):
+def apply(im, radius, *args, **options):
     im.resize(blur=radius)
     return im

@@ -143,12 +143,13 @@ class Thumbnailer(object):
         im = self.engine.open_image(fd)
         if im is None:
             return Thumb()
-
         data = self.process_image(im, geometry, filters, options)
+        self.engine.close_image(im)
+
         thumb = self.thumbs_storage.save(path, key, options['format'], data)
         if self.echo:
             print(' ', thumb.url.strip('/'))
-        if options.get('optimize'):
+        if options['optimize']:
             optimage(thumb.fullpath)
         return thumb
 
@@ -189,6 +190,7 @@ class Thumbnailer(object):
             'quality': int(options.get('quality', self.quality)),
             'progressive': bool(options.get('progressive', self.progressive)),
             'orientation': bool(options.get('orientation', self.orientation)),
+            'optimize': bool(options.get('optimize', self.optimize)),
         }
         return options
 
@@ -210,6 +212,4 @@ class Thumbnailer(object):
             im = eng.set_orientation(im)
         im = eng.set_geometry(im, geometry, options)
         im = eng.apply_filters(im, filters, self.custom_filters, options)
-        data = eng.get_data(im, options)
-        eng.close_image(im)
-        return data
+        return eng.get_data(im, options)

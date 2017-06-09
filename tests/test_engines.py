@@ -124,13 +124,13 @@ def test_geometry_wh_stretch(engine, tmpdir):
 
 def test_get_builtin_filter(engine):
     f = engine.get_filter('blur', {})
-    assert f == getattr(moar.filters.blur, engine.name)
+    assert f == moar.filters.blur
 
     f = engine.get_filter('crop', {})
-    assert f == getattr(moar.filters.crop, engine.name)
+    assert f == moar.filters.crop
 
     f = engine.get_filter('rotate', {})
-    assert f == getattr(moar.filters.rotate, engine.name)
+    assert f == moar.filters.rotate
 
 
 def test_get_unknown_filter(engine):
@@ -146,16 +146,17 @@ def test_get_custom_filter(engine):
             return im
 
     my_filter = MyFilter()
-    f = engine.get_filter('qwerty', {'qwerty': my_filter})
-    assert f == getattr(my_filter, engine.name)
+    ff = engine.get_filter('qwerty', {'qwerty': my_filter})
+    assert ff == my_filter
 
 
 def test_apply_filters(engine):
     ini = 'a200x140.png'
     im = engine.open_image(get_impath(ini))
     filters = [('crop', 50, 50, 0, 0), ('rotate', 45)]
+    ename = engine.__class__.__name__
     im = engine.apply_filters(im, filters, {}, {})
-    out = engine.name + '-filters.png'
+    out = ename + '-filters.png'
     tmp = join(str(tmpdir), out)
     engine._save_to(im, tmp)
     assert_image(tmp, out)

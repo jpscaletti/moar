@@ -14,8 +14,6 @@ from wand import image
 
 class WandEngine(BaseEngine):
 
-    name = 'wand'
-
     def open_image(self, path_or_stream):
         if not path_or_stream:
             return None

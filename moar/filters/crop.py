@@ -19,10 +19,12 @@ thumbnail(source, '200x100', ('crop', 50, 50, 'center', 'center') )
 from moar._compat import string_types
 
 
-def wand(im, *args, **options):
+def apply(im, *args, **options):
     imw, imh = im.size
-    box = get_box(args, imw, imh)
-    im.crop(*box, reset_coords=True)
+    x, y, w, h = get_box(args, imw, imh)
+    if x == 0 and y == 0 and w == imw and imh == h:
+        return im
+    im.crop(x, y, w, h, reset_coords=True)
     return im
 
 
@@ -47,6 +49,7 @@ def get_box(args, imw, imh):
             x = x[:-2]
 
     x = int(x)
+    x = max(x, 0)
 
     if isinstance(y, string_types):
         if y.endswith('%'):
@@ -57,6 +60,7 @@ def get_box(args, imw, imh):
             y = int(y[:-2])
 
     y = int(y)
+    y = max(y, 0)
 
     # Do not overflow
     if width + x > imw:

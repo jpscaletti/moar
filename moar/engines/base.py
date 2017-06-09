@@ -45,7 +45,6 @@ class BaseEngine(object):
             return im
 
         im_width, im_height = self.get_size(im)
-
         # Geometry match the current size?
         if (width is None) or (im_width == width):
             if (height is None) or (im_height == height):
@@ -102,13 +101,13 @@ class BaseEngine(object):
             fname = f[0]
             args = f[1:]
             ff = self.get_filter(fname, custom_filters)
-            im = ff(im, *args, **options)
+            im = ff.apply(im, *args, **options)
         return im
 
     def get_filter(self, fn, custom_filters):
-        f = custom_filters.get(fn)
-        if f is None:
-            f = getattr(available_filters, fn)
-        if inspect.isclass(f):
-            f = f()
-        return getattr(f, self.name)
+        ff = custom_filters.get(fn)
+        if ff is None:
+            ff = getattr(available_filters, fn)
+        if inspect.isclass(ff):
+            ff = ff()
+        return ff

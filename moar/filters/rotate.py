@@ -18,7 +18,7 @@ except ImportError:
     pass
 
 
-def wand(im, angle, *args, **options):
+def apply(im, angle, *args, **options):
     angle = - angle  # Wand rotates clockwise
     background = None
     format = options.get('format', im.format)
